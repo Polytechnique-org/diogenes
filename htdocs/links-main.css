@@ -1,0 +1,12 @@
+/* external links */
+#main a[href ^="http://"],
+#main a[href ^="ftp://"] {
+  background: url("images/link-external.png") center right no-repeat;
+  padding-right: 13px;
+}
+
+/* secure links */
+#main a[href ^="https://"] {
+  background: url("images/link-secure.gif") center right no-repeat;
+  padding-right: 16px;
+}

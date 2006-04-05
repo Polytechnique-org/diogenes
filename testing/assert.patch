@@ -1,0 +1,92 @@
+--- Assert.php.orig	2004-06-09 15:52:13.000000000 +1000
++++ Assert.php	2004-06-09 15:55:10.000000000 +1000
+@@ -240,6 +240,89 @@
+     }
+         
+     /**
++    * Asserts that the actual string does not match a given
++    * regular expression.
++    *
++    * @param string
++    * @param string
++    * @param string
++    * @access public
++    * @author Sébastien Hordeaux <marms@marms.com>
++    * @author Matthew Palmer <mpalmer@hezmatt.org>
++    */
++    function assertNotRegExp($expected, $actual, $message = '') {
++        $message = sprintf(
++          '%sexpected %s, actual %s',
++
++          !empty($message) ? $message . ' ' : '',
++          $expected,
++          $actual
++        );
++
++        if (preg_match($expected, $actual)) {
++            return $this->fail($message);
++        }
++    }
++        
++    /**
++    * Asserts that the expected string is contained somewhere within the
++    * data string given.
++    *
++    * @param string
++    * @param string
++    * @param string
++    * @access public
++    * @author Matthew Palmer <mpalmer@hezmatt.org>
++    */
++    function assertSubStr($needle, $haystack, $message = '')
++    {
++    	if (empty($message))
++    	{
++    		$message = sprintf(
++    			'"%s" not found in "%s"',
++    			$expected,
++    			$actual
++    			);
++    	}
++    	
++    	if (substr_count($haystack, $needle) == 0)
++    	{
++    		return $this->fail($message);
++    	}
++    	
++    	return $this->pass();
++    }
++    
++    /**
++    * Asserts that the expected string is not contained anywhere within the
++    * data string given.
++    *
++    * @param string
++    * @param string
++    * @param string
++    * @access public
++    * @author Matthew Palmer <mpalmer@hezmatt.org>
++    */
++    function assertNotSubStr($needle, $haystack, $message = '')
++    {
++    	if (empty($message))
++    	{
++    		$message = sprintf(
++    			'"%s" found in "%s"',
++    			$expected,
++    			$actual
++    			);
++    	}
++    	
++    	if (substr_count($haystack, $needle) > 0)
++    	{
++    		return $this->fail($message);
++    	}
++    	
++    	return $this->pass();
++    }
++    
++    /**
+     * Asserts that a variable is of a given type.
+     *
+     * @param  string          $expected

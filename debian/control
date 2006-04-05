@@ -1,0 +1,34 @@
+Source: diogenes
+Section: web
+Priority: optional
+Maintainer: Jeremy Lainé <jeremy.laine@m4x.org>
+Standards-Version: 3.6.2
+Build-Depends-Indep: cdbs, debhelper (>= 4.1.16), po-debconf
+
+Package: diogenes
+Architecture: all
+Depends: ${misc:Depends}, libphp-diogenes (= ${Source-Version}), gettext, wwwconfig-common (>=0.0.41), apache | apache2 | httpd, php4-cli | php5-cli, php-pear, cvs, rcs, perl-modules, ucf (>=0.28)
+Recommends: mysql-server
+Suggests: wv
+Description: web content management system
+ The Diogenes content management system allows you to create, host and
+ manage web sites through a web interface and/or WebDAV.  You can host several
+ independent sites on a single server and even have them run on separate
+ virtualhosts.  Diogenes offers fine-grained control of the read and write
+ permissions of the pages making up a site.
+ .
+ Diogenes provides a number of options to customise the appearance of your
+ web sites.  If you are familiar with PHP it is even possible to extend and
+ customise Diogenes's engine by subclassing its core classes. Diogenes's user
+ interface is available in Dutch, English, French, Spanish and Swedish.
+ .
+ Homepage: http://opensource.polytechnique.org/diogenes/
+
+Package: libphp-diogenes
+Architecture: all
+Depends: smarty, php-mail-mime, php4-mysql | php5-mysql
+Description: library for web site creation
+ A set of PHP classes used by the Diogenes content management system.
+ .
+ Homepage: http://opensource.polytechnique.org/libdiogenes/
+

@@ -1,0 +1,28 @@
+<?php
+
+// locations
+$globals->spoolroot = "/var/spool/diogenes"
+$globals->rcsroot = "/var/lib/diogenes";
+$globals->root = "/var/www/diogenes";
+
+/* Base url for the Diogenes system, including trailing slash.
+ *
+ * In order to make use of virtualhosts or WebDAV, please set
+ * this to a full URL starting with http:// or https:// for instance:
+ *
+ * $globals->rooturl = "http://www.foo.org/diogenes/";
+*/ 
+$globals->rooturl = "http://diogenes.polytechnique.org/";
+
+// database access
+
+// $globals->dbdb = "diogenes";
+// $globals->dbhost = "localhost";
+// $globals->dbuser = "diogenes";
+$globals->dbpwd = "changeme";
+
+// Utility to use for Word file import.
+// set 'wvHtml' to make us of wv for Word import.
+// var $word_import = 'wvHtml';
+
+?>

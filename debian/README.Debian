@@ -1,0 +1,40 @@
+Diogenes for Debian
+-------------------
+
+GETTING STARTED WITH DIOGENES
+
+  Diogenes will be available at http://localhost/diogenes/ after installation.
+  To make any real use of Diogenes, you will most likely want to set Diogenes's
+  location to a proper URL which is accessible from remote hosts. You can set
+  this URL in the configuration file:
+
+  /etc/diogenes/diogenes.debian.inc.php
+
+  To start using Diogenes, you need to create a user account so that you
+  can log in. You can do so by visiting the following page:
+
+  http://localhost/diogenes/toplevel/boot.php
+  
+  Alternatively, the following MySQL command will allow you to login with the
+  username "root" and no password. You can then change the password upon your
+  first login using Diogenes's user account manager.
+
+  use diogenes;
+  insert into diogenes_auth set username="root",password=MD5(""),perms="admin";
+  
+
+MANUAL INSTALLATION NOTES
+
+  If during installation you selected not to automatically configure Apache
+  you will have to modify your Apache configuration to include
+  /etc/diogenes/apache.conf.
+  
+  If during installation you selected not to automatically configure MySQL
+  you will have to create Diogenes's database by hand. To do so, you can use 
+  the SQL files found in /usr/share/diogenes/scripts. If you select a manual
+  database installation you will also have to handle database structure
+  upgrades yourself by running the update.php script which is provided in
+  /usr/share/diogenes/scripts.
+  
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Mon, 29 Mar 2004 13:24:19 +0200

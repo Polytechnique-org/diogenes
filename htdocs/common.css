@@ -1,0 +1,253 @@
+/* block definitions */
+
+/* header */
+
+#header {
+  color: white;
+  background-color: #444444;
+}
+
+#header .logo {
+  float: left; 
+  width: 190px;
+}
+
+#header .titlebar {
+  margin-left: 210px;
+  padding: 5px;
+}
+
+#header .site {
+  display: inline;
+  font-size: 20pt;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+#header .page {
+  display: inline;
+  padding-left: 10px;
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+/* the debugging banner */
+
+#debug {
+  background-color: #777777;
+  font-size: 11pt;
+}
+
+#debug .title {
+  display: inline;
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+#debug .item {
+  display: inline;
+  background-color: #999999;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px black solid;
+}
+
+#debug .item:hover {
+  background-color: #dddddd;
+}
+
+#debug .hide {
+  display: none;
+  background-color: white;
+  padding: 15px;
+  border: 1px black solid;
+  position: fixed;
+}
+
+#call-trace:hover div.hide { display: block; }
+
+#db-trace:hover div.hide { display: block; }
+
+#plugins-trace:hover div.hide { display: block; }
+
+/* the sidebar */
+
+#sidebar {
+  float: left;
+  margin: 5px;
+  padding: 5px;
+  font-size: 10pt;
+}
+
+/* the main display area */
+
+#main {
+  padding: 5px;
+  margin-right: 40px;
+  margin-left: 210px;
+  font-size: 11pt;
+}
+
+/* the footer */
+
+#footer {
+  clear: both;
+  text-align: center;
+  padding: 10px;
+  font-size: 9pt;
+}
+
+
+/* element redefinitions */
+body
+{
+  background-color:white;
+  border:0;
+  margin: 0;
+  font-family:verdana,arial,sans-serif;
+}
+
+a {
+  color: #70100c;
+}
+
+img {
+  border:0;
+}
+
+h2 {
+  font-size: 14pt;
+}
+
+h3 {
+  font-size: 12pt;
+}
+
+
+/* classic menu */
+.menu {
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+  width: 180px;
+}
+
+.menu a {
+  text-decoration: none;
+  display: block;
+}
+
+.menu .item a {
+  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #fbd080;
+  color: black;
+}
+
+.menu .item a.odd {
+  background-color: #f9b550;
+  color: inherit;
+}
+
+.menu .item a:hover {
+  background-color: #c06040;
+  color: white;
+}
+
+.menu .item a.top {
+  padding-left: 20px;
+  font-weight: bold;
+  background-color: #901510;
+  color: white;
+}
+
+/* PHP layers menu styling */
+
+.phplmnormal img.imgs {
+  border: 0;
+  vertical-align: top;
+}
+
+/* element redefinitions */
+a.action
+{
+  font-size: 9pt;
+}
+
+table.light
+{
+  border-collapse: collapse;
+  border:1px #901510 solid;
+  background-color: #fbd080;
+  color: black;
+}
+
+table.light td
+{
+  padding:3px;
+  border:0;
+}
+
+table.light th
+{
+  background-color: #901510;
+  color: white;
+  padding: 2px 5px 2px 5px;
+}
+
+table.light tr.odd
+{
+  background-color: #f9b550;
+  color: inherit;
+}
+
+/* file viewing */
+img.fileicon {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* diff viewing */
+.diff td {
+  vertical-align: top;
+}
+
+.diff .change {
+  background-color: #ffff77;
+}
+
+.diff .delete {
+  background-color: #ffaaaa;
+}
+
+.diff .add {
+  background-color: #aaffaa;
+}
+
+/* plugin viewer styles */
+.plugins .name {
+  font-weight: bold;
+}
+
+
+.plugins .description {
+  font-size: 9pt;
+}
+
+/* log browsing */
+.logdate {
+  font-size: 10pt;
+}
+
+.logauthor {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.filesize {
+  font-size: 10pt;
+}
+
+

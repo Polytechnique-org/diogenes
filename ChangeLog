@@ -1,0 +1,167 @@
+Diogenes 0.9.18
+ * improved - resync Textile plugin with Textpattern 4.0.2
+ * improved - merge page catalog and file browser with slicker layout
+ * improved - add "home", "up", "add a page" to file browser toolbar
+ * fixed - PHP5 compatibility fixes
+ * improved - refresh Dutch translations (thanks Michiel!)
+ * improved - add support for OMA DRM contents
+ * improved - switch to XHTML 1.0 strict
+ * improved - add debugging and W3C validation options in global options
+
+Diogenes 0.9.17.2
+ * fixed - handle log messages with quotes properly
+
+Diogenes 0.9.17.1
+ * improved - fix URL rewriting to allow access to barrel 'foo' via 
+              (..)/site.php/foo/ as well as (..)/site/foo/
+
+Diogenes 0.9.17
+ * improved - recognise additional MIME types and associated icons
+ * added - add a generic plugin mechanism 
+ * added - add MailForm plugin to display a mail form to a fixed recipient
+ * added - add FileList plugin to display a directory listing with icons
+ * added - add an option to create an empty file
+ * improved - use new icons to represent MIME types
+ * added - add WikiMarkup plugin to render Wiki markup
+ * added - add RenderPhp plugin to handle PHP execution of barrel pages
+ * improved - barrel-level templates do not apply to admin pages
+ * improved - merge all *_option tables into diogenes_option
+ * added - offer copy, move and rename file operations in file browser
+ * improved - add debugging options for WebDAV
+ * fixed - work around Apache 2 / HTTP_WebDAV_Server issue
+ * improved - add support for spaces in file names
+ * improved - add support for nested pages (abritary directory tree depth)
+ * fixed - correct WebDAV support for barrels on virtual hosts
+ * improved - directory tree is cached in a file to reduce database calls
+ * improved - add some icons to the admin interface
+ * added - add TextileMarkup plugin to handle Textile markup
+ * improved - beautify the barrel activity page
+ * improved - warn that $globals->rooturl must be full URL for some features
+ * added - add HttpHeader plugin to add custom HTTP headers to a page
+ * added - add HtmlHead plugin to add entries to a pages's <head> block
+ * added - add LinksMagic plugin to highlight external and secure links
+
+Diogenes 0.9.16
+ * improved - add a global option to control Word import
+ * improved - touchup the barrel activity summary
+ * improved - use unsigned ints instead of smallints for user/page/menu ids
+
+Diogenes 0.9.15
+ * improved - add Kafenio as the default HTML editor
+ * added - user accounts now have an 'email' field
+ * fixed - correct escaping of PHP code when using HTML editor
+ * added - new bootstrapping interface to create initial admin
+ * added - add a toplevel option to switch HTML editor (Ekit/Kafenio)
+ * improved - integrate user preferences menu into barrels
+ * added - add an option to hide the Diogenes part of a barrel's menu
+ * improved - order barrels by alias in toplevel interface
+
+Diogenes 0.9.14
+ * added - new expert mode for direct access to the global options table
+ * improved - new debugging toolbar and floating database trace
+ * fixed - always use custom function to determine mime type
+
+Diogenes 0.9.13
+ * improved - return a Content-Length header for static content
+ * fixed - various fixes in the Diogenes library (see library ChangeLog) 
+ * fixed - correct the file revision browser's 'restore' function
+ * fixed - make sure the CVS wrapper exits when it has no children left
+ * added - full Spanish translation (Pablo Castellazzi)
+ * fixed - pass correct baseurl and stylesheet to Ekit
+
+Diogenes 0.9.12
+ * improved - mention what constitutes a valid barrel name
+ * added - allow admins to choose site-wide or page-specific templates
+ * improved - make PHP execution of pages more flexible
+ * fixed - correct handling of HTML entities in raw editor
+ * improved - replace unused 'visible' flag by a more flexible status selector
+ * improved - replace useless 'root' access level by 'forbidden'
+ * added - ability to add a log message to page file commits
+ * fixed - expand 'Edit this page' menu entry for publicly writable pages
+
+Diogenes 0.9.11
+ * improved - stop using tables so admins can control their site's appearance
+ * fixed - new JavaScript MD5 which supports accentuated characters
+ * improved - several updates to French translation (Nicolas Bertolissio)
+ * improved - improved cache-control for public, static content
+ * improved - various layout and stylesheet enhancements
+ * added - include a note about customising Diogenes
+ * improved - stop hardcoding charset in the pages
+ * added - full Dutch translation (Michiel Alkemade)
+ * added - full Swedish translation (Jonas Johansson)
+ * improved - send back appropriate HTTP status codes on error pages
+ * improved - offer to authenticate again after login failure
+
+Diogenes 0.9.10
+ * improved - changed DB structure for the menus for increased speed
+ * fixed - explicitly set magic_quotes_gpc On and register_globals Off
+ * added - barrels have their own set of options
+ * added - customisable menu expanding level
+ * added - integrated phpLayersMenu
+ * fixed - reworked Word import to make it safer and to handle images
+ * improved - make it possible to use a different WebDAV class
+ * improved - do not allow the creation of a barrel called CVSROOT
+ * added - selectable themes for the menu
+ * improved - allow customisation of the toplevel pages
+
+Diogenes 0.9.9.3
+ * improved - split document root into separate subdirectory
+ * fixed - do not escape special characters in raw editor
+ * improved - added some missing translations
+
+Diogenes 0.9.9.2
+ * improved - group WebDAV operations into sessions to declutter log
+ * improved - when logging in/out the user stays on the current page
+
+Diogenes 0.9.9.1
+ * fixed - do not start session when in WebDAV mode (possible file corruption)
+ * fixed - check validity of page location
+ * fixed - use UNIX_TIMESTAMP when retrieving dates in log browser
+ * fixed - Ekit must be within a barrel (Java security violation on vhosts)
+ * improved - use HTML import function when a page is PUT with WebDAV
+ * improved - check new barrel names against list of invalid names
+
+Diogenes 0.9.9
+ * address rewriting (mod_rewrite) is no longer required
+ * added support for WebDAV
+ * use page location exclusively for browsing (not page ID)
+ * fixed faulty date selection in log browser
+ * various code cleanups
+ * user-generated pages no longer have the "valid XHTML/CSS" logos
+
+Diogenes 0.9.8.3
+ * fixed a regexp that killed old PHP versions (Word import bug)
+ * large speed improvements for log browsing
+ * enhanced database debugging
+
+Diogenes 0.9.8.2
+ * fixed admin menu not always being displayed on public pages
+ * fixed distribution problems (Makefile & cvs.pl missing)
+
+Diogenes 0.9.8.1
+ * fixed bug in diff viewing
+ * tightened HTML import code
+
+Diogenes 0.9.8
+ * added customisable write access for pages
+ * added support for anonymous (Wiki-style) write access
+ * fixed extra checks on RCS operations
+ * added CVS support as an alternative to bare RCS (experimental)
+ * added toplevel page for RCS <-> CVS switching.
+ * fixed added missing stripslashes for page title 
+
+Diogenes 0.9.7
+ * split fullname into firstname and lastname
+ * improved display of authentication method (native, etc.)
+ * added script to update database structure
+
+Diogenes 0.9.6
+ * reworked packaging 
+
+Diogenes 0.9.5
+ * started ChangeLog
+ * Ekit WYSIWYG editor integration
+ * allow language selection
+ * links to Diogenes documentation
+ * improved Word document handling
+

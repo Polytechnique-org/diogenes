@@ -1,0 +1,10 @@
+/* external links */
+.menu a[href ^="http://"],
+.menu a[href ^="ftp://"] {
+  background: url("images/link-external.png") center right no-repeat;
+}
+
+/* secure links */
+.menu a[href ^="https://"] {
+  background: url("images/link-secure.gif") center right no-repeat;
+}

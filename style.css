@@ -1,0 +1,43 @@
+/* insert your CSS customisations below */
+
+body {
+  background-color: #60a5e0;
+  color: inherit;
+}
+
+.menu .item a {
+  background-color: #4080c0;
+  color: inherit;
+}
+
+.menu .item a.odd {
+  background-color: #4590d0;
+  color: inherit;
+}
+
+.menu .item a:hover {
+  background-color: #3050d0;
+  color: white;
+}
+
+.menu .item a.top {
+  background-color: #2050a0;
+  color: white;
+}
+
+/* table class 'light' */
+table.light {
+  border-collapse: collapse;
+  background-color: #edf8ff;
+  border: 2px solid #2050a0;
+  color: black;
+}
+
+table.light tr.odd {
+  background-color: #90c0e0;
+}
+
+table.light th {
+  background-color: #2050a0;
+  color: white;
+}

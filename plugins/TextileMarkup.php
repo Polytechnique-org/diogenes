@@ -1,0 +1,57 @@
+<?php
+/*
+ * Copyright (C) 2003-2005 Polytechnique.org
+ * http://opensource.polytechnique.org/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+require_once 'Plugin/Filter.php';
+require_once 'classTextile.php';
+
+/** The TextileMarkup plugin allows you to render Textile markup into XHTML.
+ */
+class TextileMarkup extends Diogenes_Plugin_Filter
+{
+  /** Plugin name */
+  var $name = "TextileMarkup";
+  
+  /** Plugin description */
+  var $description = "This plugin allows you to render Textile markup into XHTML. To get started, take a look at some <a href=\"http://www.textism.com/tools/textile/\">sample Textile markup pages</a>.";
+  
+  
+  /** Is the plugin allowed with respect to a given write permission on a page ?
+   *
+   * @param $wperms
+   */
+  function allow_wperms($wperms) 
+  {
+    return 1;
+  }
+  
+  
+  /** Take the Wiki markup and return XHTML.
+   *
+   * @param $input
+   */  
+  function filter($input)
+  {
+    $textile = new Textile();
+    return $textile->TextileThis($input);
+  }
+  
+}
+
+?>

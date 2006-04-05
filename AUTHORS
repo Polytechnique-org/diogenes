@@ -1,0 +1,26 @@
+The following people contributed to Diogenes :
+
+Jeremy Lainé <jeremy.laine@m4x.org>
+ * original author of Diogenes
+
+Matthew Palmer <mpalmer@debian.org>
+ * testing framework
+
+Michiel Alkemade <dropthestuff@hotmail.com>
+ * Dutch translations
+
+Jonas Johansson <fazer75@hotmail.com>
+ * Swedish translations
+
+Pablo Castellazzi <pcastell@adinet.com.uy>
+ * Spanish translations
+
+
+Many thanks to the following people for writing the Polytechnique.edu
+administration interface from which Diogenes's barrel administration
+interface is derived :
+
+Yann Chevalier <yann.chevalier@m4x.org>
+Jean-Sebastien Bedo <jean-sebastien.bedo@m4x.org>
+Denis Cabasson <denis.cabasson@m4x.org>
+

@@ -1,0 +1,165 @@
+Unit Testing for Diogenes
+===========================
+
+Unit testing is the process of writing lots of little pieces of test code
+which each test some part of the functionality of a software system.  By
+having a comprehensive set of test cases which are satisfied by the
+production code, we can have real confidence in our software, instead of
+just "hoping" it works.
+
+What is a unit test?
+----------------------
+
+The general structure of all unit tests is as follows:
+
+* Setup pre-conditions (the state of the system prior to the execution of the
+	code under test)
+* Run the code to be tested, giving it all applicable arguments
+* Validate that the code ran correctly by examining the state of the system
+	after the code under test has run, and ensuring that it has done
+	what it should have done.
+
+The pre-conditions are normally either set at the beginning of the test
+method, or in a general method called setUp() (see below for the structure
+of test code).
+
+Running the code itself is normally making a call to the function to
+be tested, constructing an object, or, for Web applications, running the
+top-level web script (using require()).
+
+Validating the post-run state of the system is done by examining the
+database, system files, and script output, and using various assert methods
+to communicate the success or failure of various tests to the user.
+
+Testing Web applications such as Diogenes is relatively easy, especially the
+user interface side of things.
+
+Unlike traditional GUI applications, every state change of a web application
+is defined by the database and filesystem, the user's session, and the
+values passed from the web browser through $_REQUEST and $_SERVER.  Since
+all of these aspects are relatively easy to control, setting the pre-run
+state of the application is quite simple.  There are also relatively few
+discrete states that your web application can be in, because all of the
+system control has to be made through the constrained interface above.
+
+Testing post-conditions, as well, is simple.  If you want to ensure that a
+certain thing is part of the post-run display, you can just interrogate the
+HTML output from the test run, which is all text and can be tested with
+assertRegExp() and assertSubStr().  Again, the only state available is in
+the user's session, database, and filesystem, all of which are easy to
+interrogate.
+
+Test cases and test methods
+-----------------------------
+
+(This is where things get a bit hairy -- hold on, and perhaps read it twice)
+
+A test case is a collection of tests which are related in some way.  Each
+test case is represented in our testing framework by a class subclassed from
+PHPUnit_TestCase.  Each test is a method on the test case whose name starts
+with 'test'.  You should name the tests appropriately from there.
+
+Test cases can have a couple of special methods defined on them, called
+setUp() and tearDown().  The first method is called before each of the test
+methods is called, and the second is called after each test method has run.
+
+The setUp() and tearDown() methods are the primary reason for grouping test
+methods together.  Methods should, as much as possible, grouped into test
+cases with common setUp() and tearDown() requirements.
+
+So how do I write a Unit Test?
+-------------------------------
+
+Put together a snippet of code which sets up the state of the application,
+then run the code to be tested, and check the result.  This snippet of code
+should be placed in a test case in a method named test[Something]().  Each
+test method takes no arguments and returns nothing.
+
+Have a look at the existing test code in the testing/ directory of the
+diogenes source distribution for examples of how to write test code.
+
+When you create a new test case, you need to tell the test code runner that
+it needs to run the new test code.  There is an array in the alltests script
+which defines the files and test cases to be run.  Each key in the array
+specifies a filename to be read (without the .php extension), while the
+value associated with the key is an array of class names in that file.
+
+What should I test?
+---------------------
+
+The naive answer would be "everything".  However, that is impractical. 
+There are just too many things that could be tested for a policy of "test
+everything" to allow any actual code to be written.
+
+It helps to think of tests as pulls of the handle on a poker machine.  Each
+pull costs you something (some time to write it).  You "win" when a test
+that you expected to pass fails, or when a test you expected to fail passes. 
+You lose when a test gives you no additional useful feedback.  You want to
+maximise your winnings.
+
+So, write tests that demonstrate something new and different about the
+operation of the system.  Before you write any production code, write a test
+which defines how you want the system to act in order to pass the test.  Run
+the test suite, verify that the test fails.  Now, modify the production code
+just enough so the test passes.  If you want the system to do something that
+can't be expressed in one test, write multiple tests, each one interspersed
+with some production development to satisfy *just* *that* new test.  This
+is, in my experience, the best way to ensure that you have good test
+coverage, whilst minimising the production of tests which add no value to
+the system.
+
+How do I retro-fit unit testing onto an existing codebase?
+------------------------------------------------------------
+
+Diogenes already has a significant amount of code written, which would take
+hundreds of tests to cover completely.  There is little point in going back
+and writing tests for all of this functionality.  It appears to work well
+enough, so we should just leave it as-is.
+
+However, from now on, every time you want to make some modification (whether
+it be a refactoring, a bug fix, or a feature addition), write one or more
+test cases which demonstrate your desired result:
+
+Refactoring: Write tests surrounding the functionality you intend to
+	refactor.  Show the test cases accurately represent the desired
+	functionality of the system by ensuring they all run properly.  Then
+	perform the refactoring, ensuring you haven't broken anything by
+	making sure the tests all still run properly.
+
+Bug fix: Write one or more tests which shows the bug in action -- in other
+	words, it hits the bug, and produces erroneous results.  Then modify
+	the system so that the test passes.  You can be confident that
+	you've fixed the bug, because you have concrete feedback in the form
+	of your test suite that the bug no longer exists.
+
+Feature addition: Put together some tests which invoke the feature you want
+	to add, and test that the feature is working as it should. 
+	Naturally, these tests will fail at first, because the feature
+	doesn't exist.  But you then modify the production code to make the
+	feature work, and you stop when your tests all pass.
+
+Over time, as old code gets modified, the percentage of code covered by the
+tests will increase, and eventually we will have a comprehensively tested
+piece of software.
+
+During modifications, if you manage to break something accidentally, write a
+test to show the breakage and fix it from there.  If you broke it once,
+there's a good chance it'll break again when someone else modifies it, and
+there should be a test to immediately warn the programmer that they've
+broken something.
+
+How do I run the unit tests?
+------------------------------
+
+The primary script that executes all of the unit tests is the 'alltests'
+script in the testing/ directory of the distribution.  However, the output
+of this script is one line for every test that passes or fails.  
+
+To help highlight the test failures, there is a 'run' script, which filters
+out all of the passes, and only shows you the failures.  Very useful.
+
+So, your regular test run will be done with ./run, but if you want to see a
+thousand passes, run ./alltests.  Both of these should be run from the
+testing/ directory.  Running it from elsewhere isn't likely to get good
+results.
+

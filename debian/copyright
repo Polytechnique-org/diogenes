@@ -1,0 +1,31 @@
+This package was debianized by Jeremy Lainé <jeremy.laine@m4x.org> on
+Tue,  2 Dec 2003 20:17:24 +0100
+
+It was downloaded from http://opensource.polytechnique.org/diogenes/
+
+Upstream Author: Jeremy Lainé
+
+* HTTP_WebDAV_Server is licensed under the terms of the 
+  PHP license 2.02 and copyright (c) 1997-2003 The PHP Group.
+
+* PHPLIB is licensed under the terms of the LGPL and 
+  is copyright (c) Kristian Koehntopp and the NetUSE AG.
+
+* PHP Layers Menu is licensed under the terms of the LGPL version 2.1
+  or later and is copyright (c) 2001-2004 Marco Pratesi.
+
+* Gartoon Gnome Icon Theme is licensed under the terms of the
+  GPL version 2 or later and is copyright (c) Zeus.  
+
+* Text_Wiki is licensed under the terms of the LGPL version 2.1
+  or later and is copyright (c) 2003-2005 Paul M. Jones.
+  
+* Textile is licensed under the terms put forth at 
+  http://www.textism.com/tools/textile/license.html and is 
+  copyright (c) 2003 Dean Allen.
+
+* Diogenes is licensed under the terms of the GPL version 2  
+  or later and is copyright (c) 2003-2005 Jeremy Lainé.
+
+On Debian GNU/Linux systems, the complete text of the GNU General Public
+License may be found in `/usr/share/common-licenses/GPL'.

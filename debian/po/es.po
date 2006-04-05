@@ -1,0 +1,282 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: diogenes 0.9.12-3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-14 01:45+0100\n"
+"PO-Revision-Date: 2004-07-04 21:54-0300\n"
+"Last-Translator: Pablo Castellazzi <pcastell@adinet.com.uy>\n"
+"Language-Team: Pablo Castellazzi <pcastell@adinet.com.uy>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid "Welcome to the Diogenes setup program"
+msgstr "Bienvenido al programa de instalación de Diogenes"
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid ""
+"You must have a database server already setup and ready to go if you are "
+"going to have this program configure your database for you.  If you are not "
+"comfortable with this, you should tell the debconf process that you do not "
+"have any database server.  You will then need to configure Diogenes manually."
+msgstr ""
+"Debe tener un servidor de base de datos configurado y funcionando si desea "
+"que este programa configure su base de datos por Ud. Si no está de acuerdo "
+"debe decirle a debconf que no tiene ningun servidor de base de datos. Tendrá "
+"entonces que configurar Diogenes manualmente."
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid ""
+"If debconf is set up in a way that you will not be asked questions "
+"interactively (i.e. you do not see this note during installation but as a "
+"mail to your root account), Diogenes will assume that your web server is "
+"apache and your database server is MySQL and no MySQL root password is set.  "
+"If any of these do not apply, Diogenes will not run unless you configure it "
+"manually by creating its database and editing the files in /etc/diogenes."
+msgstr ""
+"Si debconf está configurado en una forma en la que Ud. no responde a sus "
+"preguntas interactivamente (ej. no ve esta nota durante la instalación, la "
+"ve en un correo electrónico en la cuenta de root), Diogenes asumirá que su "
+"servidor web es Apache, que su servidor de base de datos es MySQL y que noy "
+"hay contraseña de root en MySQL. Si alguna de estas condiciones no se "
+"cumple, Diogenes no funcionará hasta que sea configurado manualmente creando "
+"su base de datos y modificando los archivos en /etc/diogenes."
+
+#. Type: boolean
+#. Description
+#: ../diogenes.templates:19
+msgid "Remove web site data after \"purging\" the diogenes package?"
+msgstr ""
+"¿Eliminar la información de los sitios web después de \"purgar\" el paquete "
+"diogenes?"
+
+#. Type: boolean
+#. Description
+#: ../diogenes.templates:19
+msgid ""
+"Should the data that makes up Diogenes's web sites be removed when the "
+"diogenes packages is purged with the \"dpkg --purge diogenes\" command (i.e. "
+"remove everything including the configuration)?"
+msgstr ""
+"¿La información de los sitios web de Diogenes deberá ser eliminada cuando el "
+"paquete diogenes es purgado con el comando \"dpkg --purge diogenes\" (ej. "
+"eliminar todo incluída la configuración)?"
+
+#. Type: multiselect
+#. Choices
+#: ../diogenes.templates:26
+msgid "apache, apache-ssl, apache-perl, apache2"
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../diogenes.templates:28
+msgid "Type of web server:"
+msgstr "Tipo del servidor web:"
+
+#. Type: multiselect
+#. Description
+#: ../diogenes.templates:28
+#, fuzzy
+msgid ""
+"By default Diogenes supports any web server that php4 does.  This config "
+"process currently only supports Apache directly.  If you use another one you "
+"will have to handle the web ends manually.  If you choose the first option, "
+"this install process will manage the configuration (or attempt to) of the "
+"Apache specific portions necessary to run Diogenes properly."
+msgstr ""
+"Por omisión Diogenes soporta cualquier servidor web con php4. Este proceso "
+"de configuración solo soporta Apache directamente. Si utiliza otro servidor "
+"deberá manejarlo manualmente. Si selecciona la primera opción, este proceso "
+"de instalación manejará las porciones necesarias de la configuración de "
+"Apache (o intentará) para ejecutar Diogenes como es debido. Si no desea que "
+"esto ocurra por favor seleccione la opción \"Otros\"."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:38
+msgid "User your web server runs as:"
+msgstr "Usuario bajo el que su servidor web es ejecutado:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:38
+msgid ""
+"Unable to obtain the user your web server runs as. This is needed in order "
+"to allow the web server to write the files that make up the Diogenes-managed "
+"web sites."
+msgstr ""
+"Imposible obtener el usuario bajo el que su servidor web es ejecutado. Esto "
+"es necesario para permitirle escribir los archivos de los sitios manejados "
+"por Diogenes."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:46
+msgid "Group your web server runs as:"
+msgstr "Grupo bajo el que su servidor web es ejecutado:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:46
+msgid ""
+"Unable to obtain the group your web server runs as.  This is needed in order "
+"to allow the web server to read Diogenes's configuration files."
+msgstr ""
+"Imposible obtener el grupo bajo el que su servidor web es ejecutado. Esto es "
+"necesario para permitirle escribir los archivos de los sitios manejados por "
+"Diogenes."
+
+#. Type: select
+#. Choices
+#: ../diogenes.templates:52
+msgid "Automatic, Manual"
+msgstr "Automático, Manual"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid "Type of database installation:"
+msgstr "Tipo de la instalación de la base de datos:"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid ""
+"If you want the setup program to ask you questions and do the database setup "
+"for you, select \"Automatic\". (Recommended)"
+msgstr ""
+"Si quiere que este programa le consule y configure la base de datos por Ud. "
+"seleccione \"Automático\". (Recomendado)"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid ""
+"If you want to configure your database by hand, select \"Manual\".  In this "
+"case you will have to create the Diogenes database and user by hand and "
+"handle database upgrades manually."
+msgstr ""
+"Si quiere configurar su base de datos manualmente seleccione \"Manual\". En "
+"este caso tendrá que crear el usuario y la base de datos de Diogenes a mano, "
+"y manejar las actualizaciones de la base de datos de igual manera."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:64
+msgid "Database admin password:"
+msgstr "Contraseña del administrador de la base datos:"
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:64
+msgid ""
+"Enter the password for your database admin user to access the database. This "
+"password had been set when installing your database.  It is most likely NOT "
+"the same password that your Diogenes manager account will use."
+msgstr ""
+"Ingrese la contraseña del usuario administrador de la base de datos. Esta "
+"contraseña fue puesta cuando instaló la base de datos. Se recomienda que NO "
+"sea la misma que la del usuario administrador de Diogenes."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:72
+msgid "Hostname of the database server:"
+msgstr "Nombre del servidor de base de datos:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:72
+msgid ""
+"If your database is on another machine besides the one that Diogenes is "
+"running on then you need to change this value to the fully qualified domain "
+"name for that system."
+msgstr ""
+"Si su base de datos se encuentra en otra maquina distinta a la que Diogenes "
+"se está ejecutando debe cambiar este valor a un nombre de dominio válido "
+"para su sistema."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:80
+msgid "Name for the Diogenes database:"
+msgstr "Nombre para la base de datos de Diogenes:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:80
+msgid ""
+"By default this will be \"diogenes\".  This is where all the Diogenes "
+"related database items will be setup and stored."
+msgstr ""
+"Por omisión será \"diogenes\". Esto es donde Diogenes configurará y guardará "
+"todos los elementos relacionados con su base datos."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:87
+msgid "Database username:"
+msgstr "Usuario de la base de datos:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:87
+msgid ""
+"What username will access the database for Diogenes?  By default this is "
+"it's own user \"diogenes\" so that permissions can be tightened down."
+msgstr ""
+"¿Cual usuario accederá a la base de datos de Diogenes? Por omisión es su "
+"propio usuario \"diogenes\", asi los permisos pueden ser reforzados."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid "Password for the Diogenes user:"
+msgstr "Contraseña para el usuario Diogenes:"
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid ""
+"Enter a password for the database user which will be used along with the "
+"database user name you have already supplied to connect to the database."
+msgstr ""
+"Ingrese una contraseña para el usuario de la base de datos anteriormente "
+"mencionado."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid ""
+"If you wish to leave the password empty, type \"none\".  If you wish to use "
+"an automatically generated random password type \"auto\"."
+msgstr ""
+"Si desea dejar la contraseña vacía ingrese \"none\". Si desea que se genere "
+"de forma aleatoria ingrese \"auto\"."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:105
+msgid "MySQL administrator username:"
+msgstr "Usuario administrador de MySQL:"

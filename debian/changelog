@@ -1,0 +1,354 @@
+diogenes (0.9.18-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update dependencies to allow use with php5 instead of php4.
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Wed,  5 Apr 2006 21:31:21 +0200
+
+diogenes (0.9.17.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Mon,  3 Oct 2005 19:29:45 +0200
+
+diogenes (0.9.17.1-2) unstable; urgency=low
+
+  * Remove hardcoded depends on debconf, let debhelper handle it
+  * Do not remove debian/compat on clean, fixes lintian warning
+  * Do not run 'make' manually, let cdbs handle it by using makefile.mk
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Mon, 26 Sep 2005 21:40:19 +0200
+
+diogenes (0.9.17.1-1) unstable; urgency=low
+
+  * New upstream release.
+  - convert debian/* to utf8
+  - diogenes.postinst, diogenes.postrm : fix possible bashisms
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Tue, 30 Aug 2005 01:31:49 +0200
+
+diogenes (0.9.17-2) unstable; urgency=low
+
+  * Update to Standards-Version 3.6.2
+  * Add Czech translation of debconf messages (Closes: #315827)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sun, 26 Jun 2005 14:38:30 +0200
+
+diogenes (0.9.17-1) unstable; urgency=low
+
+  * New upstream release.
+  - disable custom templates on admin pages (Closes: #296125)
+  * Rework package dependencies
+  - add Depends on php4-mysql for libphp-diogenes
+  - change wv from Depends to Suggests for diogenes
+  * Add error information when enabling apache modules
+  * Purge Smarty template cache during configure
+  * Update German translation of debconf messages (Closes: #311718)
+  * Document the fact that $globals->rooturl defaults to
+    http://localhost/diogenes/ (Closes: #311673)
+  * Add Vietnamese translation of debconf messages (Closes: #313543)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue, 14 Jun 2005 21:01:44 +0200
+
+diogenes (0.9.16+0.9.17pre24-1) experimental; urgency=low
+
+  * New upstream release.
+  * Update German translation of debconf messages (Closes: #311718)
+  * Document the fact that $globals->rooturl defaults to
+    http://localhost/diogenes/ (Closes: #311673)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sun,  5 Jun 2005 20:15:04 +0200
+
+diogenes (0.9.16+0.9.17pre23-1) experimental; urgency=low
+
+  * New upstream release
+  * Rework package dependencies
+  - add Depends on php4-mysql for libphp-diogenes
+  - change wv from Depends to Suggests for diogenes
+  * Add error information when enable apache modules
+  * Purge Smarty template cache during configure
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sun, 29 May 2005 23:30:33 +0200
+
+diogenes (0.9.16-1) unstable; urgency=low
+
+  * New upstream release
+  - use unsigned ints instead of smallints for user ids (Closes: #299377)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sun, 13 Mar 2005 23:54:48 +0100
+
+diogenes (0.9.15-3) unstable; urgency=low
+
+  * Update French translations (Closes: #296343)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 23 Feb 2005 20:11:23 +0100
+
+diogenes (0.9.15-1) unstable; urgency=low
+
+  * New upstream release
+  - control : add Depends on php-mail-mime for libphp-diogenes
+  - control : add Recommends on mysql-server
+  * Add support for apache2, apache-ssl and apache-perl
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sat, 22 Jan 2005 13:18:39 +0100
+
+diogenes (0.9.14-2) unstable; urgency=low
+
+  * Use code contributed to wwwconfig-common
+  - diogenes.postinst : replace custom code by call to apache-php.sh
+  - diogenes.postinst : replace custom code by call to php-extensions.sh
+  - control : update Depends to wwwconfig-common (>= 0.0.41)
+  - control : change Depends from php4-cgi to php4-cli
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Mon, 15 Nov 2004 02:56:13 +0100
+
+diogenes (0.9.14-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 14 Oct 2004 23:14:45 +0200
+
+diogenes (0.9.13-2) unstable; urgency=low
+
+  * Mention all copyright holders in debian/copyright
+  * Add debian/watch file
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue, 17 Aug 2004 16:46:58 +0200
+
+diogenes (0.9.13-1) unstable; urgency=low
+
+  * New upstream release
+  * Add Pablo Castellazzi's Spanish debconf translation
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 21 Jul 2004 18:45:19 +0200
+
+diogenes (0.9.12-3) unstable; urgency=low
+
+  * Fix the revision browser's 'restore' function
+  * Fix incorrect mimetype for MS Office documents
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Fri,  2 Jul 2004 11:52:23 +0200
+
+diogenes (0.9.12-2) unstable; urgency=low
+
+  * Fix missing 'delete' button in the table editor 
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 23 Jun 2004 18:07:46 +0200
+
+diogenes (0.9.12-1) unstable; urgency=low
+
+  * New upstream release
+  - explicitly state what barrel names are valid (Closes: #252788)
+  - added customisable templates (Closes: #252805)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 10 Jun 2004 14:57:09 +0200
+
+diogenes (0.9.11-1) unstable; urgency=low
+
+  * New upstream release
+  - fixed French translations (Closes: #250485, #250487)
+  * Packaging improvements
+  - added Nicolas Bertolissio's French debconf translation
+  - added Erik Schanze's German debconf translation (Closes: #252327)
+  - diogenes.postinst : check that upgradedb.php returns OK
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue,  1 Jun 2004 15:03:11 +0200
+
+diogenes (0.9.10-3) unstable; urgency=low
+
+  * Check that PHP has MySQL support activated
+  - diogenes.postinst : enable MySQL support if necessary (Closes: #250081)
+  * Fix incorrect MD5 hashing of accentuated characters (Closes: #250198)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Sun, 23 May 2004 14:15:37 +0200
+
+diogenes (0.9.10-2) unstable; urgency=low
+
+  * Improved debconf templates:
+  - "unpersonalise" computer (Closes: #249983)
+  - set untranslatable strings (Closes: #249984)
+  - be consistent, use "web server" (Closes: #249989)
+  - do not end templates with question mark (Closes: #249991)
+  - be more explicit about automatic password generation (Closes: #249987)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 20 May 2004 13:07:02 +0200
+
+diogenes (0.9.10-1) unstable; urgency=low
+
+  * New upstream release.
+  - apache.conf : add PEAR to the include_path
+  - diogenes.postinst : check whether database creation succeeds
+  - diogenes.postinst : call modules-config more cautiously
+  - diogenes.postinst : handle case where webserver does not restart
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue, 18 May 2004 10:29:22 +0200
+
+diogenes (0.9.9.3-7) unstable; urgency=low
+
+  * General improvements
+  - apache.conf : explicitly set magic_quotes_gpc and register_globals
+  - README.Debian : added a note about using updatedb.php
+  * Minimise changes to httpd.conf
+  - apache.conf : set index.php as the DirectoryIndex
+  - diogenes.postinst : do not touch DirectoryIndex in httpd.conf
+  - diogenes.postinst / diogenes.postrm : use a symlink to apache.conf
+  - diogenes.postinst : use modules-config to enable php4 support
+  * Better cleanup upon purge
+  - diogenes.config : ask the user whether to clear data on purge
+  - diogenes.postrm : remove /var/(lib|spool)/diogenes and drop database
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed,  5 May 2004 15:09:51 +0200
+
+diogenes (0.9.9.3-6) unstable; urgency=low
+
+  * Upload sponsored by Matthew Palmer <mpalmer@debian.org>.
+  * Initial upload to Debian.  Closes: #243865.
+  * We also need the user that runs the webserver
+  - diogenes.config : retrieve webuser with getwwwoption or db_input
+  - diogenes.postinst : corrected chown of /var/(lib|spool)/diogenes
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Fri, 16 Apr 2004 11:52:24 +0200
+
+diogenes (0.9.9.3-5) unstable; urgency=low
+
+  * Server group gets determined during config
+  - diogenes.config : imported getwwwoption()
+  - diogenes.postinst : do not communicate via console
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Fri, 16 Apr 2004 10:04:20 +0200
+
+diogenes (0.9.9.3-4) unstable; urgency=low
+
+  * Stop trying to guess the MySQL user / password
+  - diogenes.config : to not use mysql-localadmpass.get
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 15 Apr 2004 19:26:39 +0200
+
+diogenes (0.9.9.3-3) unstable; urgency=low
+
+  * Better cleanup on remove
+  - rules : create /var/spool/diogenes/templates_c and /var/lib/diogenes
+  - diogenes.prerm : purge Smarty compiled templates cache
+  * Fix some issues pointed out by Matthew Palmer
+  - diogenes.templates : miscount of available options
+  - rules : moved install scripts out of /usr/share/doc
+  - diogenes.postinst : use wwwconfig-common to GRANT privileges
+  - diogenes.postinst : install ucf-managed files before configuring apache
+  - diogenes.postrm : removed .dpkg-dist files
+  * Fix potential problem with apache restart
+  - apache.conf : protect php_value with an IfModule
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 15 Apr 2004 19:13:01 +0200
+
+diogenes (0.9.9.3-2) unstable; urgency=low
+
+  * Use ucf to manage conffiles. 
+  - diogenes.postinst : removed some cruft
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 14 Apr 2004 11:29:33 +0200
+
+diogenes (0.9.9.3-1) unstable; urgency=low
+
+  * New upstream release.
+  - rules : documents are now in 'htdocs'
+  - apache.conf : changed document root to 'htdocs'
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue, 13 Apr 2004 14:46:09 +0200
+
+diogenes (0.9.9.2-2) unstable; urgency=low
+
+  * Improved package description and notes.
+  - control : more explicit description
+  - README.Debian : corrected MySQL instructions
+  * Fixed bug when MySQL admin password is empty.
+  - diogenes.postinst : escape arguments passed to updatedb.php
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Mon, 29 Mar 2004 14:12:45 +0200
+
+diogenes (0.9.9.2-1) unstable; urgency=low
+
+  * New upstream release.
+  - rules : make use of dh_install instead of copying files
+  - rules : libphp-diogenes has its own ChangeLog
+  - README.Debian : added
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Fri, 26 Mar 2004 15:57:48 +0100
+
+diogenes (0.9.9.1-1) unstable; urgency=low
+
+  * New upstream release. 
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 24 Mar 2004 12:22:58 +0100
+
+diogenes (0.9.9-1) unstable; urgency=low
+
+  * New upstream release.
+  - apache.conf : removed rewrite block
+  - control : use standard version 3.6.1
+  - control : use ${Source-Version} for Depends
+  - control : use po-debconf instead of debconf
+  - rules : distribute HTTP_WebDAV_Server files
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue, 16 Mar 2004 22:20:51 +0100
+
+diogenes (0.9.8.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Mon,  1 Mar 2004 14:40:43 +0100
+
+diogenes (0.9.8.2-1) unstable; urgency=low
+
+  * New upstream release.
+  - rules : cvs.pl needs to be installed
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed, 17 Dec 2003 11:18:27 +0100
+
+diogenes (0.9.8.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Fri, 12 Dec 2003 17:09:02 +0100
+
+diogenes (0.9.8-2) unstable; urgency=low
+
+  * Fixed Lintian warnings.
+  - copyright : added
+  - diogenes.postinst : removed a bashism
+  - diogenes.postinst : removed calls to db_input (already in diogenes.config)
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 11 Dec 2003 22:50:37 +0100
+
+diogenes (0.9.8-1) unstable; urgency=low
+
+  * New upstream release.
+  - control : added missing dependencies on php4-mysql and rcs
+  - control : added new dependency on cvs
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Thu, 11 Dec 2003 15:41:00 +0100
+
+diogenes (0.9.7-1) unstable; urgency=low
+
+  * New upstream release.
+  - rules : make call to updatedb.php
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed,  3 Dec 2003 19:23:01 +0100
+
+diogenes (0.9.6-3) unstable; urgency=low
+
+  * Better default for base url.
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed,  3 Dec 2003 07:23:45 +0100
+
+diogenes (0.9.6-2) unstable; urgency=low
+
+  * Fixed up MySQL initialisation.
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Wed,  3 Dec 2003 04:33:10 +0100
+
+diogenes (0.9.6-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Jeremy Laine <jeremy.laine@m4x.org>  Tue,  2 Dec 2003 20:17:24 +0100
+                                                                                

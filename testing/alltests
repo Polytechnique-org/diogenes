@@ -1,0 +1,39 @@
+#!/usr/bin/php4 -Cq
+<?php
+
+$testfiles = array(
+	// For your own good, don't move these first two test suites
+        'InternalTest' => array('InternalTest'),
+	'DBTest' => array('DBInitialTest',
+			'DiogenesDatabaseTest'),
+	'DiogenesLoggerViewTest' => array('DiogenesLoggerViewTest')
+        );
+
+global $TESTING;
+$TESTING=true;
+chdir('..');
+
+error_reporting(E_ALL);
+ini_set('include_path', 'include:testing:'.ini_get('include_path'));
+
+require_once 'PHPUnit.php';
+
+foreach ($testfiles as $file => $tests)
+{
+        require_once "$file.php";
+
+        echo "Now running tests from $file.php...\n";
+
+        $suite = new PHPUnit_TestSuite();
+
+        foreach ($tests as $test)
+        {
+                $suite->addTestSuite($test);
+        }
+
+        $result = PHPUnit::run($suite);
+
+	echo $result->toString();
+}
+
+echo "All Tests Complete\n";

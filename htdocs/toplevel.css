@@ -1,0 +1,48 @@
+#header {
+  background-color: #787878;
+  background-image: url(images/banner.png);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  height: 55px; 
+  background-position: right;
+  margin:0; padding:0;
+  border-bottom: 1px solid black;
+}
+
+#header .logo {
+  height: 55px; 
+  background-image: url(images/barrel.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin:0;
+}
+
+#header .titlebar {
+  padding: 10px;
+}
+
+.menu a {
+  background-image: url(images/menu-back.gif);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+
+.logevents {
+  font-weight: bold;
+  font-size: 9pt;
+  text-align: right;
+}
+
+.logmain {
+  font-weight: bold;
+  font-size: 9pt;
+}
+
+.center {
+  text-align: center;
+}
+
+.auth {
+  font-weight: bold;
+  font-size: 9pt;
+}

@@ -1,0 +1,47 @@
+#!/usr/bin/make -f
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/makefile.mk
+
+# definitions
+SCRIPTDIR := usr/share/diogenes/scripts
+
+# documentation
+DEB_INSTALL_DOCS_ALL :=
+DEB_INSTALL_DOCS_diogenes := AUTHORS README
+DEB_INSTALL_DOCS_libphp-diogenes := include/diogenes/AUTHORS
+
+# changelogs
+DEB_INSTALL_CHANGELOGS_ALL :=
+DEB_INSTALL_CHANGELOGS_diogenes := ChangeLog
+DEB_INSTALL_CHANGELOGS_libphp-diogenes := include/diogenes/ChangeLog
+
+#directories
+DEB_INSTALL_DIRS_diogenes := etc/diogenes var/lib/diogenes var/spool/diogenes/templates_c var/spool/diogenes/diogenes_c
+
+binary-install/diogenes::
+	# config
+	dh_install -X.arch-ids -pdiogenes debian/diogenes.debian.inc.php \
+			      debian/diogenes.config.inc.php \
+	                      config/apache.conf \
+			      usr/share/diogenes/config
+	
+	# files for db installation
+	dh_install -X.arch-ids -pdiogenes config/updatedb.php $(SCRIPTDIR)
+	cat debian/prefix.sql config/db/diogenes.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.tables.sql.in
+	cat debian/prefix.sql config/db/diogenes.logactions.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.logactions.sql.in
+
+	# PHP files, templates, locales et al.
+	dh_install -X.arch-ids -pdiogenes -Xdiogenes.globals.inc.php.in \
+	                       cvs.pl style.css \
+	                       htdocs include locale plugins templates \
+			       usr/share/diogenes
+	
+	# remove library files
+	rm -rf debian/diogenes/usr/share/diogenes/include/diogenes
+
+binary-install/libphp-diogenes::
+
+	# PHP files and templates
+	dh_install -X.arch-ids -plibphp-diogenes include/diogenes/*.php usr/share/php/diogenes
+	dh_install -X.arch-ids -plibphp-diogenes include/diogenes/templates usr/share/php/diogenes
+

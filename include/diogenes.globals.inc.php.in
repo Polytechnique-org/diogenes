@@ -1,0 +1,181 @@
+<?php
+/*
+ * Copyright (C) 2003-2004 Polytechnique.org
+ * http://opensource.polytechnique.org/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+
+require_once 'diogenes/diogenes.core.globals.inc.php';
+
+/** This class describes Diogenes' global settings.
+ */
+class DiogenesGlobals extends DiogenesCoreGlobals {
+  /** Absolute directory location of Diogenes root. */
+  var $root;
+  /** Absolute directory location of Diogenes spool directory. */
+  var $spoolroot;
+  /** Absolute directory location of Diogenes RCS. */
+  var $rcsroot;
+  /** The Diogenes root URL */
+  var $rooturl;
+  /** The Diogenes version */
+  var $version = "@VERSION@";
+
+  /** A barrel's stylesheet */
+  var $cssfile = "style.css";
+  /** The file containing a barrel page definition */
+  var $htmlfile = "page.html";
+  /** The Word file containing a barrel page definition */
+  var $wordfile = "page.doc";
+
+  /** The revision control system (DiogenesRcs or DiogenesCvs).
+   *  This can be set from the toplevel interface
+   */
+  var $rcs = "DiogenesRcs";
+  /** The class for display toplevel pages. */
+  var $toplevel = 'DiogenesToplevel';
+  /** The class for displaying sites. */
+  var $barrel = 'DiogenesBarrel';
+  /** The class to use for session handling. */
+  var $session = 'DiogenesSession';
+  /** The class to use for WebDAV operations. */
+  var $webdav = 'DiogenesWebDAV';
+ 
+  /** The database table holding the global options */
+  var $table_global_options = "diogenes_option";
+  
+  /** The database table holding the plugins */
+  var $table_plugins = "diogenes_plugin";
+
+  /** The tables for authentication */
+  var $tauth = array('native'=>"diogenes_auth");
+  /** Labels for the authentication tables */
+  var $tlabel = array('native'=>"Diogenes");
+
+  /** Should we display W3C validator links from user-created pages ? */
+  var $validatepages = 0;
+
+  /** Should we debug database calls ? */
+  var $debugdatabase = 0;
+  
+  /** Should we show plugin debugging information ? */
+  var $debugplugins = 0;
+ 
+  /** What file should we write the WebDAV log to? (empty = none) */
+  var $debugwebdav = '';
+
+  /** Should we capture all WebDAV output to a log? */
+  var $debugwebdav_capture = 0;
+  
+  /** Invalid locations for barrel pages */
+  var $invalidlocations = array("admin", "webdav");
+
+  /** Invalid barrel names */
+  var $invalidaliases = array("CVSROOT", "templates_c", "tree_c", "diogenes");
+ 
+  /** Available HTML editors */
+  var $html_editors = array(
+                             'kafenio' => "Kafenio",
+			     'ekit' => "Ekit"
+                           );
+
+  /** Availables languages */
+  var $locales = array(
+                       'en_US'=> "English",
+                       'es_ES'=> "Español",
+                       'fr_FR'=> "Français",
+                       'nl_NL'=> "Nederlands",
+                       'sv_SE'=> "Svenska"
+                      );
+
+  /** Available menu styles */
+  var $menu_styles = array(
+                           0=> "classic",
+                           1=> "dynamic tree",
+                           2=> "dynamic tree, save state"
+                          );
+
+  /** Available menu themes */
+  var $menu_themes = array(
+                           'gnome' => 'gnome',
+                           'gorilla' => 'gorilla',
+                           'lush' => 'lush',
+                           'mozilla' => 'mozilla'
+                          );
+  
+  /** The HTML editor to use (ekit, kafenio) */
+  var $html_editor = "kafenio";
+ 
+  /** Toplevel menu style */
+  var $menu_style = 0;
+
+  /** Toplevel menu theme */
+  var $menu_theme = "gorilla";
+ 
+  /** Template directory */
+  var $template_dir = "";
+
+  /** Default template for barrel pages */
+  var $template = "";
+  
+  /** Utility to use for Word file import.
+   *  set 'wvHtml' to make us of wv for Word import
+   *  otherwise leave empty to disable word import.
+   */
+  //var $word_import = 'wvHtml';
+  var $word_import = '';
+  
+  /** Available Word import utilities */  
+  var $word_imports = array(
+                             ''       => "disabled", 
+                             'wvHtml' => "wvHtml"
+                           );  
+  
+                           
+  /** Check that RootURL is a full URL */
+  function checkRootUrl()
+  {
+    return preg_match('/^http(s)?:\/\/.*/i', $this->rooturl); 
+  }
+                             
+  
+  /** Read extra options from database.
+   */
+  function readOptions()
+  {
+    $res = $this->db->query("select name,value from {$this->table_global_options} where barrel=''");
+
+    // we only accept options which already exist in this
+    // class
+    while (list($key,$value) = mysql_fetch_row($res)) {
+      if (isset($this->$key))
+        $this->$key = $value;
+    }
+  }
+
+  
+  /** Store a preference to database.
+   */
+  function updateOption($name,$value)
+  {
+    $this->$name = stripslashes($value);
+    $this->db->query("replace into {$this->table_global_options} set barrel='',name='$name',value='$value'");
+  }
+
+}
+
+?>

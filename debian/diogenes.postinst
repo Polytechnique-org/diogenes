@@ -1,0 +1,209 @@
+#! /bin/sh
+# Horde postinst script using debconf
+# Written by Ola Lundqvist <opal@debian.org>
+# Adapted for Horde2 by Nils Rennebarth <nils@debian.org>
+# Adapted for Diogenes by Jeremy Lainé <jeremy.laine@m4x.org>
+#
+# All questions should have been asked via debconf
+# now we just go get those, build a temp file which we read in and
+# then build our config files and set everthing up
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/share/doc/packaging-manual/
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+create_file_from_template() {
+  infile=$1
+  outfile=$2
+  # Password may contain anything, so we need to descend to quoting
+  # hell.
+  safepass="$dbpass"
+  # quote normal quote and final backslash because we need to write
+  # a single quoted PHP string
+  safepass=$(echo "$safepass" | sed -e "s/'/\\\\'/g" -e 's/\\$/\\\\'/)
+  # Now double backslashes because we will use sed
+  safepass=$(echo "$safepass" | sed -e 's/\\/\\\\/g')
+  # Finally escape an eventual hash sign with a backslash because
+  # we use the hash sign as a delimiter
+  safepass=$(echo "$safepass" | sed -e 's/#/\\#/g')
+  sed -e "				\
+    s#@dbname@#$dbname#;		\
+    s#@dbserver@#$dbserver#;	\
+    s#@dbuser@#$dbuser#;		\
+    s#@dbpass@#$safepass#;		\
+    " <$infile >$outfile
+}
+
+
+case "$1" in
+    configure)
+ 
+# install ucf-managed files
+ucf --debconf-ok /usr/share/diogenes/config/diogenes.debian.inc.php /etc/diogenes/diogenes.debian.inc.php
+ucf --debconf-ok /usr/share/diogenes/config/apache.conf /etc/diogenes/apache.conf
+
+# get debconf started
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+###############################################################################
+############################### Configure database ############################
+###############################################################################
+
+# Type of the databasemgr to use.
+db_get "diogenes/databasemgr_type"
+dbtype="$RET"
+if [ "$dbtype" = "Automatic" ] ; then
+  # Where it is located.
+  db_get "diogenes/databasemgr_server"
+  dbserver="$RET"
+  # Name of the database
+  db_get "diogenes/database_name"
+  dbname="$RET"
+  # Name of the user to have access.
+  db_get "diogenes/database_user"
+  dbuser="$RET"
+  # Its password.
+  db_get "diogenes/database_pass"
+  dbpass="$RET"
+
+  if [ ! -z $(which mysql) ]; then
+
+    # retrieve admin user and password
+    db_get "diogenes/dbmyadmin"
+    dbadmin="$RET"
+    db_get "diogenes/dbadmpass"
+    dbadmpass="$RET"
+    db_reset "diogenes/dbadmpass"
+
+    . /usr/share/wwwconfig-common/mysql-createdb.sh
+    if [ "$status" = "create" ] ; then
+      sqlfile=/usr/share/diogenes/scripts/diogenes.tables.sql
+      create_file_from_template $sqlfile.in $sqlfile
+      . /usr/share/wwwconfig-common/mysql-exec.sh
+      rm $sqlfile
+      sqlfile=/usr/share/diogenes/scripts/diogenes.logactions.sql
+      create_file_from_template $sqlfile.in $sqlfile
+      . /usr/share/wwwconfig-common/mysql-exec.sh
+      rm $sqlfile
+    elif [ "$status" = "nothing" ] ; then
+      if ! /usr/share/diogenes/scripts/updatedb.php -q -s "$dbserver" -d "$dbname" -u "$dbadmin" -p "$dbadmpass" ; then
+        echo "There was an error while upgrading the Diogenes database."
+      fi
+    else
+      echo $error
+    fi
+    . /usr/share/wwwconfig-common/mysql-createuser.sh
+  else
+    echo "Not configuring MySQL database because we cannot locate"
+    echo "the mysql client executable (mysql-client package missing)."
+  fi
+else
+    echo "Not configuring MySQL database at your request."
+fi
+
+
+###############################################################################
+########################## Configure web servers ##############################
+###############################################################################
+
+db_get "diogenes/webservers"
+webservers="$RET"
+
+for server in $webservers; do
+    server=$(echo $server | sed 's/,$//')
+    servers="$server $servers"
+    # Make sure our web server has PHP support
+    phpver=php4
+    phpini=/etc/$phpver/$server/php.ini
+    . /usr/share/wwwconfig-common/apache-php.sh
+    if [ "$status" = "uncomment" ] ; then
+      restart="$server $restart"
+    elif [ "$status" = "error" ] ; then
+      echo "Error while trying to enable $phpver support for '$server' : $error."
+    fi
+
+    # Make sure that PHP has MySQL support enabled
+    checkextensions=mysql
+    . /usr/share/wwwconfig-common/php-extensions.sh
+    
+    includefile=/etc/diogenes/apache.conf
+    # For old versions of Diogenes, remove the include of ourapache.conf
+    if dpkg --compare-versions "$2" le-nl "0.9.9.3-6" ; then
+        . /usr/share/wwwconfig-common/apache-uninclude_all.sh
+        if [ "$status" = "uncomment" ] ; then
+            restart="$server $restart"
+	fi
+    fi
+    
+    # If necessary, add a symlink to our apache.conf
+    if [ -d /etc/$server/conf.d ] && [ ! -e /etc/$server/conf.d/diogenes ] ; then
+        ln -s $includefile /etc/$server/conf.d/diogenes
+	restart="$server $restart"
+    fi
+done
+
+
+###############################################################################
+########################## Configure Diogenes #################################
+###############################################################################
+
+db_get "diogenes/webuser"
+webuser="$RET"
+db_get "diogenes/webgroup"
+webgroup="$RET"
+
+(	umask 0027			# File may contain passwords
+  create_file_from_template /usr/share/diogenes/config/diogenes.config.inc.php /etc/diogenes/diogenes.config.inc.php
+  chgrp $webgroup /etc/diogenes/diogenes.config.inc.php
+)
+
+# purge Smarty templates cache
+rm -rf /var/spool/diogenes/templates_c/*
+
+# correct ownership on Diogenes directories
+chown -R $webuser /var/lib/diogenes
+chown -R $webuser /var/spool/diogenes
+
+
+###############################################################################
+############################# Servers restart #################################
+###############################################################################
+if ! eval . /usr/share/wwwconfig-common/restart.sh ; then
+  echo "There was a problem restarting web server(s)."
+fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+#DEBHELPER#
+
+exit 0
+

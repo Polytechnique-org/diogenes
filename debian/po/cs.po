@@ -1,0 +1,281 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: diogenes\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-14 01:45+0100\n"
+"PO-Revision-Date: 2005-06-25 16:08+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid "Welcome to the Diogenes setup program"
+msgstr "Vítejte v konfiguračním systému programu Diogenes"
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid ""
+"You must have a database server already setup and ready to go if you are "
+"going to have this program configure your database for you.  If you are not "
+"comfortable with this, you should tell the debconf process that you do not "
+"have any database server.  You will then need to configure Diogenes manually."
+msgstr ""
+"Chcete-li využít konfigurační systém pro automatické nastavení databáze, "
+"musíte již mít nastaven databázový server. Pokud vás automatické nastavení "
+"příliš neoslovuje, sdělte debconfu, že nemáte žádný databázový server a "
+"můžete si tak nastavit Diogenes ručně."
+
+#. Type: note
+#. Description
+#: ../diogenes.templates:3
+msgid ""
+"If debconf is set up in a way that you will not be asked questions "
+"interactively (i.e. you do not see this note during installation but as a "
+"mail to your root account), Diogenes will assume that your web server is "
+"apache and your database server is MySQL and no MySQL root password is set.  "
+"If any of these do not apply, Diogenes will not run unless you configure it "
+"manually by creating its database and editing the files in /etc/diogenes."
+msgstr ""
+"Pokud je debconf nastavený tak, že se nemá ptát otázky interaktivně (tj. "
+"tuto poznámku nevidíte během instalace, ale byla vám zaslána poštou), "
+"bude Diogenes předpokládat, že je vaším webovým serverem apache, databázovým "
+"serverem MySQL a že v databázi není nastaveno žádné rootovské heslo. "
+"Pokud něco z toho není pravda, Diogenes se nespustí dokud jej nenastavíte "
+"ručně (tj. nevytvoříte databázi a neupravíte soubory v /etc/diogenes)."
+
+#. Type: boolean
+#. Description
+#: ../diogenes.templates:19
+msgid "Remove web site data after \"purging\" the diogenes package?"
+msgstr "Odstranit data při vyčištění balíku diogenes ze systému?"
+
+#. Type: boolean
+#. Description
+#: ../diogenes.templates:19
+msgid ""
+"Should the data that makes up Diogenes's web sites be removed when the "
+"diogenes packages is purged with the \"dpkg --purge diogenes\" command (i.e. "
+"remove everything including the configuration)?"
+msgstr ""
+"Vyberte si, zda se mají při kompletním odstranění balíku diogenes příkazem "
+"\"dpkg --purge diogenes\" odstranit i data tvořící webové stránky systému "
+"Diogenes (tj. vše včetně nastavení)."
+
+#. Type: multiselect
+#. Choices
+#: ../diogenes.templates:26
+msgid "apache, apache-ssl, apache-perl, apache2"
+msgstr "apache, apache-ssl, apache-perl, apache2"
+
+#. Type: multiselect
+#. Description
+#: ../diogenes.templates:28
+msgid "Type of web server:"
+msgstr "Typ webového serveru:"
+
+#. Type: multiselect
+#. Description
+#: ../diogenes.templates:28
+msgid ""
+"By default Diogenes supports any web server that php4 does.  This config "
+"process currently only supports Apache directly.  If you use another one you "
+"will have to handle the web ends manually.  If you choose the first option, "
+"this install process will manage the configuration (or attempt to) of the "
+"Apache specific portions necessary to run Diogenes properly."
+msgstr ""
+"Diogenes podporuje libovolný webový server, pod kterým běží php4, avšak "
+"tento konfigurační program zatím podporuje jenom Apache. "
+"Jestliže používáte jiný webový server, budete jej muset nastavit ručně. "
+"Zvolíte-li první možnost, postará se o automatické nastavení "
+"instalační program."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:38
+msgid "User your web server runs as:"
+msgstr "Uživatel, pod kterým běží webový server:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:38
+msgid ""
+"Unable to obtain the user your web server runs as. This is needed in order "
+"to allow the web server to write the files that make up the Diogenes-managed "
+"web sites."
+msgstr ""
+"Nemohu zjistit uživatele, pod kterým běží váš webový server. Tuto informaci "
+"potřebuji proto, abych povolil webovému serveru zapsat do souborů, "
+"které jsou uloženy ve webech kontrolovaných systémem Diogenes."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:46
+msgid "Group your web server runs as:"
+msgstr "Skupina, pod kterou běží webový server:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:46
+msgid ""
+"Unable to obtain the group your web server runs as.  This is needed in order "
+"to allow the web server to read Diogenes's configuration files."
+msgstr ""
+"Nemohu zjistit skupinu, pod kterou běží váš webový server. Tuto informaci "
+"potřebuji proto, abych mohl webovému serveru povolit čtení konfiguračních "
+"souborů systému Diogenes."
+
+#. Type: select
+#. Choices
+#: ../diogenes.templates:52
+msgid "Automatic, Manual"
+msgstr "Automatická, Ruční"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid "Type of database installation:"
+msgstr "Typ databázové instalace:"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid ""
+"If you want the setup program to ask you questions and do the database setup "
+"for you, select \"Automatic\". (Recommended)"
+msgstr ""
+"Pokud chcete, aby se vás konfigurační program zeptal několik otázek a "
+"podle nich nastavil databázi automaticky, vyberte \"Automatická\". "
+"(Doporučeno)"
+
+#. Type: select
+#. Description
+#: ../diogenes.templates:54
+msgid ""
+"If you want to configure your database by hand, select \"Manual\".  In this "
+"case you will have to create the Diogenes database and user by hand and "
+"handle database upgrades manually."
+msgstr ""
+"Chcete-li mít raději vše pod kontrolou, zvolte \"Ruční\". V tomto případě "
+"budete muset databázi a databázového uživatele vytvořit ručně a následně "
+"se také ručně starat o aktualizaci databáze."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:64
+msgid "Database admin password:"
+msgstr "Heslo správce databáze:"
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:64
+msgid ""
+"Enter the password for your database admin user to access the database. This "
+"password had been set when installing your database.  It is most likely NOT "
+"the same password that your Diogenes manager account will use."
+msgstr ""
+"Zadejte heslo administrátora databáze, které se použije pro přístup k "
+"databázi. Toto heslo jste nastavili při instalaci databáze. S největší "
+"pravděpodobností se NEJEDNÁ o stejné heslo, jaké bude používat správcovský "
+"účet systému Diogenes."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:72
+msgid "Hostname of the database server:"
+msgstr "Jméno počítače s databázovým serverem:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:72
+msgid ""
+"If your database is on another machine besides the one that Diogenes is "
+"running on then you need to change this value to the fully qualified domain "
+"name for that system."
+msgstr ""
+"Jestliže se vaše databáze nachází na jiném počítači než na kterém běží "
+"Diogenes, pak budete muset změnit tuto hodnotu na plně kvalifikované "
+"doménové jméno daného systému."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:80
+msgid "Name for the Diogenes database:"
+msgstr "Jméno Diogenes databáze:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:80
+msgid ""
+"By default this will be \"diogenes\".  This is where all the Diogenes "
+"related database items will be setup and stored."
+msgstr ""
+"Implicitně se použije \"diogenes\". V této databázi se budou ukládat všechny "
+"záznamy systému Diogenes."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:87
+msgid "Database username:"
+msgstr "Databázové uživatelské jméno:"
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:87
+msgid ""
+"What username will access the database for Diogenes?  By default this is "
+"it's own user \"diogenes\" so that permissions can be tightened down."
+msgstr ""
+"Jaké uživatelské jméno budete používat pro přístup k databázi Diogenes? "
+"Implicitně se použije vestavěný uživatel \"diogenes\", což dovolí zpřísnit "
+"přístupová oprávnění."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid "Password for the Diogenes user:"
+msgstr "Heslo uživatele Diogenes:"
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid ""
+"Enter a password for the database user which will be used along with the "
+"database user name you have already supplied to connect to the database."
+msgstr ""
+"Zadejte heslo pro databázového uživatele, které se použije společně se "
+"jménem databázového uživatele (již jste jej zadali) pro připojení do "
+"databáze."
+
+#. Type: password
+#. Description
+#: ../diogenes.templates:94
+msgid ""
+"If you wish to leave the password empty, type \"none\".  If you wish to use "
+"an automatically generated random password type \"auto\"."
+msgstr ""
+"Pokud chcete použít prázdné heslo, napište \"none\". Chcete-li vygenerovat "
+"náhodné heslo, zadejte \"auto\"."
+
+#. Type: string
+#. Description
+#: ../diogenes.templates:105
+msgid "MySQL administrator username:"
+msgstr "Uživatelské jméno administrátora databáze:"

@@ -1,0 +1,1775 @@
+# translation of nl.po to English
+# translation of nl.po to
+# Dutch translations for Diogenes package.
+# Copyright (C) 2004 Jeremy Lainé
+# This file is distributed under the same license as the Diogenes package.
+# Michiel Alkemade <dropthestuff@hotmail.com>, 2004.
+# Jeremy Lainé <jeremy.laine@m4x.org>, 2004, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-01-07 16:41+0100\n"
+"PO-Revision-Date: 2006-01-10 07:50+0100\n"
+"Last-Translator: Jeremy Lainé <jeremy.laine@m4x.org>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: htdocs/index.php:9
+#: htdocs/index.php:13
+#: include/admin/bad.php:46
+msgid "Welcome to Diogenes"
+msgstr "Welkom bij Diogenes"
+
+#: htdocs/index.php:11
+#: htdocs/index.php:15
+msgid "Welcome to the Diogenes content management system."
+msgstr "Welkom bij het Diogenes Content Management Systeem."
+
+#: htdocs/index.php:12
+#: htdocs/index.php:16
+msgid "Diogenes was developed by the webmasters of the Polytechnique.org web site."
+msgstr "Diogenes is ontwikkeld door de webmasters van Polytechnique.org."
+
+#: htdocs/index.php:13
+#: htdocs/index.php:17
+msgid "The following barrels are currently available"
+msgstr "De volgende barrels zijn momenteel beschikbaar"
+
+#: htdocs/index.php:14
+#: htdocs/toplevel/admins.php:8
+#: include/diogenes.barrel-editor.inc.php:152
+#: include/Barrel/Editor.php:159
+msgid "site"
+msgstr "site"
+
+#: htdocs/index.php:15
+#: htdocs/toplevel/index.php:12
+#: htdocs/toplevel/logger_actions.php:14
+#: include/admin/options.php:61
+#: include/admin/options.php:63
+#: include/diogenes.barrel-editor.inc.php:153
+#: include/diogenes.plugin-editor.inc.php:238
+#: include/admin/options.php:65
+#: include/Barrel/Editor.php:160
+#: include/Plugin/Editor.php:267
+msgid "description"
+msgstr "beschrijving"
+
+#: htdocs/prefs.php:19
+msgid "Changing password.."
+msgstr "Bezig wachtwoord te veranderen.."
+
+#: htdocs/prefs.php:33
+#: include/admin/prefs.php:20
+msgid "User preferences"
+msgstr "Gebruikersvoorkeuren"
+
+#: htdocs/prefs.php:34
+#: include/admin/prefs.php:21
+msgid "Diogenes preferences"
+msgstr "Diogenes voorkeuren"
+
+#: htdocs/prefs.php:36
+msgid "my information"
+msgstr "mijn informatie"
+
+#: htdocs/prefs.php:37
+#: htdocs/toplevel/accounts.php:13
+#: htdocs/toplevel/boot.php:28
+#: include/diogenes.session.inc.php:138
+msgid "username"
+msgstr "gebruikersnaam"
+
+#: htdocs/prefs.php:38
+msgid "full name"
+msgstr "volledige naam"
+
+#: htdocs/prefs.php:40
+#: include/admin/prefs.php:23
+msgid "language"
+msgstr "taal"
+
+#: htdocs/prefs.php:41
+#: include/admin/prefs.php:24
+msgid "You can select your preferred language by clicking on the appropriate language below."
+msgstr "Je kan een voorkeurstaal selecteren door de gewenste taal hieronder aan te klikken."
+
+#: htdocs/prefs.php:43
+msgid "my password"
+msgstr "mijn wachtwoord"
+
+#: htdocs/prefs.php:44
+msgid "new password"
+msgstr "nieuw wachtwoord"
+
+#: htdocs/prefs.php:45
+msgid "confirmation"
+msgstr "bevestiging"
+
+#: htdocs/prefs.php:47
+#: include/admin/prefs.php:26
+msgid "Change"
+msgstr "Veranderen"
+
+#: include/admin/compose.php:32
+#: include/admin/edit.php:31
+#: include/admin/compose.php:34
+#: include/admin/edit.php:33
+msgid "Commiting changes to file"
+msgstr "Veranderingen aan file aan het doorvoeren"
+
+#: include/admin/edit.php:41
+#: include/admin/edit.php:43
+msgid "File editor"
+msgstr "Bestands editor"
+
+#: include/admin/edit.php:45
+#: include/admin/edit.php:47
+msgid "File source"
+msgstr "Bestands locatie"
+
+#: htdocs/toplevel/index.php:16
+#: htdocs/toplevel/options.php:89
+#: include/admin/menus.php:151
+#: include/admin/options.php:72
+#: include/admin/pages.php:12
+#: include/admin/edit.php:48
+#: include/diogenes.session.inc.php:137
+#: include/diogenes/diogenes.logger-view.inc.php:382
+#: include/diogenes/diogenes.table-editor.inc.php:536
+#: htdocs/toplevel/options.php:53
+#: include/admin/files.php:41
+#: include/admin/menus.php:152
+#: include/admin/options.php:74
+#: include/admin/pages.php:15
+#: include/admin/edit.php:50
+#: include/diogenes/diogenes.logger-view.inc.php:379
+#: include/diogenes/diogenes.table-editor.inc.php:541
+#: include/diogenes.barrel-editor.inc.php:157
+#: include/diogenes.plugin-editor.inc.php:235
+#: include/admin/files.php:38
+#: include/admin/menus.php:164
+#: include/admin/options.php:76
+#: include/admin/pages.php:14
+#: include/Barrel/Editor.php:164
+#: include/Plugin/Editor.php:264
+#: include/diogenes/diogenes.logger-view.inc.php:378
+msgid "Submit"
+msgstr "Bevestigen"
+
+#: include/admin/files.php:27
+#: include/admin/pages.php:152
+#: include/admin/compose.php:58
+#: include/admin/edit.php:50
+#: include/Barrel/Page.php:143
+msgid "pages catalog"
+msgstr "pagina catalogus"
+
+#: include/admin/files.php:28
+#: include/admin/pages.php:154
+#: include/admin/compose.php:59
+#: include/admin/edit.php:51
+#: include/Barrel/Page.php:147
+#: include/admin/index.php:74
+#: include/Barrel/Page.php:174
+msgid "page properties"
+msgstr "pagina-eigenschappen"
+
+#: include/admin/files.php:29
+#: include/admin/pages.php:155
+#: include/admin/compose.php:60
+#: include/admin/edit.php:52
+#: include/diogenes.rcs.inc.php:452
+#: include/diogenes.rcs.inc.php:621
+#: include/Barrel/Page.php:148
+#: include/admin/files.php:146
+#: include/Barrel/Page.php:175
+msgid "view page"
+msgstr "pagina tonen"
+
+#: include/admin/files.php:83
+#: include/admin/files.php:92
+#: include/admin/files.php:101
+#: include/admin/pages.php:156
+#: include/admin/compose.php:61
+#: include/admin/edit.php:53
+#: include/Barrel/Page.php:149
+#: include/Barrel/Page.php:173
+msgid "browse files"
+msgstr "bestanden doorbladeren"
+
+#: include/admin/files.php:35
+#: include/admin/pages.php:167
+#: include/admin/compose.php:64
+#: include/admin/edit.php:56
+#: include/admin/pages.php:132
+#: include/Barrel/File.php:94
+#: include/Barrel/File.php:114
+msgid "raw editor"
+msgstr "raw editor"
+
+#: htdocs/toplevel/options.php:88
+#: include/admin/files.php:36
+#: include/admin/pages.php:168
+#: include/admin/compose.php:65
+#: include/admin/edit.php:57
+#: include/diogenes.barrel.inc.php:316
+#: htdocs/toplevel/options.php:51
+#: include/admin/pages.php:133
+#: include/diogenes.barrel.inc.php:347
+#: include/Barrel/File.php:95
+#: include/Barrel/File.php:115
+#: include/diogenes.barrel.inc.php:343
+msgid "HTML editor"
+msgstr "HTML editor"
+
+#: include/admin/files.php:85
+#: include/admin/files.php:94
+#: include/admin/pages.php:163
+#: include/admin/pages.php:170
+#: include/admin/compose.php:66
+#: include/admin/edit.php:58
+#: include/admin/pages.php:129
+#: include/admin/pages.php:134
+#: include/Barrel/File.php:97
+#: include/Barrel/File.php:117
+msgid "file revisions"
+msgstr "bestandsrevisies"
+
+msgid "Ekit"
+msgstr "Ekit"
+
+#: include/admin/menus.php:36
+#: include/admin/menus.php:37
+msgid "The site's menus"
+msgstr "Menu opbouw van de site"
+
+#: include/admin/menus.php:44
+#: include/admin/menus.php:45
+msgid "The selected menu has child items, please remove them first."
+msgstr "Het geselecteerde menu item heeft onderliggende items, verwijder deze eerst."
+
+#: include/admin/menus.php:144
+#: include/admin/menus.php:145
+#: include/admin/menus.php:157
+msgid "menu entry properties"
+msgstr "eigenschappen van menu ingang"
+
+#: include/admin/menus.php:147
+#: include/admin/menus.php:148
+#: include/admin/menus.php:160
+msgid "none"
+msgstr "geen"
+
+#: include/admin/menus.php:148
+#: include/admin/menus.php:149
+#: include/admin/menus.php:161
+msgid "internal link"
+msgstr "intern koppeling"
+
+#: include/admin/menus.php:149
+#: include/admin/menus.php:150
+#: include/admin/menus.php:162
+msgid "external link"
+msgstr "extern koppeling"
+
+#: include/admin/menus.php:173
+#: include/diogenes.plugin-editor.inc.php:240
+#: include/admin/menus.php:185
+#: include/Plugin/Editor.php:269
+msgid "move up"
+msgstr "naar boven"
+
+#: include/admin/menus.php:176
+#: include/diogenes.plugin-editor.inc.php:241
+#: include/admin/menus.php:188
+#: include/Plugin/Editor.php:270
+msgid "move down"
+msgstr "naar beneden"
+
+#: htdocs/toplevel/index.php:85
+#: include/admin/menus.php:178
+#: include/diogenes.rcs.inc.php:417
+#: include/diogenes/diogenes.table-editor.inc.php:529
+#: include/diogenes/diogenes.table-editor.inc.php:534
+#: include/diogenes.barrel-editor.inc.php:43
+#: include/Barrel/Page.php:119
+#: include/Barrel/File.php:74
+#: include/admin/menus.php:190
+#: include/Barrel/File.php:92
+#: include/Barrel/Page.php:143
+#: include/Barrel/Editor.php:45
+msgid "edit"
+msgstr "bewerken"
+
+#: htdocs/toplevel/index.php:87
+#: include/admin/menus.php:179
+#: include/admin/pages.php:202
+#: include/diogenes.rcs.inc.php:419
+#: include/diogenes/diogenes.table-editor.inc.php:528
+#: include/diogenes/diogenes.table-editor.inc.php:533
+#: include/diogenes.barrel-editor.inc.php:52
+#: include/Barrel/Page.php:129
+#: include/Barrel/File.php:77
+#: include/admin/menus.php:191
+#: include/Barrel/File.php:95
+#: include/Barrel/Page.php:153
+#: include/Barrel/Editor.php:54
+msgid "delete"
+msgstr "verwijderen"
+
+#: include/admin/menus.php:217
+#: include/admin/menus.php:216
+#: include/admin/menus.php:228
+msgid "External links are denoted with the [ext] prefix."
+msgstr "Externe koppelingen beginnen met het voorvoegsel [ext]."
+
+#: include/admin/menus.php:222
+#: include/admin/menus.php:221
+#: include/admin/menus.php:233
+msgid "Add new entry"
+msgstr "Nieuwe ingang toevoegen"
+
+#: include/admin/files.php:63
+#: include/admin/files.php:86
+#: include/admin/files.php:88
+msgid "Error during file transfer!"
+msgstr "Fout bij het verzenden van het bestand!"
+
+#: include/admin/files.php:69
+#: include/admin/files.php:92
+#: include/admin/files.php:94
+msgid "Deleting file"
+msgstr "Bezig met verwijderen van bestand"
+
+#: include/admin/files.php:81
+#: include/admin/files.php:112
+#: include/admin/files.php:120
+msgid "Revision differences"
+msgstr "Verschillen tussen revisies"
+
+#: include/admin/files.php:90
+#: include/admin/files.php:120
+#: include/admin/files.php:128
+msgid "File revisions"
+msgstr "Bestandsrevisies"
+
+#: include/admin/files.php:103
+#: include/admin/files.php:155
+#: include/admin/files.php:194
+msgid "File manager"
+msgstr "Bestandmanager"
+
+#: include/admin/files.php:40
+#: include/admin/files.php:38
+msgid "Files in current directory"
+msgstr "Bestanden in huidige map"
+
+#: include/admin/files.php:41
+#: include/admin/files.php:40
+#: include/admin/files.php:37
+msgid "Import file"
+msgstr "Bestand importeren"
+
+#: include/admin/files.php:42
+#: include/admin/pages.php:210
+#: include/admin/pages.php:191
+#: include/admin/files.php:39
+#: include/admin/pages.php:163
+msgid "Send"
+msgstr "Verzenden"
+
+#: include/admin/files.php:43
+msgid "File to upload"
+msgstr "Te verzenden bestand"
+
+#: include/admin/index.php:20
+#: include/admin/index.php:45
+#: include/admin/index.php:47
+msgid "site created"
+msgstr "site angemaakt"
+
+#: include/admin/index.php:23
+#: include/admin/index.php:50
+#: include/admin/index.php:63
+msgid "page created"
+msgstr "pagina angemaakt"
+
+#: include/admin/index.php:26
+#: include/admin/index.php:54
+msgid "page deleted"
+msgstr "pagina verwijdert"
+
+#: include/admin/index.php:31
+#: include/admin/index.php:59
+#: include/admin/index.php:86
+msgid "file updated"
+msgstr "bestand bijgewerkt"
+
+#: include/admin/index.php:34
+#: include/admin/index.php:64
+msgid "file removed"
+msgstr "bestand verwijderd"
+
+#: include/admin/index.php:43
+#: include/admin/index.php:77
+#: include/admin/index.php:105
+msgid "Welcome to the Diogenes backoffice"
+msgstr "Welkom bij het Diogenes backoffice"
+
+#: include/admin/files.php:47
+#: include/admin/index.php:44
+#: include/diogenes/diogenes.logger-view.inc.php:372
+#: include/admin/files.php:49
+#: include/admin/index.php:78
+#: include/diogenes/diogenes.logger-view.inc.php:369
+#: include/admin/files.php:46
+#: include/admin/index.php:106
+#: include/diogenes/diogenes.logger-view.inc.php:368
+msgid "date"
+msgstr "datum"
+
+#: include/admin/index.php:45
+#: include/admin/users.php:28
+#: include/diogenes/diogenes.logger-view.inc.php:369
+#: include/admin/index.php:79
+#: include/diogenes/diogenes.logger-view.inc.php:366
+#: include/admin/index.php:107
+#: include/diogenes/diogenes.logger-view.inc.php:365
+msgid "user"
+msgstr "gebruiker"
+
+#: include/admin/index.php:46
+#: include/admin/index.php:80
+#: include/admin/index.php:108
+msgid "event"
+msgstr "gebeurtenis"
+
+#: include/admin/pages.php:11
+#: include/admin/pages.php:14
+#: include/admin/pages.php:158
+msgid "Page manager"
+msgstr "Paginabeheer"
+
+#: include/admin/pages.php:13
+#: include/admin/pages.php:16
+#: include/admin/pages.php:15
+msgid "Reset"
+msgstr "Terugzetten"
+
+#: include/admin/pages.php:14
+#: include/diogenes.barrel.inc.php:312
+#: include/admin/pages.php:17
+#: include/diogenes.barrel.inc.php:343
+#: include/admin/pages.php:16
+#: include/diogenes.barrel.inc.php:339
+msgid "Page properties"
+msgstr "Pagina-eigenschappen"
+
+#: include/admin/pages.php:15
+#: include/admin/files.php:55
+#: include/admin/pages.php:19
+#: include/admin/files.php:52
+#: include/admin/pages.php:18
+msgid "location"
+msgstr "locatie"
+
+#: htdocs/toplevel/index.php:10
+#: htdocs/toplevel/logger_actions.php:13
+#: include/admin/options.php:60
+#: include/admin/pages.php:16
+#: include/admin/files.php:56
+#: include/admin/options.php:62
+#: include/admin/pages.php:20
+#: include/admin/files.php:53
+#: include/admin/options.php:64
+#: include/admin/pages.php:19
+msgid "title"
+msgstr "titel"
+
+msgid "display"
+msgstr "tonen"
+
+#: include/admin/files.php:56
+#: include/admin/pages.php:22
+msgid "access"
+msgstr "toegang"
+
+#: include/admin/pages.php:22
+#: include/admin/pages.php:26
+msgid "Add a page"
+msgstr "Pagina toevoegen"
+
+#: include/admin/pages.php:43
+#: include/admin/pages.php:47
+#: include/admin/pages.php:50
+msgid "Document name does not end in .doc"
+msgstr "Dit document heeft geen .doc exensie"
+
+#: include/admin/pages.php:46
+#: include/admin/pages.php:50
+#: include/admin/pages.php:53
+msgid "Checking in Word file"
+msgstr "Controleren in Word document"
+
+#: include/admin/pages.php:51
+#: include/admin/pages.php:55
+#: include/admin/pages.php:58
+msgid "Importing Word file"
+msgstr "Bezig Word bestand te importeren"
+
+#: include/admin/pages.php:57
+#: include/admin/pages.php:61
+#: include/admin/pages.php:64
+msgid "Importing HTML file"
+msgstr "Bezig HTML file te importeren"
+
+#: include/admin/pages.php:62
+#: include/admin/pages.php:66
+#: include/admin/pages.php:69
+msgid "Raw file import"
+msgstr "Raw file importeren"
+
+#: include/admin/pages.php:184
+#: include/admin/pages.php:169
+#: include/admin/pages.php:167
+msgid "visible"
+msgstr "zichtbaar"
+
+msgid "invisible"
+msgstr "onzichtbaar"
+
+#: htdocs/toplevel/index.php:84
+#: include/admin/pages.php:196
+#: include/diogenes.rcs.inc.php:416
+#: include/diogenes.rcs.inc.php:450
+#: include/diogenes.rcs.inc.php:619
+#: include/Barrel/Page.php:118
+#: include/Barrel/File.php:73
+#: include/admin/files.php:144
+#: include/Barrel/File.php:91
+#: include/Barrel/Page.php:142
+msgid "view"
+msgstr "tonen"
+
+#: include/admin/pages.php:197
+#: include/Barrel/Page.php:120
+#: include/Barrel/Page.php:144
+msgid "properties"
+msgstr "eigenschappen"
+
+#: include/admin/pages.php:198
+msgid "files"
+msgstr "bestanden"
+
+#: include/admin/pages.php:199
+#: include/diogenes.rcs.inc.php:418
+#: include/Barrel/Page.php:121
+#: include/Barrel/File.php:75
+#: include/Barrel/File.php:93
+#: include/Barrel/Page.php:145
+msgid "revisions"
+msgstr "revisies"
+
+#: include/admin/pages.php:211
+#: include/admin/pages.php:195
+#: include/admin/pages.php:172
+msgid "Import a Word document"
+msgstr "Importeer een Word document"
+
+#: include/admin/pages.php:214
+#: include/admin/pages.php:198
+#: include/admin/pages.php:176
+msgid "This page's master document is currently a Word document."
+msgstr "Het master document van deze pagina is op een Word document."
+
+#: include/admin/pages.php:215
+#: include/admin/pages.php:199
+#: include/admin/pages.php:177
+msgid "You can upload a new version of the Word document below."
+msgstr "Upload een nieuwe versie van het Word document hieronder."
+
+#: include/admin/pages.php:216
+#: include/admin/pages.php:200
+#: include/admin/pages.php:178
+msgid "You can get the current version of the file here"
+msgstr "Haal hier de huidige versie van het bestand op"
+
+#: include/admin/pages.php:219
+#: include/admin/pages.php:203
+#: include/admin/pages.php:181
+msgid "If you wish, you can set this page's content from a Word document."
+msgstr "Indien gewenst kan de content uit een Word document worden overgenomen."
+
+#: include/admin/pages.php:220
+#: include/admin/pages.php:204
+#: include/admin/pages.php:182
+msgid "To do so, simply upload the Word document below."
+msgstr "Om dit te doen, upload het Word document hier beneden."
+
+#: include/admin/pages.php:222
+#: include/admin/pages.php:208
+#: include/admin/pages.php:160
+msgid "Import HTML"
+msgstr "Importeer HTML"
+
+#: include/admin/pages.php:223
+#: include/admin/pages.php:209
+#: include/admin/pages.php:161
+msgid "You can replace the current page's contents by uploading an HTML file below."
+msgstr "Vervang de huidige content in de pagina door onderstaand een HTML bestand te uploaden."
+
+#: include/admin/pages.php:224
+#: include/admin/pages.php:210
+#: include/admin/pages.php:162
+msgid "If the file name ends with .htm or .html, anything outside the &lt;body&gt;&lt;/body&gt; pair will be stripped."
+msgstr "Indien de bestandsnaam eindigt op .htm of .html, alles buiten de &lt;body&gt;&lt;/body&gt; zal worden verwijdert."
+
+#: htdocs/toplevel/admins.php:20
+#: include/admin/users.php:15
+msgid "Could not find requested user"
+msgstr "Registreerde gebruiker is niet te vinden"
+
+#: include/admin/users.php:24
+msgid "Users administration"
+msgstr "Gebruikersbeheer"
+
+#: include/admin/users.php:25
+msgid "Registered users"
+msgstr "Registreerde gebruikers"
+
+#: include/admin/users.php:26
+#: include/diogenes.toplevel.inc.php:200
+#: include/diogenes.toplevel.inc.php:94
+#: include/diogenes.toplevel.inc.php:95
+msgid "Administrators"
+msgstr "Administratoren"
+
+#: include/admin/users.php:29
+#: include/diogenes/diogenes.logger-view.inc.php:373
+#: include/diogenes/diogenes.table-editor.inc.php:526
+#: include/diogenes/diogenes.logger-view.inc.php:370
+#: include/diogenes/diogenes.table-editor.inc.php:531
+#: include/diogenes/diogenes.logger-view.inc.php:369
+msgid "action"
+msgstr "actie"
+
+#: htdocs/toplevel/admins.php:45
+#: include/admin/users.php:35
+msgid "remove"
+msgstr "verwijderen"
+
+#: include/diogenes.session.inc.php:134
+msgid "Diogenes login"
+msgstr "Diogenes login"
+
+#: include/diogenes.session.inc.php:135
+msgid "Connexion"
+msgstr "Verbinding"
+
+#: htdocs/toplevel/accounts.php:16
+#: htdocs/toplevel/boot.php:31
+#: include/diogenes.session.inc.php:136
+msgid "password"
+msgstr "wachtwoord"
+
+#: include/diogenes.toplevel.inc.php:52
+#: include/diogenes.barrel.inc.php:104
+#: include/diogenes.barrel.inc.php:105
+#: include/diogenes.toplevel.inc.php:53
+#: include/diogenes.barrel.inc.php:107
+msgid "You are not authorized to view this page!"
+msgstr "Je bent niet geautoriseerd om deze pagina te bekijken!"
+
+#: include/diogenes.toplevel.inc.php:38
+#: include/diogenes.toplevel.inc.php:187
+#: include/diogenes.admin.inc.php:62
+#: include/diogenes.barrel.inc.php:301
+#: include/diogenes.toplevel.inc.php:81
+#: include/diogenes.barrel.inc.php:332
+#: include/diogenes.admin.inc.php:69
+#: include/diogenes.toplevel.inc.php:39
+#: include/diogenes.toplevel.inc.php:82
+#: include/diogenes.admin.inc.php:68
+#: include/diogenes.barrel.inc.php:328
+msgid "Home"
+msgstr "Home"
+
+#: include/diogenes.toplevel.inc.php:192
+#: include/diogenes.barrel.inc.php:303
+#: include/diogenes.toplevel.inc.php:86
+#: include/diogenes.barrel.inc.php:334
+#: include/diogenes.toplevel.inc.php:87
+#: include/diogenes.barrel.inc.php:330
+msgid "Logout"
+msgstr "Afmelden"
+
+#: include/diogenes.toplevel.inc.php:194
+#: include/diogenes.barrel.inc.php:306
+#: include/diogenes.toplevel.inc.php:88
+#: include/diogenes.barrel.inc.php:337
+#: include/diogenes.toplevel.inc.php:89
+#: include/diogenes.barrel.inc.php:333
+msgid "Login"
+msgstr "Aanmelden"
+
+#: include/diogenes.admin.inc.php:37
+#: include/diogenes.admin.inc.php:64
+#: include/diogenes.barrel.inc.php:310
+#: include/diogenes.barrel.inc.php:341
+#: include/diogenes.admin.inc.php:71
+#: include/diogenes.admin.inc.php:70
+#: include/diogenes.barrel.inc.php:337
+msgid "Administration"
+msgstr "Beheer"
+
+#: include/diogenes.rcs.inc.php:455
+#: include/diogenes.rcs.inc.php:624
+#: include/admin/files.php:149
+msgid "diff to"
+msgstr "diff to"
+
+#: include/diogenes.rcs.inc.php:459
+#: include/diogenes.rcs.inc.php:628
+#: include/admin/files.php:153
+msgid "restore"
+msgstr "herstellen"
+
+#: include/diogenes.admin.inc.php:63
+#: include/diogenes.admin.inc.php:70
+#: include/diogenes.admin.inc.php:69
+msgid "Admin manual"
+msgstr "Admin handleiding"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+#: include/diogenes.toplevel.inc.php:202
+#: include/diogenes.admin.inc.php:67
+#: include/diogenes.toplevel.inc.php:97
+#: include/diogenes.admin.inc.php:78
+#: include/diogenes.toplevel.inc.php:98
+#: include/diogenes.admin.inc.php:77
+msgid "Users"
+msgstr "Gebruikers"
+
+#: include/diogenes.admin.inc.php:68
+#: include/diogenes.admin.inc.php:80
+#: include/diogenes.admin.inc.php:79
+msgid "Content"
+msgstr "Inhoud"
+
+#: include/diogenes.admin.inc.php:69
+#: include/diogenes.admin.inc.php:81
+#: include/diogenes.admin.inc.php:80
+msgid "Pages catalog"
+msgstr "Paginacatalogus"
+
+#: include/diogenes.admin.inc.php:70
+#: include/diogenes.admin.inc.php:82
+#: include/diogenes.admin.inc.php:81
+msgid "Edit style sheet"
+msgstr "Stijlblad bewerken"
+
+#: include/diogenes.admin.inc.php:71
+#: include/diogenes.admin.inc.php:83
+#: include/diogenes.admin.inc.php:82
+msgid "Edit menu"
+msgstr "Menu bewerken"
+
+#: include/diogenes.toplevel.inc.php:38
+#: include/diogenes.toplevel.inc.php:39
+msgid "Toplevel administration"
+msgstr "Topniveau beheer"
+
+#: include/diogenes.page.inc.php:59
+msgid "Powered by Diogenes"
+msgstr "Powered by Diogenes"
+
+#: include/diogenes.page.inc.php:213
+#: include/diogenes.page.inc.php:216
+#: include/diogenes.page.inc.php:212
+msgid "The requested document was not found."
+msgstr "Het gevraagde document werd niet gevonden."
+
+#: include/diogenes.toplevel.inc.php:188
+#: include/diogenes.toplevel.inc.php:82
+#: include/diogenes.toplevel.inc.php:83
+msgid "User manual"
+msgstr "Handleiding"
+
+#: include/diogenes.toplevel.inc.php:191
+#: include/diogenes.barrel.inc.php:304
+#: include/diogenes.toplevel.inc.php:85
+#: include/diogenes.barrel.inc.php:335
+#: include/diogenes.toplevel.inc.php:86
+#: include/diogenes.barrel.inc.php:331
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: include/diogenes.toplevel.inc.php:197
+#: include/diogenes.toplevel.inc.php:91
+#: include/diogenes.toplevel.inc.php:92
+msgid "Sites"
+msgstr "Websites"
+
+#: include/diogenes.toplevel.inc.php:198
+#: include/diogenes.toplevel.inc.php:92
+#: include/diogenes.toplevel.inc.php:93
+msgid "Root manual"
+msgstr "Root handleiding"
+
+#: htdocs/toplevel/index.php:8
+#: include/diogenes.toplevel.inc.php:199
+#: htdocs/toplevel/index.php:11
+#: include/diogenes.toplevel.inc.php:93
+#: htdocs/toplevel/index.php:16
+#: include/diogenes.toplevel.inc.php:94
+msgid "List of sites"
+msgstr "Lijst met websites"
+
+#: htdocs/toplevel/admins.php:7
+msgid "Site administrators"
+msgstr "Website administratoren"
+
+#: htdocs/toplevel/accounts.php:7
+#: include/diogenes.toplevel.inc.php:203
+#: include/diogenes.toplevel.inc.php:98
+#: include/diogenes.toplevel.inc.php:99
+msgid "User accounts"
+msgstr "Accounts"
+
+#: include/diogenes.toplevel.inc.php:204
+#: include/diogenes.toplevel.inc.php:99
+#: include/diogenes.toplevel.inc.php:100
+msgid "Browse user log"
+msgstr "Log bladeren"
+
+#: htdocs/toplevel/logger_actions.php:8
+#: include/diogenes.toplevel.inc.php:205
+#: include/diogenes.toplevel.inc.php:100
+#: include/diogenes.toplevel.inc.php:101
+msgid "Logger actions"
+msgstr "Logger acties"
+
+#: include/diogenes.page.inc.php:198
+#: include/diogenes.page.inc.php:201
+#: include/diogenes.page.inc.php:197
+msgid "Diogenes error"
+msgstr "Diogenes fout"
+
+#: include/diogenes.page.inc.php:199
+#: include/diogenes.page.inc.php:202
+#: include/diogenes.page.inc.php:198
+msgid "Error"
+msgstr "Fout"
+
+#: include/diogenes/diogenes.logger-view.inc.php:338
+#: include/diogenes/diogenes.logger-view.inc.php:337
+#: include/diogenes/diogenes.logger-view.inc.php:336
+msgid "view session"
+msgstr "bekijk sessie"
+
+#: include/diogenes/diogenes.logger-view.inc.php:339
+#: include/diogenes/diogenes.logger-view.inc.php:338
+#: include/diogenes/diogenes.logger-view.inc.php:337
+msgid "user's log"
+msgstr "gebruikers log"
+
+#: htdocs/toplevel/logger.php:7
+msgid "User activity log"
+msgstr "Gebruikers activiteiten log"
+
+#: htdocs/toplevel/accounts.php:17
+#: htdocs/toplevel/boot.php:32
+msgid "permissions"
+msgstr "toestemmingen"
+
+#: htdocs/toplevel/accounts.php:19
+#: htdocs/toplevel/admins.php:46
+msgid "view log"
+msgstr "log tonen"
+
+#: htdocs/toplevel/admins.php:9
+msgid "administrator"
+msgstr "administrator"
+
+#: htdocs/toplevel/admins.php:10
+#: htdocs/toplevel/index.php:11
+#: include/admin/files.php:50
+#: include/admin/menus.php:220
+#: include/admin/pages.php:21
+#: include/diogenes/diogenes.logger-view.inc.php:378
+#: include/admin/files.php:52
+#: include/admin/menus.php:219
+#: include/admin/pages.php:25
+#: include/diogenes/diogenes.logger-view.inc.php:375
+#: include/admin/files.php:49
+#: include/admin/menus.php:231
+#: include/diogenes/diogenes.logger-view.inc.php:374
+msgid "actions"
+msgstr "acties"
+
+#: htdocs/toplevel/admins.php:43
+msgid "site users"
+msgstr "site gebruikers"
+
+#: htdocs/toplevel/admins.php:44
+msgid "demote to user"
+msgstr "gewoon user"
+
+#: htdocs/toplevel/index.php:9
+#: include/diogenes.barrel-editor.inc.php:151
+#: include/Barrel/Editor.php:158
+msgid "alias"
+msgstr "alias"
+
+#: htdocs/toplevel/index.php:13
+#: include/admin/options.php:62
+#: include/admin/options.php:64
+#: include/diogenes.barrel-editor.inc.php:154
+#: include/admin/options.php:66
+#: include/Barrel/Editor.php:161
+msgid "keywords"
+msgstr "zoektermen"
+
+#: htdocs/toplevel/index.php:14
+#: include/diogenes.barrel-editor.inc.php:155
+#: include/Barrel/Editor.php:162
+msgid "Create a new site"
+msgstr "Nieuw website toevoegen"
+
+#: htdocs/toplevel/index.php:17
+#: include/diogenes.barrel-editor.inc.php:158
+#: include/Barrel/Editor.php:166
+msgid "vhost (see note)"
+msgstr "vhost (zie documentatie)"
+
+#: htdocs/toplevel/index.php:19
+#: include/diogenes.barrel-editor.inc.php:160
+#: include/Barrel/Editor.php:168
+msgid "flags"
+msgstr "flags"
+
+#: htdocs/toplevel/index.php:86
+#: include/diogenes.barrel-editor.inc.php:45
+#: include/Barrel/Editor.php:47
+msgid "admin"
+msgstr "admin"
+
+#: include/diogenes.admin.inc.php:65
+#: include/diogenes.admin.inc.php:72
+#: include/diogenes.admin.inc.php:71
+msgid "Activity"
+msgstr "Activiteit"
+
+#: htdocs/toplevel/accounts.php:14
+#: htdocs/toplevel/boot.php:29
+msgid "first name"
+msgstr "voornaam"
+
+#: htdocs/toplevel/accounts.php:15
+#: htdocs/toplevel/boot.php:30
+msgid "last name"
+msgstr "achternaam"
+
+#: include/admin/compose.php:16
+#: include/admin/edit.php:15
+#: include/diogenes.admin.inc.php:44
+msgid "Directory not found"
+msgstr "Map niet gevonden"
+
+#: include/admin/pages.php:19
+#: include/admin/pages.php:23
+#: include/admin/files.php:57
+msgid "read access"
+msgstr "leestoegang"
+
+#: include/admin/pages.php:20
+#: include/admin/pages.php:24
+#: include/admin/files.php:58
+msgid "write access"
+msgstr "schrijftoegang"
+
+#: include/admin/pages.php:83
+msgid "world-writable pages are not allowed with PHP execution enabled!"
+msgstr "world-writable paginas zijn niet toegestaan met PHP executie toestemming in werken!"
+
+#: include/diogenes.barrel.inc.php:314
+#: include/diogenes.barrel.inc.php:345
+#: include/diogenes.barrel.inc.php:341
+msgid "Edit this page"
+msgstr "Pagina bewerken"
+
+#: include/diogenes.barrel.inc.php:315
+#: include/diogenes.barrel.inc.php:346
+#: include/diogenes.barrel.inc.php:342
+msgid "Raw editor"
+msgstr "Raw editor"
+
+#: htdocs/toplevel/options.php:90
+#: htdocs/toplevel/options_expert.php:56
+msgid "Convert"
+msgstr "Converteren"
+
+#: htdocs/toplevel/options.php:95
+#: htdocs/toplevel/options_expert.php:61
+msgid "You are currently using RCS as the version control system for your barrels."
+msgstr "RCS wordt op dit moment gebruikt als versie controle systeem voor je barrels."
+
+#: htdocs/toplevel/options.php:96
+#: htdocs/toplevel/options_expert.php:62
+msgid "You can switch to a full CVS repository by clicking here."
+msgstr "Je kan naar het CVS repository linken door hier te klikken."
+
+#: htdocs/toplevel/options.php:100
+#: htdocs/toplevel/options_expert.php:66
+msgid "You are currently using CVS as the version control system for your barrels."
+msgstr "CVS wordt op dit moment gebruikt als versie controle systeem voor je barrels."
+
+#: htdocs/toplevel/options.php:101
+#: htdocs/toplevel/options_expert.php:67
+msgid "You can switch back to RCS by clicking here."
+msgstr "Je kan terug gaan naar RCS door hier te klikken."
+
+#: include/admin/files.php:44
+#: include/admin/files.php:46
+#: include/admin/files.php:43
+msgid "file"
+msgstr "bestand"
+
+#: include/admin/files.php:46
+#: include/admin/files.php:48
+#: include/admin/files.php:45
+msgid "version"
+msgstr "versie"
+
+#: include/admin/files.php:48
+#: include/admin/files.php:50
+#: include/admin/files.php:47
+msgid "author"
+msgstr "auteur"
+
+#: include/admin/files.php:49
+#: include/admin/files.php:51
+#: include/admin/files.php:48
+msgid "size"
+msgstr "grootte"
+
+#: include/admin/pages.php:91
+#: include/Barrel/Page.php:205
+#: include/Barrel/Page.php:248
+msgid "the page location cannot contain spaces or special characters"
+msgstr "de pagina lokatie kan geen spaties en speciale karakters als invoer gebruiken"
+
+#: include/admin/pages.php:95
+#: include/Barrel/Page.php:212
+#: include/Barrel/Page.php:255
+msgid "this location cannot be used, it is reserved by Diogenes"
+msgstr "deze locatie kan niet worden gebruikt omdat het is gereserveerd door Diogenes"
+
+#: include/admin/files.php:45
+#: include/admin/files.php:47
+#: include/admin/files.php:44
+msgid "log"
+msgstr "log"
+
+#: include/admin/menus.php:145
+#: include/admin/menus.php:146
+#: include/admin/menus.php:158
+msgid "entry title"
+msgstr "ingangtitel"
+
+#: include/admin/menus.php:146
+#: include/admin/menus.php:147
+#: include/admin/menus.php:159
+msgid "type of link"
+msgstr "type koppeling"
+
+#: include/admin/menus.php:218
+#: include/admin/menus.php:217
+#: include/admin/menus.php:229
+msgid "menu name"
+msgstr "menunaam"
+
+#: include/admin/menus.php:219
+#: include/admin/menus.php:218
+#: include/admin/menus.php:230
+msgid "link"
+msgstr "koppeling"
+
+#: htdocs/toplevel/options.php:80
+#: htdocs/toplevel/options_expert.php:8
+#: include/diogenes.toplevel.inc.php:201
+#: htdocs/toplevel/options.php:43
+#: include/diogenes.toplevel.inc.php:95
+#: include/diogenes.toplevel.inc.php:96
+msgid "Global options"
+msgstr "Algemene opties"
+
+msgid "menu options"
+msgstr "menuopties"
+
+#: htdocs/toplevel/options.php:83
+#: include/admin/options.php:69
+#: htdocs/toplevel/options.php:46
+#: include/admin/options.php:71
+#: include/admin/options.php:73
+msgid "menu style"
+msgstr "menustijl"
+
+#: htdocs/toplevel/options.php:84
+#: include/admin/options.php:70
+#: htdocs/toplevel/options.php:47
+#: include/admin/options.php:72
+#: include/admin/options.php:74
+msgid "menu theme"
+msgstr "menuthema"
+
+#: htdocs/toplevel/options.php:91
+#: htdocs/toplevel/options_expert.php:57
+msgid "version control system"
+msgstr "versie controle systeem"
+
+#: include/admin/options.php:6
+#: include/admin/options.php:7
+msgid "Site options"
+msgstr "Website opties"
+
+#: include/admin/options.php:55
+#: include/admin/options.php:57
+#: include/admin/options.php:59
+msgid "fully expanded"
+msgstr "volledige uitgeklapt"
+
+#: include/admin/options.php:71
+#: include/admin/options.php:73
+#: include/admin/options.php:75
+msgid "minimum menu levels to expand"
+msgstr "minimum aantal menu niveaus om uit te klappen"
+
+#: include/diogenes.admin.inc.php:66
+#: include/diogenes.admin.inc.php:73
+#: include/diogenes.admin.inc.php:72
+msgid "Options"
+msgstr "Opties"
+
+#: include/admin/options.php:59
+#: include/admin/options.php:61
+#: include/admin/options.php:63
+msgid "general options"
+msgstr "algemene opties"
+
+#: include/diogenes/diogenes.logger-view.inc.php:368
+#: include/diogenes/diogenes.logger-view.inc.php:365
+#: include/diogenes/diogenes.logger-view.inc.php:364
+msgid "session properties"
+msgstr "sessie-eigenschappen"
+
+#: include/diogenes/diogenes.logger-view.inc.php:370
+#: include/diogenes/diogenes.logger-view.inc.php:367
+#: include/diogenes/diogenes.logger-view.inc.php:366
+msgid "host"
+msgstr "server"
+
+#: include/diogenes/diogenes.logger-view.inc.php:371
+#: include/diogenes/diogenes.logger-view.inc.php:368
+#: include/diogenes/diogenes.logger-view.inc.php:367
+msgid "browser"
+msgstr "browser"
+
+#: include/diogenes/diogenes.logger-view.inc.php:374
+#: include/diogenes/diogenes.logger-view.inc.php:371
+#: include/diogenes/diogenes.logger-view.inc.php:370
+msgid "data"
+msgstr "data"
+
+#: include/diogenes/diogenes.logger-view.inc.php:375
+#: include/diogenes/diogenes.logger-view.inc.php:372
+#: include/diogenes/diogenes.logger-view.inc.php:371
+msgid "filter by"
+msgstr "filteren op"
+
+#: include/diogenes/diogenes.logger-view.inc.php:376
+#: include/diogenes/diogenes.logger-view.inc.php:373
+#: include/diogenes/diogenes.logger-view.inc.php:372
+msgid "start"
+msgstr "begin"
+
+#: include/diogenes/diogenes.logger-view.inc.php:377
+#: include/diogenes/diogenes.logger-view.inc.php:374
+#: include/diogenes/diogenes.logger-view.inc.php:373
+msgid "summary"
+msgstr "samenvatting"
+
+#: include/diogenes/diogenes.logger-view.inc.php:379
+#: include/diogenes/diogenes.logger-view.inc.php:376
+#: include/diogenes/diogenes.logger-view.inc.php:375
+msgid "year"
+msgstr "jaar"
+
+#: include/diogenes/diogenes.logger-view.inc.php:380
+#: include/diogenes/diogenes.logger-view.inc.php:377
+#: include/diogenes/diogenes.logger-view.inc.php:376
+msgid "month"
+msgstr "maand"
+
+#: include/diogenes/diogenes.logger-view.inc.php:381
+#: include/diogenes/diogenes.logger-view.inc.php:378
+#: include/diogenes/diogenes.logger-view.inc.php:377
+msgid "day"
+msgstr "dag"
+
+#: include/diogenes/diogenes.table-editor.inc.php:525
+#: include/diogenes/diogenes.table-editor.inc.php:530
+msgid "id"
+msgstr "id"
+
+#: include/diogenes/diogenes.table-editor.inc.php:527
+#: include/diogenes/diogenes.table-editor.inc.php:532
+msgid "create"
+msgstr "toevoegen"
+
+#: include/diogenes/diogenes.table-editor.inc.php:530
+#: include/diogenes/diogenes.table-editor.inc.php:535
+msgid "new entry"
+msgstr "nieuwe item"
+
+#: include/diogenes/diogenes.table-editor.inc.php:531
+#: include/diogenes/diogenes.table-editor.inc.php:536
+msgid "existing entry"
+msgstr "bestaande item"
+
+#: include/diogenes/diogenes.table-editor.inc.php:532
+#: include/diogenes/diogenes.table-editor.inc.php:537
+msgid "(blank = no change)"
+msgstr "(leeg =  geen veranderingen)"
+
+#: include/diogenes/diogenes.table-editor.inc.php:533
+#: include/diogenes/diogenes.table-editor.inc.php:538
+msgid "back"
+msgstr "terug"
+
+#: include/diogenes/diogenes.table-editor.inc.php:535
+#: include/diogenes/diogenes.table-editor.inc.php:540
+msgid "You are about to delete this entry. Do you want to proceed?"
+msgstr "Je gaat het item verwijderen, wil je doorgaan?"
+
+#: include/diogenes.session.inc.php:62
+#: include/diogenes.session.inc.php:71
+msgid "Authentication error!"
+msgstr "Authenticatie fout!"
+
+#: include/admin/files.php:84
+#: include/admin/files.php:93
+#: include/admin/files.php:102
+#: include/admin/pages.php:158
+#: include/admin/compose.php:57
+#: include/admin/edit.php:49
+#: include/admin/files.php:114
+#: include/admin/files.php:122
+#: include/admin/files.php:154
+#: include/admin/pages.php:124
+#: include/admin/compose.php:61
+#: include/admin/edit.php:53
+#: include/admin/plugins.php:23
+#: include/admin/files.php:61
+#: include/admin/pages.php:122
+msgid "Page"
+msgstr "Pagina"
+
+#: include/admin/files.php:86
+#: include/admin/files.php:95
+#: include/admin/pages.php:172
+#: include/admin/compose.php:63
+#: include/admin/edit.php:55
+#: include/admin/files.php:115
+#: include/admin/files.php:123
+#: include/admin/pages.php:136
+#: include/admin/compose.php:62
+#: include/admin/edit.php:54
+#: include/admin/files.php:122
+#: include/admin/files.php:161
+#: include/admin/pages.php:123
+msgid "File"
+msgstr "Bestand"
+
+#: htdocs/toplevel/index.php:15
+#: include/diogenes.barrel-editor.inc.php:156
+#: include/Barrel/Editor.php:163
+msgid "The site alias may only contain letters, numbers and underscores."
+msgstr "De alias van de website mag alleen bestaan uit letters, cijfers en onderstreeptekens."
+
+#: htdocs/toplevel/index.php:18
+#: include/diogenes.barrel-editor.inc.php:159
+#: include/Barrel/Editor.php:167
+msgid "<b>vhost note</b>: If you intend to serve this site from a virtualhost, you should enter the name of the virtualhost in this field."
+msgstr "<b>vhost notitie</b> : Als je van plan bent deze website op en virtualhost te draaien, dan moet je de virtualhost hier invoeren."
+
+#: htdocs/toplevel/index.php:55
+msgid "PHP execution"
+msgstr "PHP uitvoering"
+
+#: htdocs/toplevel/index.php:55
+#: include/diogenes.barrel-editor.inc.php:106
+#: include/Barrel/Editor.php:113
+msgid "custom templates"
+msgstr "aagepaste sjablonen"
+
+msgid "template options"
+msgstr "sjabloonopties"
+
+#: htdocs/toplevel/options.php:85
+#: include/admin/options.php:66
+#: htdocs/toplevel/options.php:48
+#: include/admin/options.php:68
+#: include/admin/options.php:70
+msgid "templates directory"
+msgstr "sjablonenmap"
+
+#: htdocs/toplevel/options.php:86
+#: include/admin/options.php:67
+#: htdocs/toplevel/options.php:49
+#: include/admin/options.php:69
+#: include/admin/options.php:71
+msgid "default template"
+msgstr "stan&daardsjabloon"
+
+#: include/admin/compose.php:56
+#: include/admin/edit.php:46
+#: include/admin/compose.php:58
+#: include/admin/edit.php:48
+msgid "log message"
+msgstr "logbericht"
+
+#: include/admin/options.php:63
+#: include/admin/options.php:65
+#: include/admin/options.php:67
+msgid "favicon"
+msgstr "favicon"
+
+#: include/admin/options.php:64
+#: include/admin/options.php:66
+#: include/admin/options.php:68
+msgid "(relative url to a PNG image)"
+msgstr "(relatief pad naar en PNG afbeelding)"
+
+#: include/admin/pages.php:17
+#: include/admin/files.php:57
+#: include/admin/pages.php:21
+#: include/admin/files.php:54
+#: include/admin/pages.php:20
+msgid "page template"
+msgstr "pagina sjabloon"
+
+#: include/admin/pages.php:18
+#: include/admin/files.php:58
+#: include/admin/pages.php:22
+#: include/admin/files.php:55
+#: include/admin/pages.php:21
+msgid "status"
+msgstr "status"
+
+#: include/admin/pages.php:184
+#: include/admin/pages.php:169
+#: include/admin/pages.php:167
+msgid "under construction"
+msgstr "nog in ontwikkeling"
+
+#: include/admin/pages.php:184
+#: include/admin/pages.php:169
+#: include/admin/pages.php:167
+msgid "disabled"
+msgstr "uitgeschakeld"
+
+#: include/admin/pages.php:184
+#: include/admin/pages.php:169
+#: include/admin/pages.php:167
+msgid "archived"
+msgstr "gearchiveerd"
+
+#: include/diogenes.barrel.inc.php:152
+#: include/diogenes.barrel.inc.php:153
+#: include/diogenes.barrel.inc.php:155
+msgid "This page is currently under construction."
+msgstr "Deze pagina is nog in ontwikkeling."
+
+#: include/diogenes.barrel.inc.php:156
+#: include/diogenes.barrel.inc.php:157
+#: include/diogenes.barrel.inc.php:159
+msgid "This page is currently unavailable."
+msgstr "Deze pagina is momenteel niet beschikbaar."
+
+#: include/diogenes.admin.inc.php:63
+#: include/diogenes.admin.inc.php:70
+#: include/diogenes.admin.inc.php:69
+msgid "http://diogenes-doc.polytechnique.org/en-admin/"
+msgstr "http://diogenes-doc.polytechnique.org/en-admin/"
+
+#: include/diogenes.toplevel.inc.php:188
+#: include/diogenes.toplevel.inc.php:82
+#: include/diogenes.toplevel.inc.php:83
+msgid "http://diogenes-doc.polytechnique.org/en-user/"
+msgstr "http://diogenes-doc.polytechnique.org/en-user/"
+
+#: include/diogenes.toplevel.inc.php:198
+#: include/diogenes.toplevel.inc.php:92
+#: include/diogenes.toplevel.inc.php:93
+msgid "http://diogenes-doc.polytechnique.org/en-root/"
+msgstr "http://diogenes-doc.polytechnique.org/en-root/"
+
+#: htdocs/toplevel/options.php:81
+#: htdocs/toplevel/options_expert.php:9
+#: htdocs/toplevel/options.php:44
+msgid "Mode"
+msgstr "Modus"
+
+#: htdocs/toplevel/options.php:81
+#: htdocs/toplevel/options_expert.php:9
+#: htdocs/toplevel/options.php:44
+msgid "standard"
+msgstr "standaard"
+
+#: htdocs/toplevel/options.php:81
+#: htdocs/toplevel/options_expert.php:9
+#: htdocs/toplevel/options.php:44
+msgid "expert"
+msgstr "expert"
+
+#: htdocs/toplevel/options.php:82
+#: include/admin/options.php:65
+#: htdocs/toplevel/options.php:45
+#: include/admin/options.php:67
+#: include/admin/options.php:69
+msgid "display options"
+msgstr "weergave-opties"
+
+#: htdocs/toplevel/options.php:87
+#: htdocs/toplevel/options.php:50
+msgid "system options"
+msgstr "systeem opties"
+
+msgid "Initial user setup"
+msgstr "Initiele gebruikers configuratie"
+
+#: htdocs/toplevel/boot.php:11
+msgid "Sorry, this feature is only available using native Diogenes authentication."
+msgstr "Sorry, deze functionaliteit is alleen beschikbaar met de specifieke Diogenes authenticatie. "
+
+#: htdocs/toplevel/boot.php:19
+msgid "The database is already configured."
+msgstr "De database is al geconfigureerd. "
+
+#: htdocs/toplevel/options_expert.php:13
+#: htdocs/toplevel/options_expert.php:75
+#: htdocs/toplevel/options_expert.php:76
+msgid "option"
+msgstr "optie"
+
+#: htdocs/toplevel/options_expert.php:14
+#: htdocs/toplevel/options_expert.php:76
+#: htdocs/toplevel/options_expert.php:77
+msgid "value"
+msgstr "waarde"
+
+#: include/admin/menus.php:221
+#: include/admin/menus.php:220
+#: include/admin/menus.php:232
+msgid "Menu"
+msgstr "Menu"
+
+#: include/diogenes.page.inc.php:65
+#: include/diogenes.page.inc.php:66
+msgid "debugging"
+msgstr "debug"
+
+#: include/diogenes.page.inc.php:66
+#: include/diogenes.page.inc.php:67
+msgid "call trace"
+msgstr "call trace"
+
+#: include/diogenes.page.inc.php:67
+#: include/diogenes.page.inc.php:68
+msgid "database trace"
+msgstr "database trace"
+
+#: include/diogenes/diogenes.logger-view.inc.php:59
+#: include/diogenes/diogenes.logger-view.inc.php:85
+#: include/diogenes/diogenes.logger-view.inc.php:130
+#: include/diogenes/diogenes.logger-view.inc.php:183
+#: include/diogenes/diogenes.logger-view.inc.php:58
+#: include/diogenes/diogenes.logger-view.inc.php:84
+#: include/diogenes/diogenes.logger-view.inc.php:129
+#: include/diogenes/diogenes.logger-view.inc.php:182
+msgid "all"
+msgstr "allemaal"
+
+#: include/diogenes/diogenes.logger-view.inc.php:363
+#: include/diogenes/diogenes.logger-view.inc.php:360
+#: include/diogenes/diogenes.logger-view.inc.php:359
+msgid "Please select a year and/or a user."
+msgstr "Selecteer een jaar en/of gebruiker. "
+
+#: include/diogenes/diogenes.table-editor.inc.php:523
+#: include/diogenes/diogenes.table-editor.inc.php:528
+msgid "previous page"
+msgstr "vorige pagina"
+
+#: include/diogenes/diogenes.table-editor.inc.php:524
+#: include/diogenes/diogenes.table-editor.inc.php:529
+msgid "next page"
+msgstr "volgende pagina"
+
+#: htdocs/toplevel/boot.php:7
+msgid "Initial setup"
+msgstr "Initiele configuratie"
+
+#: htdocs/toplevel/boot.php:46
+msgid "The initial setup of the database was performed successfuly."
+msgstr "De initiele configuratie is succesvol ingesteld."
+
+#: include/admin/options.php:47
+#: include/admin/options.php:49
+#: include/admin/options.php:51
+msgid "no"
+msgstr "nee"
+
+#: include/admin/options.php:47
+#: include/admin/options.php:49
+#: include/admin/options.php:51
+msgid "yes"
+msgstr "ja"
+
+#: include/admin/options.php:68
+#: include/admin/options.php:70
+#: include/admin/options.php:72
+msgid "hide Diogenes menu"
+msgstr "Diogenes menu verbergen"
+
+#: include/admin/prefs.php:28
+msgid "account preferences"
+msgstr "account voorkeuren"
+
+#: htdocs/toplevel/plugins.php:19
+msgid "Barrel plugins"
+msgstr "Barrel plugins"
+
+#: htdocs/toplevel/plugins.php:21
+msgid "Global plugin settings"
+msgstr "Algemene plugin opties"
+
+#: htdocs/toplevel/plugins.php:38
+#, php-format
+msgid "Rebuilding plugin cache for barrel '%s'"
+msgstr "Vernieuwen plugin cache voor barrel '%s'"
+
+#: htdocs/toplevel/plugins.php:47
+msgid "Clean plugins database"
+msgstr "Opschonen van de plugins database"
+
+#: htdocs/toplevel/plugins.php:48
+msgid "If you are having problems with references to plugins that no longer exist, you can have Diogenes remove such entries from the database."
+msgstr "Indien er problemen zijn met verwijzingen naar plugins die niet langer meer werken kan Diogenes zulke verwijzingen verwijderen uit de database. "
+
+#: htdocs/toplevel/plugins.php:49
+msgid "Clean"
+msgstr "Opschonen"
+
+#: htdocs/toplevel/plugins.php:51
+msgid "Enable or disable plugins"
+msgstr "Plugins activeren of deactiveren"
+
+#: htdocs/toplevel/plugins.php:54
+msgid "You can select the plugins you want to enable for this barrel."
+msgstr "Selecteer de plugin die je wilt activeren voor deze barrel. "
+
+#: htdocs/toplevel/plugins.php:56
+msgid "You can select the plugins you want to enable or disable globally, that is the plugins that can be used in the different barrels. Please note that for a plugin to be accessible from a barrel, you will need to activate that plugin for the barrel. To do this, from the <i>List of sites</i> click on 'plugins' next to the barrel of your choice."
+msgstr ""
+
+#: htdocs/toplevel/options.php:52
+msgid "Word document import"
+msgstr "Importeer een Word document"
+
+#: include/admin/files.php:39
+msgid "File operations"
+msgstr "Bestands aanpassingen"
+
+#: include/admin/files.php:43
+#: include/admin/files.php:40
+msgid "Create an empty file"
+msgstr "Een nieuw bestand toevoegen"
+
+#: include/admin/files.php:44
+#: include/admin/files.php:41
+msgid "Copy or move a file"
+msgstr "Kopieer of verplaats een file"
+
+#: include/admin/files.php:45
+#: include/admin/files.php:42
+msgid "Create"
+msgstr "Aanmaken"
+
+#: include/admin/files.php:53
+#: include/admin/files.php:50
+msgid "to"
+msgstr "naar"
+
+#: include/admin/files.php:59
+msgid "read"
+msgstr "lezen"
+
+#: include/admin/files.php:60
+msgid "write"
+msgstr "schrijven"
+
+#: include/admin/files.php:67
+#: include/admin/files.php:69
+msgid "Creating empty file"
+msgstr "Leeg bestand aanmaken"
+
+#: include/admin/files.php:69
+#: include/admin/files.php:71
+msgid "The specified file already exists!"
+msgstr "Dit specifieke bestand is reeds aanwezig!"
+
+#: include/admin/files.php:155
+#: include/admin/pages.php:160
+#: include/admin/plugins.php:22
+#: include/admin/files.php:194
+#: include/admin/pages.php:156
+#: include/Barrel/Page.php:170
+msgid "home"
+msgstr "home"
+
+#: include/admin/files.php:182
+#: include/admin/files.php:224
+msgid "Copy"
+msgstr "Kopieer"
+
+#: include/admin/files.php:182
+#: include/admin/files.php:224
+msgid "Move"
+msgstr "Verplaats"
+
+#: include/admin/pages.php:18
+#: include/admin/pages.php:17
+#: include/Barrel/Page.php:171
+msgid "parent page"
+msgstr "moeder pagina"
+
+#: include/admin/webdav.php:7
+#: include/diogenes.admin.inc.php:79
+#: include/diogenes.admin.inc.php:78
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: include/admin/webdav.php:9
+#: include/admin/webdav.php:11
+msgid "You can access your barrel's files using WebDAV by pointing your WebDAV client to the following address."
+msgstr "Je hebt toegang tot de bestanden in je barrel via WebDAV door je WebDAV client naar het volgende adres te verwijzen. "
+
+#: include/admin/plugins.php:22
+msgid "Page plugins "
+msgstr "Pagina plugins"
+
+#: include/admin/plugins.php:26
+msgid "Available plugins"
+msgstr "Beschikbare plugins"
+
+#: include/diogenes.page.inc.php:69
+#: include/diogenes.barrel-editor.inc.php:50
+#: include/diogenes.barrel-editor.inc.php:106
+#: include/Barrel/Page.php:126
+#: include/Barrel/Page.php:152
+#: include/diogenes.plugin-editor.inc.php:237
+#: include/Barrel/Page.php:150
+#: include/Barrel/Page.php:178
+#: include/Barrel/Editor.php:52
+#: include/Barrel/Editor.php:113
+#: include/Plugin/Editor.php:266
+#: include/diogenes.page.inc.php:68
+msgid "plugins"
+msgstr "plugins"
+
+#: include/diogenes.toplevel.inc.php:96
+#: include/diogenes.admin.inc.php:76
+#: include/diogenes.toplevel.inc.php:97
+#: include/diogenes.admin.inc.php:75
+msgid "Plugins"
+msgstr "Plugins"
+
+#: include/Barrel/Page.php:70
+#: include/Barrel/Page.php:89
+msgid "Not deleting page, it has child pages!"
+msgstr "Pagina kan niet verwijdert worden, er zijn nog afgeleide pagina's!"
+
+#: include/Barrel/File.php:76
+#: include/Barrel/File.php:94
+msgid "rename"
+msgstr "naam wijzigen"
+
+#: include/diogenes.plugin-editor.inc.php:236
+#: include/Plugin/Editor.php:265
+msgid "plugin"
+msgstr "plugin"
+
+#: include/diogenes.plugin-editor.inc.php:239
+#: include/Plugin/Editor.php:268
+msgid "parameters"
+msgstr "parameters"
+
+#: include/admin/files.php:192
+msgid "Document"
+msgstr "Document"
+
+#: include/admin/index.php:52
+msgid "barrel options"
+msgstr "barrel opties"
+
+#: include/admin/index.php:57
+msgid "barrel plugins"
+msgstr "barrel plugins"
+
+#: include/admin/index.php:68
+msgid "page removed"
+msgstr "pagina verwijderd"
+
+#: include/admin/index.php:80
+msgid "page plugins"
+msgstr "pagina plugins"
+
+#: include/admin/index.php:92
+msgid "file deleted"
+msgstr "bestand verwijdert"
+
+#: include/admin/webdav.php:14
+msgid "In order to access your barrel's files using WebDAV, please ask your Diogenes administrator to enable this feature in the Diogenes configuration file."
+msgstr "Voor toegang tot de bestande in je barrel via WebDAV, vraag uw Diogenes administrator om deze functie aan te zetten in het Diogenes configuratie bestand. "
+
+#: include/Barrel/Page.php:81
+msgid "Deleting page"
+msgstr "Pagina aan het verwijderen"
+
+#: include/Barrel/Page.php:176
+msgid "add a page"
+msgstr "Voeg een pagina toe"
+
+#: include/Barrel/Page.php:266
+msgid "Creating new page"
+msgstr "Nieuwe pagina aanmaken"
+
+#: include/Barrel/Editor.php:165
+msgid "no barrels available"
+msgstr "geen barrels beschikbaar"
+
+#: htdocs/toplevel/index.php:13
+msgid "Warning : in order to make use of virtual hosts or WebDAV, you need to set $globals->rooturl to a full URL starting with http:// or https:// in your Diogenes configuration file."
+msgstr "LET OP: om gebruik te maken van virtual hosts of WebDAV dient $globals->rooturl te verwijzen naar een volledige URL beginnend met http:// of https:// in je Diogenes configuratie bestand."
+

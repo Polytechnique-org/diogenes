@@ -1,0 +1,19 @@
+The following people contributed to the Diogenes library.
+
+Pierre Habouzit <pierre.habouzit AT m4x.org>
+ * various database access optimisations
+ * database debugging code
+ * improvements in readability in case of sets, enums, or `JOIN' values
+
+Jeremy Lainé <jeremy.laine@m4x.org>
+ * original author of the Diogenes library
+ * flagset class
+ * log and log browsing system
+ * table viewer class
+
+Loïc Le Loarer
+ * original mailer code
+
+Polytechnique.org team
+ * various bits of code
+

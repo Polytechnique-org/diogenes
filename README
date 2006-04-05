@@ -1,0 +1,56 @@
+Notes for Diogenes
+
+PRESENTATION
+------------
+
+Diogenes is a content management system that allows you to quickly create and
+host web sites for communities. It was written by the Polytechnique.org
+team. More information can be found on the Diogenes project page :
+
+  http://opensource.polytechnique.org/diogenes/
+
+It is released under the terms of the GNU Public License (GPL) version 2. The 
+full text of this license can be found in the COPYING file included in this
+distribution.
+
+
+DOCUMENTATION & INSTALLATION
+----------------------------
+
+The documentation for Diogenes, including installation instructions can
+be found here:
+
+  http://doc.polytechnique.org/diogenes/
+
+
+CUSTOMISING DIOGENES
+--------------------
+
+Diogenes provides several means of customising its look and behaviour.
+
+ * CONFIGURATION FILE
+
+The first thing you can modify is Diogenes's configuration file called 
+"diogenes.config.inc.php". To have a list of the values you can assign, take a
+look at the file called "diogenes.globals.inc.php".
+
+ * SUBCLASSING DIOGENES'S CLASSES
+
+Diogenes is written in Object-Oriented Programming (OOP), and it is possible to
+specify the classes to use from the configuration file. For instance, if you
+want to change the look and/or behaviour of Diogenes's toplevel pages you would :
+
+- create a class called "CustomToplevel" for instance, which derives from 
+  "DiogenesToplevel".  Let us say this class is stored in a file called
+  "custom.toplevel.inc.php".
+
+- include "custom.toplevel.inc.php" from your configuration file like this :
+
+  require_once 'custom.toplevel.inc.php';
+
+- tell Diogenes to use your CustomToplevel class to display toplevel pages by
+  setting the following in your configuration file :
+
+  $globals->toplevel = "CustomToplevel";
+
+

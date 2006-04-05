@@ -1,0 +1,96 @@
+libdiogenes 0.9.18
+ * improved - (mime) recognise MIME type of OMA DRM content
+ * added - (mime) add function to retrieve a multipart content's boundary
+
+libdiogenes 0.9.17.2
+ * removed - drop checkLogger function in diogenes.core.page.inc.php
+
+libdiogenes 0.9.17
+ * improved - recognise MIME type of Java archives and descriptors
+ * improved - split MIME handling to diogenes.mime.inc.php
+ * improved - getUsername and getUserId perform caching of the results,
+              actual lookup is moved to lookupUsername and lookupUserId
+
+libdiogenes 0.9.16
+ * fixed - (hermes mailer) fix a typo in the addBcc method
+
+libdiogenes 0.9.15
+ * improved - make mysql_insert_id and such functions work with debug mode on
+ * added - (hermes mailer) add HermesMailer class to handle mail operations
+ * improved - use __FILE__ to guess where other includes are. we don't depend
+              of include_path anymore
+ * improved - rand_token improved again
+ * added - (db creator) add class to handle database upgrades
+ * improved - (table editor) refine locked / hidden fields handling
+ * improved - (table editor) use set_maxrows to chop results into pages
+
+libdiogenes 0.9.14
+ * improved - rand_token now generates pass without I/l/1 or 0/O wich are
+              confusing for users (those are replaced with !/;/? and %/&)
+ * improved - (table editor) make it possible to edit the id field
+ * improved - renamed mime_content_type to get_mime_type to avoid confusion
+ * added - (table editor) add support for lock and hidden fields
+ * added - (table editor) add support for additional WHERE conditions
+ * improved - (table editor) make it possible to hide id field in the summary
+ * improved - (table editor) add a read-only mode
+
+libdiogenes 0.9.13
+ * fixed - return correct mimetype for .xls and .ppt files
+ * improved - (log browser) reduce calls to getUsername by caching results
+ * improved - (log browser) display a message when search criteria are missing
+ * fixed - (table editor) restore the 'delete' button which had gone missing
+
+libdiogenes 0.9.11
+ * fixed - check that PHP has MySQL support
+ * improved - internationalisation support for the log browser
+ * improved - internationalisation support for the table editor
+ * added - diogenes_func_tag, to produce generic XHTML tags
+ * removed - diogenes_func_meta, does not serve any useful purpose
+
+libdiogenes 0.9.10
+ * improved - better handling of EXPLAIN results in database debugger
+ * improved - use require_once to prevent multiple inclusions
+ * improved - made getUserId/getUsername static members of DiogenesCoreSession
+ * improved - DiogenesTableEditor/DiogenesLoggerView do not display anything
+
+libdiogenes 0.9.9.3
+ * improved - database field type autodetection for timestamps/datetime
+ * improved - DiogenesTableEditor can now translate set and enum values in a
+              more human readable form
+ * added - DiogenesTableEditor::describe_join_value to describe values that
+           are some non human readable id, in order to provide selectable, and
+           readable values
+ * added - diogenes_func_extval, a template function 'extval' that do the same
+           as diogenes_func_flags for 'join_values' (see just above)
+ * improved - table-editor.tpl in order to use the preceding improvements
+
+libdiogenes 0.9.9.2
+ * fixed - added missing mysql_free_results in logger
+ * improved - break down logger constructor into functions
+
+libdiogenes 0.9.9.1
+ * fixed - use UNIX_TIMESTAMP when retrieving dates in log browser
+
+libdiogenes 0.9.9
+ * added - replacement for mime_content_type
+ * fixed - fix faulty date selection in log browser
+
+libdiogenes 0.9.8.3
+ * improved - large speed improvements for log browsing
+ * improved - made it possible to override getUserId and getUsername
+ * improved - enhanced database debugging
+
+libdiogenes 0.9.8.1
+ * fixed - bugfix for diff viewing
+
+libdiogenes 0.9.8
+ * fixed - stripped one too many characters in diff viewer
+
+libdiogenes 0.9.7
+ * improved - display of authentication method (native, etc.)
+
+libdiogenes 0.9.5
+ * started ChangeLog
+ * added - replacement for file_get_contents
+ * added - the table editor automatically probes the table
+
