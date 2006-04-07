@@ -12,7 +12,7 @@ PKG_DIRS = config htdocs include locale po plugins templates
 LIB_FILES = COPYING
 LIB_BASE = include/diogenes
 
-VCS_FILTER = ! -name .arch-ids ! -name CVS
+VCS_FILTER = \( -name .arch-ids -o -name CVS -o -name .svn \) -prune
 
 # global targets
 
@@ -40,7 +40,7 @@ pkg-dist: pkg-build
 	rm -rf $(PKG_DIST) $(PKG_DIST).tar.gz
 	mkdir $(PKG_DIST)
 	cp -a $(PKG_FILES) $(PKG_DIST)
-	for dir in `find $(PKG_DIRS) -type d $(VCS_FILTER)`; \
+	for dir in `find $(PKG_DIRS) $(VCS_FILTER) -o -type d -print`; \
 	do \
           mkdir -p $(PKG_DIST)/$$dir; \
 	  find $$dir -maxdepth 1 -type f -exec cp {} $(PKG_DIST)/$$dir \; ; \
@@ -57,7 +57,7 @@ lib-dist: lib-build
 	rm -rf $(LIB_DIST)
 	mkdir $(LIB_DIST)
 	cp -a $(LIB_FILES) $(LIB_DIST)
-	for dir in `cd $(LIB_BASE) && find -type d $(VCS_FILTER)`; \
+	for dir in `cd $(LIB_BASE) && find . $(VCS_FILTER) -o -type d -print`; \
 	do \
           mkdir -p $(LIB_DIST)/$$dir; \
 	  find $(LIB_BASE)/$$dir -maxdepth 1 -type f -exec cp {} $(LIB_DIST)/$$dir \; ; \
