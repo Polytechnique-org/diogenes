@@ -47,14 +47,21 @@ class Diogenes_Plugin_Filter extends Diogenes_Plugin_Skel
    */
   function filter($input)
   {
+    global $page;
     $name = $this->name;
     
     $mask = "/(\{$name(\s+[^\}]*)?\})/";
     $bits = preg_split($mask, $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
     $output = "";    
     while($bit = array_shift($bits)) {
-      if (preg_match($mask, $bit)) {
-        $argstr = array_shift($bits);
+      $matches = array();
+      if (preg_match($mask, $bit, $matches)) {
+        if ($matches[2]) 
+        {  
+          $argstr = array_shift($bits);
+        } else {
+          $argstr = "";
+        }
         $argbits = preg_split("/\s/", trim($argstr));
         $args = array();
         foreach($argbits as $argbit)

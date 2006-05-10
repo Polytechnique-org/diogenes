@@ -1,3 +1,6 @@
+Diogenes 0.9.18.1
+ * fixed - fix handling of filter plugins without arguments
+
 Diogenes 0.9.18
  * improved - resync Textile plugin with Textpattern 4.0.2
  * improved - merge page catalog and file browser with slicker layout
