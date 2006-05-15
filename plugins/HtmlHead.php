@@ -30,9 +30,15 @@ class HtmlHead extends Diogenes_Plugin_Filter
   
   /** Plugin description */
   var $description = "This plugin allows you to add entries to a page's &lt;head&gt; block.";
-  
-  /** Plugin parameters */
-  var $params = array('contents' => '');
+ 
+
+  /** Constructor.
+   */
+  function HtmlHead()
+  {
+    $this->declareParam('contents', '');
+  }
+
 
   /** Apply filtering to the input and return an output.
    *
@@ -41,10 +47,10 @@ class HtmlHead extends Diogenes_Plugin_Filter
   function filter($input)
   {
     global $page;
-   
-    if ($this->params['contents'])
+    $contents = $this->getParamValue('content'); 
+    if (!empty($contents))
     {
-      array_push($page->head, $this->params['contents']);
+      array_push($page->head, $contents);
     }
 
     return $input;

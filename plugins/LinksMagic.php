@@ -31,10 +31,17 @@ class LinksMagic extends Diogenes_Plugin_Filter
   
   /** Plugin description */
   var $description = "This plugin allows you to mark external and secure (HTTPS) links in your pages.";
-  
-  /** Plugin parameters */
-  var $params = array('main' => 1, 'sidebar' => 1);
+ 
 
+  /** Constructor.
+   */
+  function LinksMagic()
+  {
+    $this->declareParam('main', 1);
+    $this->declareParam('sidebar', 1);
+  }
+
+  
   /** Apply filtering to the input and return an output.
    *
    * @param $input
@@ -43,12 +50,12 @@ class LinksMagic extends Diogenes_Plugin_Filter
   {
     global $page;
  
-    if ($this->params['sidebar'])
+    if ($this->getParamValue('sidebar'))
     {
       array_unshift($page->head, '<link rel="stylesheet" href="'.$page->url('links-sidebar.css').'" type="text/css" />');
     }
 
-    if ($this->params['main'])
+    if ($this->getParamValue('main'))
     {
       array_unshift($page->head, '<link rel="stylesheet" href="'.$page->url('links-main.css').'" type="text/css" />');
     }

@@ -120,7 +120,7 @@ class Diogenes_Plugin_Editor {
       }
       
       foreach ($available as $plugin) {  
-        $plugentry =& $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $plugin);
+        $plugentry = $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $plugin);
         if (!is_array($plugentry) and $this->plug_page) {
           $plugentry = $globals->plugins->cacheGet($cache, $this->plug_barrel, 0, $plugin);
           if (is_array($plugentry))
@@ -154,10 +154,10 @@ class Diogenes_Plugin_Editor {
             }
             
             // retrieve parameters from REQUEST
-            foreach ($plug_h->params as $key => $val)
+            foreach ($plug_h->getParamNames() as $key)
             {
               if (isset($_REQUEST[$plug_h->name."_".$key])) {
-                $plug_h->params[$key] = $_REQUEST[$plug_h->name."_".$key];              
+                $plug_h->setParamValue($key, $_REQUEST[$plug_h->name."_".$key]);              
               }
             }
             

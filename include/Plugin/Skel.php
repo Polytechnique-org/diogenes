@@ -67,22 +67,60 @@ class Diogenes_Plugin_Skel {
   {
     return ($wperms != 'public');
   }
-   
 
+
+  /** Declare a plugin parameter.
+   */
+  function declareParam($key, $val)
+  {
+    $this->params[$key] = $val;
+  }
+
+
+  /** Return an array of parameter names.
+   */
+  function getParamNames()
+  {
+    return array_keys($this->params);
+  }
+
+
+  /** Return the value of a parameter of the plugin.
+   */
+  function getParamValue($key)
+  {
+    return isset($this->params[$key]) ? $this->params[$key] : '';
+  }
+ 
+ 
+  /** Set the value of a parameter of the plugin.
+   */
+  function setParamValue($key, $val)
+  {
+    if (isset($this->params[$key])) {
+      //echo "$this->name : Calling setParamValue($key, $val)<br/>\n";
+      $this->params[$key] = $val; 
+    } else {
+      //echo "$this->name : skipping setParamValue($key, $val)<br/>\n";
+    }
+  }
+ 
+ 
   /** Set plugin parameters.
    *
    * @param $params
    */
   function setParams($params)
   {
-    $bits = explode("\0", $params);      
+    $bits = explode("\0", $params);
     foreach ($bits as $bit)
     {
       $frags = explode("=", $bit, 2);
       $key = $frags[0];
-      $val = isset($frags[1]) ? $frags[1] : '';
-      if (isset($this->params[$key])) {
-        $this->params[$key] = $val;
+      if (!empty($key))
+      {
+        $val = isset($frags[1]) ? $frags[1] : '';
+        $this->setParamValue($key, $val);
       }
     }
   }
@@ -97,14 +135,15 @@ class Diogenes_Plugin_Skel {
   {
     global $globals;
     
-    //echo $this->name . " : deleteParams($barrel, $page)<br/>\n";
+    //echo $this->name . " : eraseParams($barrel, $page)<br/>\n";
     $globals->db->query("delete from diogenes_plugin where plugin='{$this->name}' and barrel='$barrel' and page='$page'");
     
     $this->active = 0;
     unset($this->pos);
-    foreach ($this->params as $key => $val)
+    foreach ($this->getParamNames() as $key)
     {
-      $this->params[$key] = '';
+      //echo "$this->name : erasing param<br/>\n";
+      $this->setParamValue($key, '');
     }
   }
    
@@ -123,9 +162,10 @@ class Diogenes_Plugin_Skel {
     $this->active = 1;
     
     $params = '';
-    foreach ($this->params as $key => $val)
-    { 
-      //echo $this->name . " $key=$val<br/>";
+    foreach ($this->getParamNames() as $key)
+    {
+      $val = $this->getParamValue($key);
+      //echo "$this->name : $key = $val<br/>\n";
       $params .= "$key=$val\0";     
     }        
     $globals->db->query("replace into diogenes_plugin set plugin='{$this->name}', barrel='$barrel', page='$page', pos='$pos', params='$params'");

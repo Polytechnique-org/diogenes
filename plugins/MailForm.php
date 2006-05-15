@@ -35,8 +35,16 @@ class MailForm extends Diogenes_Plugin_Filter
   /** Plugin description */
   var $description = "This plugin allows you to insert a form to send an e-mail to a fixed recipient. To make use of this plugin, insert <b>{MailForm}</b> in your page where the mail form should appear.";
   
-  /** Plugin parameters */
-  var $params = array('email' => '', 'title' => '', 'subject_tag' => '[web form] ');
+
+  /** Constructor.
+   */
+  function MailForm()
+  {
+    $this->declareParam('email', '');
+    $this->declareParam('title', '');
+    $this->declareParam('subject_tag', '[web form]');
+  }
+
 
   /** Show an instance of the MailForm plugin.
    */
@@ -44,9 +52,9 @@ class MailForm extends Diogenes_Plugin_Filter
   {
     global $page;
 
-    // get params
-    $to_email = $this->params['email'];
-    $form_title = $this->params['title'];
+    // get parameters
+    $to_email = $this->getParamValue('email');
+    $form_title = $this->getParamValue('title');
     
     if (!isvalid_email($to_email)) {
       return '<p>You must specify a valid e-mail in the "email" parameter to make use of the MailForm plugin.<p>';
@@ -80,7 +88,7 @@ class MailForm extends Diogenes_Plugin_Filter
       
       $mymail = new HermesMailer();
       $mymail->setFrom($from);
-      $mymail->setSubject($this->params['subject_tag'].$subject);
+      $mymail->setSubject($this->getParamValue('subject_tag').$subject);
       $mymail->addTo($to_email);
       $mymail->setTxtBody($message);
       $mymail->send();
