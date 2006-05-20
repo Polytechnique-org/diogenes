@@ -49,17 +49,16 @@ function var_encode_text($var, $level = 0, $no_children = FALSE, $tabstr = '  ',
     return $code;
   } elseif (is_array($var)) {
     $arraysep = ",$eol";
-    $code = "array(".$eol;
+    $vcode = '';
     foreach ($var as $key => $value) {
-      $code .= str_repeat($tabstr, $level + 1);
-      $code .= "'$key'=>".var_encode_text($value, $level + 1, $no_children, $tabstr, $eol);
-      $code .= $arraysep;
+      $vcode .= str_repeat($tabstr, $level + 1);
+      $vcode .= "'$key'=>".var_encode_text($value, $level + 1, $no_children, $tabstr, $eol);
+      $vcode .= $arraysep;
     }
-    if (substr($code, -strlen($arraysep)))
-      $code = substr($code, 0, - strlen($arraysep));
-    $code .= $eol;
-    //$code = chop($code, ','); //remove unnecessary coma
-    $code .= str_repeat($tabstr, $level) . ")";
+    if (substr($vcode, -strlen($arraysep)) == $arraysep)
+      $vcode = substr($vcode, 0, - strlen($arraysep));
+
+    $code = "array(".($vcode ? "$eol$vcode$eol".str_repeat($tabstr, $level)  : ""). ")";
     return $code;
   } elseif (is_scalar($var)) {
     return "'".$var."'";
