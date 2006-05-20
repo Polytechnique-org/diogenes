@@ -211,6 +211,11 @@ class Diogenes_Plugin_Editor {
     // next we add the inactive plugins
     $plugs = array_merge_recursive($rw_plugs_on, $rw_plugs_off);
     $page->assign('plugins', $plugs);
+    // debugging
+    foreach ($plugs as $p_type => $p_entries)
+    {
+      $globals->plugins->log = array_merge($globals->plugins->log, $p_entries);
+    }
 
     // values
     $page->assign('show_params', $this->show_params);

@@ -343,9 +343,6 @@ class Diogenes_Plugins
     if (is_array($plugentry))
       $plug_h->fromArray($plugentry);
 
-    $plug_log = $plug_h->toArray();
-    //$pluglog['name'] = 'foo';
-    array_push($this->log, $plug_log);
     return $plug_h;
   }
     
@@ -375,6 +372,7 @@ class Diogenes_Plugins
     {
       $trclass = $odd ? ' class="odd"' : '';
       $out .= "<tr><th colspan=\"2\">{$val['name']} v{$val['version']}</th></tr>\n";
+      $out .= "<tr><td>status</td><td>{$val['status']}</td></tr>\n";
       if (isset($val['pos'])) {
         $out .= "<tr><td>position</td><td>{$val['pos']}</td></tr>\n";
       }
