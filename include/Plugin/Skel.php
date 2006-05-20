@@ -23,8 +23,8 @@ require_once 'System.php';
 require_once 'Tree/Node.php';
 
 define('PLUG_DISABLED', 0);
-define('PLUG_AVAILABLE', 1);
-define('PLUG_ACTIVE', 2);
+define('PLUG_ACTIVE', 1);
+define('PLUG_LOCK', 2);
 
 /** Recursive stripslashes.
  *
@@ -61,7 +61,7 @@ class Diogenes_Plugin_Skel {
   var $pos = 0;
   
   /** The plugin status (disabled, available, active) */
-  var $status = PLUG_AVAILABLE;
+  var $status = PLUG_DISABLED;
   
   /** Is the plugin allowed with respect to a given write permission on a page ?
    *

@@ -66,16 +66,14 @@ class Diogenes_Plugin_Editor {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';    
     $target = isset($_REQUEST['plug_target']) ? $_REQUEST['plug_target'] : '';
 
-    // load all available plugins
-    $cachefile = $globals->plugins->cacheFile($this->plug_barrel);
-
     // if the tree cache does not exits try to init it
+    $cachefile = $globals->plugins->cacheFile($this->plug_barrel);
     if(!file_exists($cachefile))
     {
       $globals->plugins->compileCache($this->plug_barrel, $page);
     }
     $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
-    $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);
+    $available = $globals->plugins->cachedVisible($cache, $this->plug_barrel, $this->plug_page);
 
     // handle updates
     $rebuild_cache = 0;
@@ -172,58 +170,52 @@ class Diogenes_Plugin_Editor {
       // rebuild plugin cache
       $globals->plugins->compileCache($this->plug_barrel, $page);
       $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
-      $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);
+      $available = $globals->plugins->cachedVisible($cache, $this->plug_barrel, $this->plug_page);
     }
     
     // get dump of plugins to fill out form
     $page->assign('plug_barrel', $this->plug_barrel);
     $page->assign('plug_page', $this->plug_page);
-    $plugs = array();
+    $ro_plugs = array();
+    $rw_plugs_on = array();
+    $rw_plugs_off = array();
     
     // start by adding the active plugins
     foreach ($available as $plugname => $plugcache)
     {
-      if ($plugcache['status'] == PLUG_ACTIVE)
+      $plugentry = $plugcache;
+      $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
+      $type = $plugentry['type'];
+
+      if ($plugentry['status'] & PLUG_LOCK)
       {
-         $plugentry = $plugcache;
-         $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
-         $type = $plugentry['type'];
-         if (!empty($plugs[$type])) {
-            $plugentry['move_up'] = 1;
-            $last = count($plugs[$type]) - 1;
-            $plugs[$type][$last]['move_down'] = 1;
-          } else {
-            $plugs[$type] = array();
-          }
-          array_push($plugs[$type], $plugentry);
+        $o_plugs =& $ro_plugs;
+        $plugentry['readonly'] = 1;
+      } else {
+        if ($plugentry['status'] & PLUG_ACTIVE)
+          $o_plugs =& $rw_plugs_on;
+        else 
+          $o_plugs =& $rw_plugs_off;
       }
+
+      if (!empty($o_plugs[$type])) {
+        $plugentry['move_up'] = 1;
+        $last = count($o_plugs[$type]) - 1;
+        $o_plugs[$type][$last]['move_down'] = 1;
+      } else {
+        $o_plugs[$type] = array();
+      }
+      array_push($o_plugs[$type], $plugentry);
     }
 
     // next we add the inactive plugins
-    if (!$this->readonly)
-    {
-      foreach ($available as $plugname => $plugcache)
-      {
-        if ( ($plugcache['status'] == PLUG_AVAILABLE) ||
-             (($plugcache['status'] == PLUG_DISABLED) && !$this->plug_barrel) )
-        {
-          $plugentry = $plugcache;
-          $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
-          $type = $plugentry['type'];
-          if (empty($plugs[$type])) {
-            $plugs[$type] = array();
-          }
-          array_push($plugs[$type], $plugentry);
-        }
-      }
-    }
-
+    $plugs = array_merge_recursive($rw_plugs_on, $rw_plugs_off);
     $page->assign('plugins', $plugs);
 
     // values
     $page->assign('show_params', $this->show_params);
     $page->assign('readonly',$this->readonly);
-    $statusvals = array(0 => 'disabled', '1' => 'available', 2 => 'enabled');
+    $statusvals = array(0 => 'off', 1 => 'on', 2 => 'off (lock)', 3 => 'on (lock)');
     $page->assign('statusvals', $statusvals);
 
     // translations    

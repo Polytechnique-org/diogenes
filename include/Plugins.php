@@ -118,12 +118,21 @@ class Diogenes_Plugins
    *
    * @param $cache
    * @param $barrel
-   * @param $page   
+   * @param $page
    */
   function cachedActive($cache, $barrel, $page)
   {
     $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
     $plugins = array();
+    foreach ($p_node->data as $plugname => $plugentry)
+    {
+      //echo "cachedEditable : examining $plugname (status {$plugentry['status']})<br/>\n";
+      if ($plugentry['status'] & PLUG_ACTIVE)
+      {
+        //echo "cachedActive : adding $plugname<br/>\n";
+        $plugins[$plugname] = $plugentry;
+      }
+    }
     return $plugins;
   }
 
@@ -135,19 +144,23 @@ class Diogenes_Plugins
    * @param $barrel
    * @param $page
    */
-  function cachedAvailable($cache, $barrel, $page)
+  function cachedVisible($cache, $barrel, $page)
   {
     $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
-    //echo "<pre>".var_encode_text($p_node)."</pre>";
+    return $p_node->data;
+/*
+    $available = array();
     foreach ($p_node->data as $plugname => $plugentry)
     {
-      $plugfile = $this->plugdir."/".$plugname.".php";
-      if (file_exists($plugfile) and (!$barrel || ($plugentry['status'] != PLUG_DISABLED)))
+      //echo "cachedEditable : examining $plugname (status {$plugentry['status']})<br/>\n";
+      if (!($plugentry['status'] & PLUG_LOCK) || !$barrel)
       {
+        //echo "cachedEditable : adding $plugname<br/>\n";
         $available[$plugname] = $plugentry;
-      }
+  //    }
     }
     return $available;
+*/
   }
 
 
@@ -180,20 +193,20 @@ class Diogenes_Plugins
     {
       //echo "Processing plugin '$plugin' for &lt;{$node->name}&gt;<br/>\n";
       $outval = '';
-      if ($parentval['status'] != PLUG_DISABLED)
+      if (($parentval['status'] & PLUG_ACTIVE) || !($parentval['status'] & PLUG_LOCK))
       {
-        //echo "* plugin available/enabled at parent level<br/>\n";
+        //echo "* plugin '$plugin' not locked off parent level<br/>\n";
         $outval = $parentval;
         if (is_array($node->data[$plugin]))
         {
           //echo "** plugin set at current level<br/>\n";
           $outval['pos'] = $node->data[$plugin]['pos'];
           $outval['params'] = $node->data[$plugin]['params'];
-          if ($parentval['status'] == PLUG_AVAILABLE) {
+          if (!($parentval['status'] & PLUG_LOCK)) {
             //echo "*** plugin status set to DB-specified value<br/>\n";
             $outval['status'] = $node->data[$plugin]['status'];
           } else {
-            //echo "*** plugin forced on at parent level<br/>\n";
+            $outval['status'] = $parentval['status'];
           }
         } else {
           //echo "** plugin unset at current level<br/>\n";
@@ -295,12 +308,14 @@ class Diogenes_Plugins
     if ($barrel) {
       $dump_node = $globals_out_node->getChild($barrel);
       $dump_node->writeFile($this->cachefile($barrel));
+      $dump_node->writeFile($this->cachefile($barrel).".txt", NODE_DUMP_TEXT);
     } else {
       $globals_out_node->writeFile($this->cachefile($barrel), NODE_DUMP_NOCHILDREN);
       $globals_out_node->writeFile($this->cachefile($barrel).".txt", NODE_DUMP_NOCHILDREN | NODE_DUMP_TEXT);
       foreach ($globals_out_node->children as $c_barrel => $dump_node)
       {
         $dump_node->writeFile($this->cachefile($c_barrel));
+        $dump_node->writeFile($this->cachefile($c_barrel).".txt", NODE_DUMP_TEXT);
       }
     }
   }

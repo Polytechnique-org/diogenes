@@ -29,23 +29,24 @@
 {foreach from=$plugins key=plugtype item=plugarr}
 <table class="light" style="width:80%">
 <tr>
-  <th colspan="3">{$plugtype} {$msg_plugedit_plugins}</th>
+  <th colspan="2">{$plugtype} {$msg_plugedit_plugins}</th>
 </tr>
 {foreach from=$plugarr item=plug}
 <tr class="odd">
-  <td style="width:30px"><img class="fileicon" src="{$plug.icon}"/>&nbsp;{$plug.name}&nbsp;v{$plug.version}
-  </td>
+  <td><img class="fileicon" src="{$plug.icon}"/>&nbsp;{$plug.name}&nbsp;v{$plug.version}</td>
   <td>
-{if !$readonly}
+{if $plug.readonly}
+    status {$plug.status}
+{else}
     <select name="{$plug.name}_status">{html_options options=$statusvals selected=$plug.status}</select>
     <a class="action"{if $plug.move_up}href="javascript:move_up('{$plug.name}');"{/if}>{$msg_move_up}</a>&nbsp;<a class="action"{if $plug.move_down}href="javascript:move_down('{$plug.name}');"{/if}>{$msg_move_down}</a>
 {/if}
   </td>
 </tr>
 <tr>
-{if $show_params}
   <td><div class="description">{$plug.description}</div></td>
-  <td colspan="2">
+  <td>
+{if $show_params}
     <table class="plugparams">
 {foreach from=$plug.params key=key item=val}
     <tr>
@@ -54,8 +55,8 @@
     </tr>
 {/foreach}
     </table>
+{/if}
   </td>
-{/if}  
 </tr>
 {/foreach}
 </table>
