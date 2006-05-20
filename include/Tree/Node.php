@@ -43,8 +43,10 @@ function var_encode_text($var, $level = 0, $no_children = FALSE, $tabstr = '  ',
     {
       $code .= str_repeat($tabstr, $level+1) . "* children" . $eol;
       foreach ($var->children as $index => $child)
+      {
         $code .= str_repeat($tabstr, $level+2) . "index : $index" . $eol;
         $code .= var_encode_text($child, $level+2, $no_children, $tabstr, $eol);
+      }
     }
     return $code;
   } elseif (is_array($var)) {
