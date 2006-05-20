@@ -29,26 +29,24 @@
 {foreach from=$plugins key=plugtype item=plugarr}
 <table class="light" style="width:80%">
 <tr>
-  <th colspan="{if $show_params}4{else}3{/if}">{$plugtype} {$msg_plugedit_plugins}</th>
+  <th colspan="3">{$plugtype} {$msg_plugedit_plugins}</th>
 </tr>
-{counter start=0 assign=cnt print=0}
 {foreach from=$plugarr item=plug}
-<tr{if $cnt % 2} class="odd"{/if}>
-  <td style="width:30px">
-    <img class="fileicon" src="{$plug.icon}" />
+<tr class="odd">
+  <td style="width:30px"><img class="fileicon" src="{$plug.icon}"/>&nbsp;{$plug.name}&nbsp;v{$plug.version}
   </td>
-  <td>    
-    <div class="name">{if !$readonly}<input type="checkbox" name="plugins_active[]" value="{$plug.name}"{if $plug.active} checked="checked"{/if} />&nbsp;{/if}{$plug.name}&nbsp;v{$plug.version}</div>
+  <td>
 {if !$readonly}
+    <select name="{$plug.name}_status">{html_options options=$statusvals selected=$plug.status}</select>
     <a class="action"{if $plug.move_up}href="javascript:move_up('{$plug.name}');"{/if}>{$msg_move_up}</a>&nbsp;<a class="action"{if $plug.move_down}href="javascript:move_down('{$plug.name}');"{/if}>{$msg_move_down}</a>
 {/if}
   </td>
-  <td>
-  <div class="description">{$plug.description}</div>
-  </td>  
-{if !$readonly && $show_params}       
-  <td>
-    <table>
+</tr>
+<tr>
+{if $show_params}
+  <td><div class="description">{$plug.description}</div></td>
+  <td colspan="2">
+    <table class="plugparams">
 {foreach from=$plug.params key=key item=val}
     <tr>
       <td>{$key}</td>
@@ -59,7 +57,6 @@
   </td>
 {/if}  
 </tr>
-{counter}
 {/foreach}
 </table>
 <br/>

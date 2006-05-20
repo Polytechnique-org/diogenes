@@ -18,6 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once 'diogenes/diogenes.misc.inc.php';
+
 define('NODE_DUMP_BINARY', 0);
 define('NODE_DUMP_TEXT', 1);
 define('NODE_DUMP_NOCHILDREN', 2);
@@ -59,13 +61,16 @@ function var_encode_text($var, $level = 0, $no_children = FALSE, $tabstr = '  ',
     //$code = chop($code, ','); //remove unnecessary coma
     $code .= str_repeat($tabstr, $level) . ")";
     return $code;
-  } elseif (is_string($var)) {
+  } elseif (is_scalar($var)) {
     return "'".$var."'";
-  } elseif (is_bool($var)) {
-    return ($code ? 'TRUE' : 'FALSE');
   } else {
     return 'NULL';
   }
+}
+
+function var_encode_html($var, $level = 0, $no_children = FALSE)
+{
+  return var_encode_text($var, $level, $no_children, '&nbsp;&nbsp;', $eol = "<br/>\n");
 }
 
 function var_encode_bin($var, $no_children = FALSE)
@@ -156,13 +161,6 @@ class Diogenes_Tree_Node
     $this->data = $data;
     $this->name = $name;
     $this->children = $children;
-  }
-
-  /** Add a child for this node.
-   */
-  function pushChild($node, $index)
-  {
-    array_push($this->children, $node);
   }
 
   /** Return the specified child of this node.

@@ -115,6 +115,7 @@ CREATE TABLE `diogenes_plugin` (
   `page` int(10) unsigned NOT NULL default '0',
   `pos` int(10) unsigned NOT NULL default '0',
   `params` text NOT NULL,
+  `status` int(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`plugin`,`barrel`,`page`),
   KEY `pos` (`pos`)
 ) TYPE=MyISAM;

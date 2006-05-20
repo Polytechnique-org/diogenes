@@ -20,21 +20,23 @@
 
 // dependency on PEAR
 require_once 'System.php';
+require_once 'Tree/Node.php';
+require_once 'Plugin/Skel.php';
+
 
 /** This class describes Diogenes' plugins. 
  */
 class Diogenes_Plugins
 {
-  /** Array of currently loaded plugins */
-  var $loaded = array();
-
   /** Directory that holds the plugins cache files */
   var $cachedir;
-  
+
   /** Directory that holds the plugins */
   var $plugdir;
-  
-  
+
+  /** Plugins that will be sent to trace */
+  var $log = array();
+
   /** Constructs a new holder for Diogenes plugins.
    *
    * @param $dbh
@@ -45,7 +47,7 @@ class Diogenes_Plugins
   {
     $this->dbh =& $dbh;
     $this->plugdir = $plugdir;
-    $this->cachedir = $cachedir;    
+    $this->cachedir = $cachedir;
   }
   
   
@@ -58,47 +60,60 @@ class Diogenes_Plugins
     $cachefile = $this->cachedir . "/" . ($barrel ? $barrel : "__diogenes__") . ".plugins";
     return $cachefile;
   }
-    
-  
+
   /** Return the cache entry for specified plugin
    *
    * @param $cache
    * @param $barrel
    * @param $page
    * @param $plugin
-   */    
+   */
   function cacheGet($cache, $barrel, $page, $plugin)
   {
-    foreach ($cache as $plugentry)
-    {      
-      if (($plugentry['plugin'] == $plugin) && ($plugentry['page'] == $page))
-      {
-        return $plugentry;
-      }
-    }
-    return;     
+    $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
+    return $p_node->data[$plugin];
   }
 
-  
+
   /** Return the cache entry for a plugin at a specified position
    *
    * @param $cache
    * @param $barrel
    * @param $page
    * @param $pos
-   */  
+   */
   function cacheGetAtPos($cache, $barrel, $page, $pos)
   {
-    foreach ($cache as $plugentry)
-    {      
-      if (($plugentry['pos'] == $pos) && ($plugentry['page'] == $page))
+    $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
+    foreach ($p_node->data as $plugname => $plugentry)
+    {
+      if ($plugentry['pos'] == $pos)
       {
+        $plugentry['plugin'] = $plugname;
         return $plugentry;
       }
-    }  
-  }  
+    }
+  }
 
-  
+
+  /** Return the cache entry for specified plugin
+   *
+   * @param $cache
+   * @param $barrel
+   * @param $page
+   * @param $plugin
+   */
+  function cacheGetPageNode($cache, $barrel, $page)
+  {
+    if ($page) {
+      $p_node = $cache->getChild($page);
+    } else {
+      $p_node = $cache;
+    }
+    return $p_node;
+  }
+
+
   /** List the plugins that are active in a given context
    *
    * @param $cache
@@ -107,40 +122,35 @@ class Diogenes_Plugins
    */
   function cachedActive($cache, $barrel, $page)
   {
+    $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
     $plugins = array();
-    foreach ($cache as $plug)
-    {
-      if ($plug['page'] == $page) 
-      {
-        array_push($plugins, $plug);
-      }
-    }
-    return $plugins;    
+    return $plugins;
   }
 
-    
+
   /** Returns an array of cache entries representing the available plugins
    *  in a given context
    *
    * @param $cache
    * @param $barrel
    * @param $page
-   */  
+   */
   function cachedAvailable($cache, $barrel, $page)
-  {      
-    $available = array();
-    foreach ($cache as $plugentry)
-    {      
-      $plugfile = $this->plugdir."/".$plugentry['plugin'].".php";
-      if (file_exists($plugfile) and ($plugentry['page'] == 0) and (!$page or $plugentry['active']))
+  {
+    $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
+    //echo "<pre>".var_encode_text($p_node)."</pre>";
+    foreach ($p_node->data as $plugname => $plugentry)
+    {
+      $plugfile = $this->plugdir."/".$plugname.".php";
+      if (file_exists($plugfile) and (!$barrel || ($plugentry['status'] != PLUG_DISABLED)))
       {
-        array_push($available, $plugentry['plugin']);
+        $available[$plugname] = $plugentry;
       }
     }
-    return $available;    
+    return $available;
   }
-  
-  
+
+
   /** Remove database references to plugins that are not available.
    */
   function clean_database(&$page)
@@ -160,109 +170,168 @@ class Diogenes_Plugins
     */
   }
 
-    
-  /** Compile plugin cache.
-   *
-   * @param $cachefile
-   * @param $barrel
-   */
-  function compileCache($cachefile, $barrel)
+
+  /** Build view for current level.
+  */
+  function compileNode($node, &$outparent, $index)
   {
-    if (!$fp = fopen($cachefile, "w")) {
-      trigger_error("failed to open '$cachefile' for writing", E_USER_ERROR);
+    $outvals = array();
+    foreach ($outparent->data as $plugin => $parentval)
+    {
+      //echo "Processing plugin '$plugin' for &lt;{$node->name}&gt;<br/>\n";
+      $outval = '';
+      if ($parentval['status'] != PLUG_DISABLED)
+      {
+        //echo "* plugin available/enabled at parent level<br/>\n";
+        $outval = $parentval;
+        if (is_array($node->data[$plugin]))
+        {
+          //echo "** plugin set at current level<br/>\n";
+          $outval['pos'] = $node->data[$plugin]['pos'];
+          $outval['params'] = $node->data[$plugin]['params'];
+          if ($parentval['status'] == PLUG_AVAILABLE) {
+            //echo "*** plugin status set to DB-specified value<br/>\n";
+            $outval['status'] = $node->data[$plugin]['status'];
+          } else {
+            //echo "*** plugin forced on at parent level<br/>\n";
+          }
+        } else {
+          //echo "** plugin unset at current level<br/>\n";
+        }
+      }
+
+      // add the plugin to output
+      if (is_array($outval))
+      {
+        $outvals[$plugin] = $outval;
+      }
+    }
+    $outnode = new Diogenes_Tree_Node($outvals, $node->name);
+    //echo "<hr/>";
+
+    // recurse into children
+    foreach ($node->children as $cindex => $child)
+    {
+      $this->compileNode($child, $outnode, $cindex);
     }
 
-    // get the list of available plugins
-    $available = array();            
-    if (!$barrel) {
-    
-      $plugfiles = System::find($this->plugdir.' -type f -name *.php');  
-      foreach ($plugfiles as $file) {
-        $name = basename($file);
-        $name = substr($name, 0, -4);      
-        array_push($available, $name);
-      }      
-      
-    } else {
-            
-      $sql = "select plugin from diogenes_plugin where page=0 AND barrel=''";
-      $res = $this->dbh->query($sql);
-      while (list($plugin) = mysql_fetch_row($res))
-      {
-        array_push($available, $plugin);
-      }
-      mysql_free_result($res);
-   }
-    
-/*
-   echo "compile : available <pre>";
-   print_r($available);
-   echo "</pre>";
-*/   
-   // get active plugins
-   $sql = "select page, pos, plugin, params from diogenes_plugin where barrel='{$barrel}' order by page, pos";
-   $res = $this->dbh->query($sql);
-   $active = array();
-   while ($row = mysql_fetch_row($res))
-   {
-     $plugin = $row[2];
-     if (in_array($plugin, $available)) {
-       array_unshift($row, 1); 
-       fputs($fp, join("\t", $row) . "\n");       
-       if (!$row[1]) {
-         array_push($active, $plugin);
-         //echo "compileCache : adding active plugin $plugin<br/>";       
-       }
-     }
-   }
-   mysql_free_result($res);    
-   
-   // add inactive plugins
-   foreach ($available as $plugin)
-   {
-     if (!in_array($plugin, $active))
-     {
-       //echo "compileCache : adding inactive plugin $plugin<br/>";
-       $row = array(0, 0, 0, $plugin, '');
-       fputs($fp, join("\t", $row) . "\n");     
-     }
-   }
-   
-   fclose($fp);
-   
-   //$this->log("rcs_commit","{$this->alias}:$dir/$file:$message");
-
+    // add the produced node
+    $outparent->setChild($index, $outnode);
   }
-  
-   
+
+
+  /** Compile plugin cache.
+   *
+   * @param $barrel
+   */
+  function compileCache($barrel, &$caller)
+  {
+    $caller->info("Recompiling " .($barrel ? "plugin cache for barrel '$barrel'" : "global plugin cache"));
+
+    // get the list of all plugins present on the system
+    $allplugins = array();
+    $plugfiles = System::find($this->plugdir.' -type f -name *.php');
+    foreach ($plugfiles as $file) {
+      $name = basename($file);
+      $name = substr($name, 0, -4);
+      array_push($allplugins, $name);
+    }
+
+    $defcache = array();
+    // fill initial values
+    foreach ($allplugins as $plugin)
+    {
+      $plug_h = $this->load($plugin);
+      $defcache[$plugin] = $plug_h->toArray();
+    }
+
+    // get DB values
+    $dbcache = array();
+
+    $sql_limit = $barrel ? " where barrel='{$barrel}' or barrel=''" : "";
+    $sql = "select barrel, page, plugin, status, pos, params from diogenes_plugin" . $sql_limit;
+    $res = $this->dbh->query($sql);
+    while($row = mysql_fetch_row($res))
+    {
+      $c_barrel = array_shift($row);
+      $c_page = array_shift($row);
+      $plugin = array_shift($row);
+      $plugentry = array(
+        'status' => $row[0],
+        'pos' => $row[1],
+        'params' => ($row[2] ? var_decode_bin($row[2]) : array())
+      );
+      $plug_h = $this->load($plugin, $plugentry);
+      //echo "Got params from DB for '$plugin', barrel '$c_barrel', page '$c_page' : ".$row[2]."<br/>";
+      $dbcache[$c_barrel][$c_page][$plugin] = $plug_h->toArray();
+    }
+    mysql_free_result($res);
+
+    // build the input tree
+    $globals_node = new Diogenes_Tree_Node($dbcache[''][0], 'globals defaults');
+    $sql_limit = $barrel ? " where alias='{$barrel}'" : " where alias!=''";
+    $res = $this->dbh->query("select alias from diogenes_site" . $sql_limit);
+    while(list($c_barrel) = mysql_fetch_row($res))
+    {
+      $barrel_node = new Diogenes_Tree_Node($dbcache[$c_barrel][0], "barrel '$c_barrel' defaults");
+      $res2 = $this->dbh->query("select PID from {$c_barrel}_page");
+      while(list($page) = mysql_fetch_row($res2))
+      {
+        $page_node = new Diogenes_Tree_Node($dbcache[$c_barrel][$page], "barrel '$c_barrel' page $page"); 
+        $barrel_node->setChild($page, $page_node);
+      }
+      mysql_free_result($res2);
+      $globals_node->setChild($c_barrel, $barrel_node);
+    }
+    mysql_free_result($res);
+
+    // compile the cache
+    $top_out_node = new Diogenes_Tree_Node($defcache, 'plugin defaults');
+    $this->compileNode($globals_node, $top_out_node, 'globals');
+    $globals_out_node = $top_out_node->getChild('globals');
+    //echo "<pre>" . $top_out_node->dump() . "</pre><hr/>";
+
+    // produce dump(s)
+    if ($barrel) {
+      $dump_node = $globals_out_node->getChild($barrel);
+      $dump_node->writeFile($this->cachefile($barrel));
+    } else {
+      $globals_out_node->writeFile($this->cachefile($barrel), NODE_DUMP_NOCHILDREN);
+      $globals_out_node->writeFile($this->cachefile($barrel).".txt", NODE_DUMP_NOCHILDREN | NODE_DUMP_TEXT);
+      foreach ($globals_out_node->children as $c_barrel => $dump_node)
+      {
+        $dump_node->writeFile($this->cachefile($c_barrel));
+      }
+    }
+  }
+
+
   /** Load the specified plugin
    *
    * @param $plugentry
    */
-  function load($plugentry)
+  function load($plugin, $plugentry = '')
   {
-    $plugin = $plugentry['plugin'];
     $plugfile = $this->plugdir."/$plugin.php";
     if (!file_exists($plugfile)) {
       trigger_error("could not find plugin file '$plugfile'", E_USER_WARNING);
       return;
     }
-     
     include_once($plugfile);
-  
     if (!class_exists($plugin)) {
       trigger_error("could not find class '$plugin'", E_USER_WARNING);
       return;
     }
-    
+
     // load and register plugin
-    $plug = new $plugin();
-    $plug->pos = $plugentry['pos'];
-    $plug->active = $plugentry['active'];
-    $plug->setParams($plugentry['params']);
-    $this->loaded[$plugin] =& $plug;      
-    
-    return $plug;
+    $plug_h = new $plugin();
+    if (is_array($plugentry))
+      $plug_h->fromArray($plugentry);
+
+    $plug_log = $plug_h->toArray();
+    //$pluglog['name'] = 'foo';
+    array_push($this->log, $plug_log);
+    return $plug_h;
   }
     
 
@@ -276,62 +345,35 @@ class Diogenes_Plugins
     if (!file_exists($cachefile)) {
         return array();
     }
-    
-    if (!$fp = fopen($cachefile, "r")) {
-      trigger_error("failed to open '$cachefile' for reading", E_USER_WARNING);
-      return;
-    }
-    
-    $plugins = array();
-    while ($line = fgets($fp))
-    {
-      // drop end of line
-      $line = substr($line, 0, -1);
-      $bits = explode("\t", $line);
-      $plug = array(
-        'active' => $bits[0],
-        'page'   => $bits[1],
-        'pos'    => $bits[2],
-        'plugin' => $bits[3],
-        'params' => $bits[4],
-      );        
-      array_push($plugins, $plug);
-    }
-        
-    fclose($fp);
-    
-    return $plugins;
+
+    return Diogenes_Tree_Node::readFile($cachefile);
   }
 
-      
+
   /** Prepare plugins trace for output
-   */    
+   */
   function trace_format()
   {
-    $out = "";
-    foreach ($this->loaded as $key => $val)
-    {      
-      $out .= '<table class="light" style="width: 100%; font-family: monospace">';
-      $out .= '<tr><th colspan="2">'.$key.' v'.$val->version.'</th></tr>';
-      if (isset($val->pos)) {
-        $out .= '<tr><td>position</td><td>'.$val->pos.'</td></tr>';
+    $out = '<table class="light" style="width: 100%; font-family: monospace">'."\n";
+    $odd = 0;
+    foreach ($this->log as $key => $val)
+    {
+      $trclass = $odd ? ' class="odd"' : '';
+      $out .= "<tr><th colspan=\"2\">{$val['name']} v{$val['version']}</th></tr>\n";
+      if (isset($val['pos'])) {
+        $out .= "<tr><td>position</td><td>{$val['pos']}</td></tr>\n";
       }
-      $out .= '<tr><td>type</td><td>'.$val->type.'</td></tr>';
-      $out .= '<tr><td>description</td><td>'.$val->description.'</td></tr>';
-      if (empty($val->params)) {
-        $out .= '<tr class="odd"><td colspan="2">parameters</td></tr>';
-        foreach ($val->params as $skey => $sval) 
-        {
-          $out .= "<tr><td>$skey</td><td>$sval</td></tr>";
-        }
+      $out .= "<tr$trclass><td>type</td><td>{$val['type']}</td></tr>\n";
+      $out .= "<tr$trclass><td>description</td><td>{$val['description']}</td></tr>\n";
+      if (!empty($val['params'])) {
+        $out .= "<tr$trclass><td>parameters</td><td>".var_encode_html($val['params'])."</td></tr>\n";
       }
-      $out .= "</table><br/>";
+      $odd = ($odd+1) % 2;
     }
+    $out .= "</table>\n";
     return $out;
   }
-  
-  
-  
+
 }
 
 ?>

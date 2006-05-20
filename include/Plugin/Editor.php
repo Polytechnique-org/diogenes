@@ -52,8 +52,8 @@ class Diogenes_Plugin_Editor {
     $this->plug_page = $plug_page;
     $this->plug_page_wperms = $plug_page_wperms;
   }
-  
-  
+
+
   /** Run the plugin editor.
    *
    * @param $page
@@ -62,185 +62,154 @@ class Diogenes_Plugin_Editor {
   function run(&$page, $outputvar = '')
   {
     global $globals;
-    
+
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';    
     $target = isset($_REQUEST['plug_target']) ? $_REQUEST['plug_target'] : '';
-         
+
     // load all available plugins
     $cachefile = $globals->plugins->cacheFile($this->plug_barrel);
-    
-    // if the tree cache does not exits, try to init it
-    if (!file_exists($cachefile)) {
-      $globals->plugins->compileCache($cachefile, $this->plug_barrel);
-    }        
+
+    // if the tree cache does not exits try to init it
+    if(!file_exists($cachefile))
+    {
+      $globals->plugins->compileCache($this->plug_barrel, $page);
+    }
     $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
     $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);
-           
-    
+
     // handle updates
+    $rebuild_cache = 0;
     switch ($action) {
     case "move_up": case "move_down":
       if ($this->readonly) die("Sorry, this plugin view is read-only.");
-      
+
       $delta = ($action == "move_down") ? 1 : -1;
-      //$page->info("moving plugin '$target'..");
+      $page->info("moving plugin '$target'..");
       $plugcache_a = $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $target);
-      $plug_a =& $globals->plugins->load($plugcache_a);
-      //$plug_a =& $globals->plugins->get($target);
-      
+      $plug_a =& $globals->plugins->load($plugcache_a['name'], $plugcache_a);
+
       if (is_object($plug_a) && ($plug_a->active)) {
         $old_pos = $plug_a->pos;
-        //$plug_b =& $globals->plugins->getAtPos($old_pos + $delta);        
         $plugcache_b = $globals->plugins->cacheGetAtPos($cache, $this->plug_barrel, $this->plug_page, $old_pos + $delta);
-        
+
         if (is_array($plugcache_b))
         {
-          $plug_b =& $globals->plugins->load($plugcache_b);
-  
+          $plug_b =& $globals->plugins->load($plugcache_b['name'], $plugcache_b);
+
           // swap the current plugin and the next plugin
           if (is_object($plug_b) && ($plug_b->active)) 
           {
-            $plug_a->writeParams($this->plug_barrel, $this->plug_page, $old_pos + $delta);        
-            $plug_b->writeParams($this->plug_barrel, $this->plug_page, $old_pos);
-          }        
-        }
-      }     
-      $globals->plugins->compileCache($cachefile, $this->plug_barrel);
-      $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);  
-      $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);       
-      break;
-      
-    case "update":
-      if ($this->readonly) die("Sorry, this plugin view is read-only.");
-    
-      // list of active plugins
-      $active = array();
-      if (isset($_REQUEST['plugins_active'])) {
-        $active = array_values($_REQUEST['plugins_active']);
-      }
-      
-      foreach ($available as $plugin) {  
-        $plugentry = $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $plugin);
-        if (!is_array($plugentry) and $this->plug_page) {
-          $plugentry = $globals->plugins->cacheGet($cache, $this->plug_barrel, 0, $plugin);
-          if (is_array($plugentry))
-          {
-            $plugentry['active'] = 0;
+            $plug_a->toDatabase($this->plug_barrel, $this->plug_page, $old_pos + $delta);
+            $plug_b->toDatabase($this->plug_barrel, $this->plug_page, $old_pos);
           }
         }
-        
+      }
+      $rebuild_cache = 1;
+      break;
+
+    case "update":
+      if ($this->readonly) die("Sorry, this plugin view is read-only.");
+      foreach ($available as $plugin => $plugentry)
+      {
         // check we have a valid cache entry
         if (!is_array($plugentry)) {
-          $page->info("could not find plugin '$plugin' in cache for barrel '{$this->plug_barrel}'");          
+          $page->info("could not find plugin '$plugin' in cache for barrel '{$this->plug_barrel}'");
           return;
         }
-        
-        $plug_h =& $globals->plugins->load($plugentry);
-        
-        if (is_object($plug_h) && is_array($plugentry)) {
-          $pos = array_search($plugin, $active);
-          
-          if ($pos !== false) {
-            // check the plugin is allowed in the current context
-            if ($this->plug_barrel and $this->plug_page) {
-              $wperms = $this->plug_page_wperms;
-              
-              // $page->info("checking plugin '$plugin' vs. write permissions '$wperms'..");
-              if (!$plug_h->allow_wperms($wperms))
-              {
-                $page->info("plugin '$plugin' is not allowed with write permissions '$wperms'!");
-                break;
-              }             
-            }
-            
-            // retrieve parameters from REQUEST
-            foreach ($plug_h->getParamNames() as $key)
+
+        $plug_h =& $globals->plugins->load($plugin, $plugentry);
+        if (!is_object($plug_h)) {
+          $page->info("could not load plugin '$plugin' in cache for barrel '{$this->plug_barrel}'");
+          return;
+        }
+
+        if ($pos !== false) {
+          // check the plugin is allowed in the current context
+          if ($this->plug_barrel and $this->plug_page) {
+            $wperms = $this->plug_page_wperms;
+
+            // $page->info("checking plugin '$plugin' vs. write permissions '$wperms'..");
+            if (!$plug_h->allow_wperms($wperms))
             {
-              if (isset($_REQUEST[$plug_h->name."_".$key])) {
-                $plug_h->setParamValue($key, $_REQUEST[$plug_h->name."_".$key]);              
-              }
+              $page->info("plugin '$plugin' is not allowed with write permissions '$wperms'!");
+              break;
             }
-            
-            // write parameters to database
-            $plug_h->writeParams($this->plug_barrel, $this->plug_page, $pos);
-          } else {        
-            // erase parameters from database
-            $plug_h->eraseParams($this->plug_barrel, $this->plug_page);          
-          }        
+          }
+
+          // retrieve parameters from REQUEST
+          if (isset($_REQUEST[$plug_h->name."_status"])) 
+	  {
+            $plug_h->status = $_REQUEST[$plug_h->name."_status"];
+          }
+          foreach ($plug_h->getParamNames() as $key)
+          {
+            if (isset($_REQUEST[$plug_h->name."_".$key])) {
+              $plug_h->setParamValue($key, $_REQUEST[$plug_h->name."_".$key]);
+            }
+          }
+
+          // write parameters to database
+          $plug_h->toDatabase($this->plug_barrel, $this->plug_page, $pos);
+          $rebuild_cache = 1;
         }
       }
-      
+      break;
+    }
+
+    // if necessary, rebuild the plugin cache
+    if ($rebuild_cache)
+    {
       // log this action
       if ($this->plug_barrel)
       { 
         if ($this->plug_page)
         {
-          $page->log('page_plugins', $this->plug_barrel.":".$this->plug_page);        
+          $page->log('page_plugins', $this->plug_barrel.":".$this->plug_page);
         } else {
-          $page->log('barrel_plugins', $this->plug_barrel.":*");        
+          $page->log('barrel_plugins', $this->plug_barrel.":*");
         }
       }
-      
-      $globals->plugins->compileCache($cachefile, $this->plug_barrel);
-      $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);  
-      $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);    
-      break;
+      // rebuild plugin cache
+      $globals->plugins->compileCache($this->plug_barrel, $page);
+      $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
+      $available = $globals->plugins->cachedAvailable($cache, $this->plug_barrel, $this->plug_page);
     }
     
     // get dump of plugins to fill out form
     $page->assign('plug_barrel', $this->plug_barrel);
     $page->assign('plug_page', $this->plug_page);
-    
     $plugs = array();
     
     // start by adding the active plugins
-    foreach ($cache as $plugcache)
+    foreach ($available as $plugname => $plugcache)
     {
-      if (in_array($plugcache['plugin'], $available) and ($plugcache['page'] == $this->plug_page) and ($plugcache['active']))
+      if ($plugcache['status'] == PLUG_ACTIVE)
       {
-        // check we have a valid plugin handle
-        $plug_h = $globals->plugins->load($plugcache);
-        if (!is_object($plug_h)) {
-
-          $page->info("could not load disabled plugin '{$plugcache['plugin']}' in barrel '{$this->plug_barrel}'"); 
-
-        } else {
-                
-          $plugentry = $plug_h->dump();
-          $plugentry['icon'] = $globals->icons->get_action_icon('plugins');            
-          $type = $plugentry['type'];        
-          if (!empty($plugs[$type])) {
+         $plugentry = $plugcache;
+         $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
+         $type = $plugentry['type'];
+         if (!empty($plugs[$type])) {
             $plugentry['move_up'] = 1;
             $last = count($plugs[$type]) - 1;
-            $plugs[$type][$last]['move_down'] = 1;              
+            $plugs[$type][$last]['move_down'] = 1;
           } else {
-            $plugs[$type] = array();      
-          }                
+            $plugs[$type] = array();
+          }
           array_push($plugs[$type], $plugentry);
-
-	}
-      }    
+      }
     }
-    
-    // next we add the disabled plugins
+
+    // next we add the inactive plugins
     if (!$this->readonly)
     {
-      foreach ($available as $plugname)
+      foreach ($available as $plugname => $plugcache)
       {
-        $plugcache = $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $plugname);
-        if (!is_array($plugcache) or !$plugcache['active'])
+        if ( ($plugcache['status'] == PLUG_AVAILABLE) ||
+             (($plugcache['status'] == PLUG_DISABLED) && !$this->plug_barrel) )
         {
-          $plugcache = $globals->plugins->cacheGet($cache, $this->plug_barrel, 0, $plugname);
-          $plugcache['active'] = 0;        
-          $plug_h = $globals->plugins->load($plugcache);
-          if (!is_object($plug_h)) {
-            $page->info("could not load disabled plugin '$plugname' in barrel '{$this->plug_barrel}'"); 
-            return;
-          }
-                    
-          $plugentry = $plug_h->dump();        
-          $plugentry['icon'] = $globals->icons->get_action_icon('plugins');                        
-          $type = $plugentry['type'];          
+          $plugentry = $plugcache;
+          $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
+          $type = $plugentry['type'];
           if (empty($plugs[$type])) {
             $plugs[$type] = array();
           }
@@ -248,17 +217,14 @@ class Diogenes_Plugin_Editor {
         }
       }
     }
-    
-    /*
-    echo "plugins <pre>";
-    print_r($plugs);
-    echo "</pre>";
-    */
+
     $page->assign('plugins', $plugs);
-    
+
     // values
     $page->assign('show_params', $this->show_params);
     $page->assign('readonly',$this->readonly);
+    $statusvals = array(0 => 'disabled', '1' => 'available', 2 => 'enabled');
+    $page->assign('statusvals', $statusvals);
 
     // translations    
     $page->assign('msg_submit', __("Submit"));
@@ -268,7 +234,7 @@ class Diogenes_Plugin_Editor {
     $page->assign('msg_plugedit_parameters', __("parameters"));
     $page->assign('msg_move_up', __("move up"));
     $page->assign('msg_move_down', __("move down"));
-    
+
     // if requested, assign the content to be displayed
     if (!empty($outputvar)) {
       $page->assign($outputvar, $page->fetch('plugin-editor.tpl'));
