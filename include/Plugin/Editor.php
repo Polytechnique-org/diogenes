@@ -21,16 +21,14 @@
 // dependency on PEAR
 require_once 'System.php';
 
+define('MODE_NORMAL', 0);
+define('MODE_ROOT', 1);
+define('MODE_READONLY', 2);
+define('MODE_NOPARAMS', 4);
 
 /** This class provides a configuration tool for Diogenes plugins. 
  */
 class Diogenes_Plugin_Editor {
-  /** Should we show plugins parameters? */
-  var $show_params = 1;
-  
-  /** Should editing functions be disabled? */
-  var $readonly = false;
-
   /** The alias of the barrel we are working on. */
   var $plug_barrel;
 
@@ -39,6 +37,9 @@ class Diogenes_Plugin_Editor {
       
   /** The write permissions of the page we are working on. */
   var $plug_page_wperms;
+
+  /** The plugin editor mode */
+  var $mode = MODE_NORMAL;
   
   /** Construct a new plugin editor.
    *
@@ -73,40 +74,13 @@ class Diogenes_Plugin_Editor {
       $globals->plugins->compileCache($this->plug_barrel, $page);
     }
     $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
-    $available = $globals->plugins->cachedVisible($cache, $this->plug_barrel, $this->plug_page);
+    $available = $globals->plugins->cacheGetVisible($cache, $this->plug_barrel, $this->plug_page);
 
     // handle updates
     $rebuild_cache = 0;
     switch ($action) {
-    case "move_up": case "move_down":
-      if ($this->readonly) die("Sorry, this plugin view is read-only.");
-
-      $delta = ($action == "move_down") ? 1 : -1;
-      $page->info("moving plugin '$target'..");
-      $plugcache_a = $globals->plugins->cacheGet($cache, $this->plug_barrel, $this->plug_page, $target);
-      $plug_a =& $globals->plugins->load($plugcache_a['name'], $plugcache_a);
-
-      if (is_object($plug_a) && ($plug_a->active)) {
-        $old_pos = $plug_a->pos;
-        $plugcache_b = $globals->plugins->cacheGetAtPos($cache, $this->plug_barrel, $this->plug_page, $old_pos + $delta);
-
-        if (is_array($plugcache_b))
-        {
-          $plug_b =& $globals->plugins->load($plugcache_b['name'], $plugcache_b);
-
-          // swap the current plugin and the next plugin
-          if (is_object($plug_b) && ($plug_b->active)) 
-          {
-            $plug_a->toDatabase($this->plug_barrel, $this->plug_page, $old_pos + $delta);
-            $plug_b->toDatabase($this->plug_barrel, $this->plug_page, $old_pos);
-          }
-        }
-      }
-      $rebuild_cache = 1;
-      break;
-
     case "update":
-      if ($this->readonly) die("Sorry, this plugin view is read-only.");
+      if ($this->mode & MODE_READONLY) die("Sorry, this plugin view is read-only.");
       foreach ($available as $plugin => $plugentry)
       {
         // check we have a valid cache entry
@@ -136,7 +110,7 @@ class Diogenes_Plugin_Editor {
 
           // retrieve parameters from REQUEST
           if (isset($_REQUEST[$plug_h->name."_status"])) 
-	  {
+          {
             $plug_h->status = $_REQUEST[$plug_h->name."_status"];
           }
           foreach ($plug_h->getParamNames() as $key)
@@ -147,7 +121,12 @@ class Diogenes_Plugin_Editor {
           }
 
           // write parameters to database
-          $plug_h->toDatabase($this->plug_barrel, $this->plug_page, $pos);
+          if ($plug_h->status & PLUG_SET)
+          {
+            $plug_h->toDatabase($this->plug_barrel, $this->plug_page, $pos);
+          } else {
+            $plug_h->eraseParameters($this->plug_barrel, $his->plug_page);
+          }
           $rebuild_cache = 1;
         }
       }
@@ -170,7 +149,7 @@ class Diogenes_Plugin_Editor {
       // rebuild plugin cache
       $globals->plugins->compileCache($this->plug_barrel, $page);
       $cache = $globals->plugins->readCache($cachefile, $this->plug_barrel);
-      $available = $globals->plugins->cachedVisible($cache, $this->plug_barrel, $this->plug_page);
+      $available = $globals->plugins->cacheGetVisible($cache, $this->plug_barrel, $this->plug_page);
     }
     
     // get dump of plugins to fill out form
@@ -180,14 +159,19 @@ class Diogenes_Plugin_Editor {
     $rw_plugs_on = array();
     $rw_plugs_off = array();
     
-    // start by adding the active plugins
+    /* run over the plugins and split plugins into the following categories:
+     *  - read-only,
+     *  - read-write/active 
+     *  - read-write/inactive
+     */
     foreach ($available as $plugname => $plugcache)
     {
       $plugentry = $plugcache;
       $plugentry['icon'] = $globals->icons->get_action_icon('plugins');
       $type = $plugentry['type'];
 
-      if ($plugentry['status'] & PLUG_LOCK)
+      // FIXME : the test below needs to be refined
+      if (!($this->mode & MODE_ROOT) && ($plugentry['status'] & PLUG_LOCK))
       {
         $o_plugs =& $ro_plugs;
         $plugentry['readonly'] = 1;
@@ -198,19 +182,17 @@ class Diogenes_Plugin_Editor {
           $o_plugs =& $rw_plugs_off;
       }
 
-      if (!empty($o_plugs[$type])) {
-        $plugentry['move_up'] = 1;
-        $last = count($o_plugs[$type]) - 1;
-        $o_plugs[$type][$last]['move_down'] = 1;
-      } else {
+      if (empty($o_plugs[$type])) {
         $o_plugs[$type] = array();
       }
       array_push($o_plugs[$type], $plugentry);
     }
 
-    // next we add the inactive plugins
+    // merge the different plugin categories into a global list
     $plugs = array_merge_recursive($rw_plugs_on, $rw_plugs_off);
+    $plugs = array_merge_recursive($plugs, $ro_plugs);
     $page->assign('plugins', $plugs);
+
     // debugging
     foreach ($plugs as $p_type => $p_entries)
     {
@@ -218,36 +200,42 @@ class Diogenes_Plugin_Editor {
     }
 
     // values
-    $page->assign('show_params', $this->show_params);
-    $page->assign('readonly',$this->readonly);
-    $statusvals = array(0 => 'off', 1 => 'on', 2 => 'off (lock)', 3 => 'on (lock)');
+    $page->assign('show_params', !($this->mode & MODE_NOPARAMS));
+    $page->assign('readonly', ($this->mode & MODE_READONLY));
+    $statusvals = array(
+        PLUG_DISABLED => 'default',
+        PLUG_SET | PLUG_DISABLED => 'off',
+        PLUG_SET | PLUG_ACTIVE => 'on',
+        PLUG_SET | PLUG_DISABLED | PLUG_LOCK => 'off (lock)',
+        PLUG_SET | PLUG_ACTIVE | PLUG_LOCK => 'on (lock)',
+    );
+    $rwstatusvals = $statusvals;
+    if (!($this->mode & MODE_ROOT)) {
+      unset($rwstatusvals[PLUG_SET | PLUG_DISABLED | PLUG_LOCK]);
+      unset($rwstatusvals[PLUG_SET | PLUG_ACTIVE | PLUG_LOCK]);
+    }
     $page->assign('statusvals', $statusvals);
+    $page->assign('rwstatusvals', $rwstatusvals);
 
-    // translations    
+    // translations
     $page->assign('msg_submit', __("Submit"));
-    $page->assign('msg_plugedit_plugin', __("plugin"));    
+    $page->assign('msg_plugedit_plugin', __("plugin"));
     $page->assign('msg_plugedit_plugins', __("plugins"));
     $page->assign('msg_plugedit_description', __("description"));
     $page->assign('msg_plugedit_parameters', __("parameters"));
-    $page->assign('msg_move_up', __("move up"));
-    $page->assign('msg_move_down', __("move down"));
 
     // if requested, assign the content to be displayed
     if (!empty($outputvar)) {
       $page->assign($outputvar, $page->fetch('plugin-editor.tpl'));
     }
   }
-  
-  
-  /** Do not display plugin parameters.
-   *
-   * @param $hide boolean
+
+  /** Set the editor mode.
    */
-  function hide_params($hide)
+  function set_mode($mode)
   {
-    $this->show_params = !$hide;
+    $this->mode = $mode;
   }
-  
 }
 
 ?>

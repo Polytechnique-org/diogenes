@@ -61,6 +61,7 @@ class Diogenes_Plugins
     return $cachefile;
   }
 
+
   /** Return the cache entry for specified plugin
    *
    * @param $cache
@@ -72,27 +73,6 @@ class Diogenes_Plugins
   {
     $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
     return $p_node->data[$plugin];
-  }
-
-
-  /** Return the cache entry for a plugin at a specified position
-   *
-   * @param $cache
-   * @param $barrel
-   * @param $page
-   * @param $pos
-   */
-  function cacheGetAtPos($cache, $barrel, $page, $pos)
-  {
-    $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
-    foreach ($p_node->data as $plugname => $plugentry)
-    {
-      if ($plugentry['pos'] == $pos)
-      {
-        $plugentry['plugin'] = $plugname;
-        return $plugentry;
-      }
-    }
   }
 
 
@@ -120,16 +100,16 @@ class Diogenes_Plugins
    * @param $barrel
    * @param $page
    */
-  function cachedActive($cache, $barrel, $page)
+  function cacheGetActive($cache, $barrel, $page)
   {
     $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
     $plugins = array();
     foreach ($p_node->data as $plugname => $plugentry)
     {
-      //echo "cachedEditable : examining $plugname (status {$plugentry['status']})<br/>\n";
+      //echo "cacheGetActive : examining $plugname (status {$plugentry['status']})<br/>\n";
       if ($plugentry['status'] & PLUG_ACTIVE)
       {
-        //echo "cachedActive : adding $plugname<br/>\n";
+        //echo "cacheGetActive : adding $plugname<br/>\n";
         $plugins[$plugname] = $plugentry;
       }
     }
@@ -144,23 +124,10 @@ class Diogenes_Plugins
    * @param $barrel
    * @param $page
    */
-  function cachedVisible($cache, $barrel, $page)
+  function cacheGetVisible($cache, $barrel, $page)
   {
     $p_node = $this->cacheGetPageNode($cache, $barrel, $page);
     return $p_node->data;
-/*
-    $available = array();
-    foreach ($p_node->data as $plugname => $plugentry)
-    {
-      //echo "cachedEditable : examining $plugname (status {$plugentry['status']})<br/>\n";
-      if (!($plugentry['status'] & PLUG_LOCK) || !$barrel)
-      {
-        //echo "cachedEditable : adding $plugname<br/>\n";
-        $available[$plugname] = $plugentry;
-  //    }
-    }
-    return $available;
-*/
   }
 
 
@@ -197,10 +164,9 @@ class Diogenes_Plugins
       {
         //echo "* plugin '$plugin' not locked off parent level<br/>\n";
         $outval = $parentval;
-        if (is_array($node->data[$plugin]))
+        if ((is_array($node->data[$plugin])) && ($node->data[$plugin]['status'] & PLUG_SET))
         {
           //echo "** plugin set at current level<br/>\n";
-          $outval['pos'] = $node->data[$plugin]['pos'];
           $outval['params'] = $node->data[$plugin]['params'];
           if (!($parentval['status'] & PLUG_LOCK)) {
             //echo "*** plugin status set to DB-specified value<br/>\n";
@@ -262,7 +228,7 @@ class Diogenes_Plugins
     $dbcache = array();
 
     $sql_limit = $barrel ? " where barrel='{$barrel}' or barrel=''" : "";
-    $sql = "select barrel, page, plugin, status, pos, params from diogenes_plugin" . $sql_limit;
+    $sql = "select barrel, page, plugin, status, params from diogenes_plugin" . $sql_limit;
     $res = $this->dbh->query($sql);
     while($row = mysql_fetch_row($res))
     {
@@ -271,8 +237,7 @@ class Diogenes_Plugins
       $plugin = array_shift($row);
       $plugentry = array(
         'status' => $row[0],
-        'pos' => $row[1],
-        'params' => ($row[2] ? var_decode_bin($row[2]) : array())
+        'params' => ($row[1] ? var_decode_bin($row[1]) : array())
       );
       $plug_h = $this->load($plugin, $plugentry);
       //echo "Got params from DB for '$plugin', barrel '$c_barrel', page '$c_page' : ".$row[2]."<br/>";
@@ -373,9 +338,6 @@ class Diogenes_Plugins
       $trclass = $odd ? ' class="odd"' : '';
       $out .= "<tr><th colspan=\"2\">{$val['name']} v{$val['version']}</th></tr>\n";
       $out .= "<tr><td>status</td><td>{$val['status']}</td></tr>\n";
-      if (isset($val['pos'])) {
-        $out .= "<tr><td>position</td><td>{$val['pos']}</td></tr>\n";
-      }
       $out .= "<tr$trclass><td>type</td><td>{$val['type']}</td></tr>\n";
       $out .= "<tr$trclass><td>description</td><td>{$val['description']}</td></tr>\n";
       if (!empty($val['params'])) {

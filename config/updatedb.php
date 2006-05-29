@@ -13,7 +13,7 @@ require_once("diogenes/diogenes.database-creator.inc.php");
 class DiogenesDbInit extends DiogenesDatabaseCreator
 {
   /** database versions history */
-  var $versions = array("0.9.9.3", "0.9.10", "0.9.12", "0.9.15", "0.9.16", "0.9.16+0.9.17pre15", "0.9.16+0.9.17pre19", "0.9.16+0.9.17pre21", "0.9.18+0.9.19pre1");
+  var $versions = array("0.9.9.3", "0.9.10", "0.9.12", "0.9.15", "0.9.16", "0.9.16+0.9.17pre15", "0.9.16+0.9.17pre19", "0.9.16+0.9.17pre21", "0.9.18+0.9.19pre2");
 
   /**
    * Upgrades the database from one version to the next
@@ -214,11 +214,13 @@ class DiogenesDbInit extends DiogenesDatabaseCreator
       $this->dbh->query("INSERT INTO diogenes_logactions VALUES (16, 'page_plugins', 'the page plugins were modified');");
       break;
 
-    case "0.9.18+0.9.19pre1":
+    case "0.9.18+0.9.19pre2":
       $this->info(" - adding 'status' field to 'diogenes_plugin' table");
       $this->dbh->query("ALTER TABLE `diogenes_plugin` ADD `status` INT( 1 ) UNSIGNED NOT NULL default '0'");
-      $this->dbh->query("update diogenes_plugin set status=1 where page=0");
-      $this->dbh->query("update diogenes_plugin set status=2 where page!=0");
+      $this->dbh->query("update diogenes_plugin set status=0 where page=0");
+      $this->dbh->query("update diogenes_plugin set status=1 where page!=0");
+      $this->info(" - removing 'pos' field to 'diogenes_plugin' table");
+      $this->dbh->query("ALTER TABLE `diogenes_plugin` DROP `pos`");
       break;
     
     default:

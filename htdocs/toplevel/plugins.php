@@ -23,7 +23,7 @@ if ($barrel)
 
 /* plugin editor */
 $editor = new Diogenes_Plugin_Editor($barrel, 0);
-//$editor->hide_params(1);
+$editor->set_mode(MODE_ROOT);
 $editor->run($page,'editor_content');
 
 // translations

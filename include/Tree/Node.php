@@ -31,7 +31,7 @@ define('VAR_TYPE_NODE', 4);
 
 function var_encode_text($var, $level = 0, $no_children = FALSE, $tabstr = '  ', $eol = "\n")
 {
-  if (is_object($var) && (get_class($var) == 'Diogenes_Tree_Node')) {
+  if (is_object($var) && (strtolower(get_class($var)) == 'diogenes_tree_node')) {
     // node name
     $code = str_repeat($tabstr, $level) . "node : {$var->name}" . $eol;
 
@@ -76,7 +76,7 @@ function var_encode_html($var, $level = 0, $no_children = FALSE)
 
 function var_encode_bin($var, $no_children = FALSE)
 {
-  if (is_object($var) && (get_class($var) == 'Diogenes_Tree_Node')) {
+  if (is_object($var) && (strtolower(get_class($var)) == 'diogenes_tree_node')) {
     $code = pack('C', VAR_TYPE_NODE);
     $code .= var_encode_bin($var->name);
     $code .= var_encode_bin($var->data);
@@ -184,7 +184,7 @@ class Diogenes_Tree_Node
   {
     $bin = file_get_contents($filename);
     $node = var_decode_bin($bin);
-    if (!is_object($node) || get_class($node) != 'Diogenes_Tree_Node')
+    if (!is_object($node) || strtolower(get_class($node)) != 'diogenes_tree_node')
     {
       trigger_error('readFile : not a Diogenes_Tree_Node', E_USER_ERROR);
     }

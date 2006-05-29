@@ -1,23 +1,4 @@
 {if !$readonly}
-{literal}
-<script type="text/javascript">
-  <!--
-  function move_up( myplug ) {
-    document.plug_form.action.value = "move_up";
-    document.plug_form.plug_target.value = myplug;
-    document.plug_form.submit();
-    return true;
-  }
-  function move_down( myplug ) {
-    document.plug_form.action.value = "move_down";
-    document.plug_form.plug_target.value = myplug;
-    document.plug_form.submit();
-    return true;
-  }
-  // -->
-</script>
-{/literal}
-
 <form name="plug_form" method="post" action="{$post}">
 <input type="hidden" name="action" value="update" />
 <input type="hidden" name="plug_target" value="" />
@@ -35,11 +16,10 @@
 <tr class="odd">
   <td><img class="fileicon" src="{$plug.icon}"/>&nbsp;{$plug.name}&nbsp;v{$plug.version}</td>
   <td>
-{if $plug.readonly}
-    status {$plug.status}
+{if $readonly || $plug.readonly}
+    {$statusvals[$plug.status]}
 {else}
-    <select name="{$plug.name}_status">{html_options options=$statusvals selected=$plug.status}</select>
-    <a class="action"{if $plug.move_up}href="javascript:move_up('{$plug.name}');"{/if}>{$msg_move_up}</a>&nbsp;<a class="action"{if $plug.move_down}href="javascript:move_down('{$plug.name}');"{/if}>{$msg_move_down}</a>
+    <select name="{$plug.name}_status">{html_options options=$rwstatusvals selected=$plug.status}</select>
 {/if}
   </td>
 </tr>
@@ -51,10 +31,12 @@
 {foreach from=$plug.params key=key item=val}
     <tr>
       <td>{$key}</td>
-      <td><input type="text" name="{$plug.name}_{$key}" value="{$val|escape}" size="30" /></td>
+      <td><input type="text" name="{$plug.name}_{$key}" value="{$val.value|escape}" size="30" /></td>
     </tr>
 {/foreach}
     </table>
+{else}
+    &nbsp;
 {/if}
   </td>
 </tr>

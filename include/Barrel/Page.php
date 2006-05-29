@@ -216,7 +216,7 @@ class Diogenes_Barrel_Page
     if ($props['PID'])
     {
       $cache = $globals->plugins->readCache($this->barrel->pluginsCacheFile, $this->barrel->alias);
-      $plugs_active = $globals->plugins->cachedActive($cache, $this->barrel->alias, $props['PID']);
+      $plugs_active = $globals->plugins->cacheGetActive($cache, $this->barrel->alias, $props['PID']);
       foreach($plugs_active as $plugentry)
       {
         $plug_h = $globals->plugins->load($plugentry);
