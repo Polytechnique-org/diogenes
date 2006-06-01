@@ -113,11 +113,9 @@ CREATE TABLE `diogenes_plugin` (
   `plugin` varchar(32) NOT NULL default '',
   `barrel` varchar(16) NOT NULL default '',
   `page` int(10) unsigned NOT NULL default '0',
-  `pos` int(10) unsigned NOT NULL default '0',
   `params` text NOT NULL,
   `status` int(1) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`plugin`,`barrel`,`page`),
-  KEY `pos` (`pos`)
+  PRIMARY KEY  (`plugin`,`barrel`,`page`)
 ) TYPE=MyISAM;
 
 -- --------------------------------------------------------
@@ -139,4 +137,4 @@ CREATE TABLE `diogenes_site` (
 -- Set the database format version
 --
 
-INSERT INTO `diogenes_option` SET name='dbversion', value='0.9.16+0.9.17pre21';
+INSERT INTO `diogenes_option` SET name='dbversion', value='0.9.20';
