@@ -207,7 +207,9 @@ while (list($MID,$ordre,$title,$link,$PID,$ptitle) = mysql_fetch_row($res)) {
 }
 mysql_free_result($res);
 
-$filiation = $page->menuToRoot($MIDpere,array());
+// all menu entries from database
+$mcache = $page->menuRead();
+$filiation = $page->menuToRoot($mcache,$MIDpere,array());
 $menubar = array();
 foreach($filiation as $mykey=>$myval) {
   if ($myval == 0) {

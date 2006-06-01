@@ -78,13 +78,13 @@ class DiogenesPage extends DiogenesCorePage
     global $globals;
     
     $this->assign('page_template', $template);
+    $this->makeMenu();
     if ($globals->debugdatabase) 
       $this->assign('db_trace',$globals->db->trace_format($this)); 
     if ($globals->debugplugins)
       $this->assign('plugins_trace',$globals->plugins->trace_format($this));
     if (($globals->debugplugins) || ($globals->debugdatabase))
       $this->assign('debug_css', $this->url("common.css"));
-    $this->makeMenu();
 
     if (!$master)
       $master = $this->getTemplate();

@@ -59,7 +59,11 @@ class DiogenesCoreGlobals {
   {
     $db = new DiogenesDatabase($this->dbdb, $this->dbhost, $this->dbuser, $this->dbpwd);
     if (!$db->connect_id)
+    {
+      if (!headers_sent())
+        header("HTTP/1.0 500 Internal Server Error");
       die("Could not connect to database (".mysql_error().")");
+    }
     $this->db = $db;
   }
 
