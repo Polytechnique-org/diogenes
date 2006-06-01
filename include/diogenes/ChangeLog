@@ -1,3 +1,6 @@
+libdiogenes 0.9.19
+ * improved - (globals) set HTTP status code 500 if database connection fails
+
 libdiogenes 0.9.18
  * improved - (mime) recognise MIME type of OMA DRM content
  * added - (mime) add function to retrieve a multipart content's boundary
