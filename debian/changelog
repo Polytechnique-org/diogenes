@@ -2,6 +2,8 @@ diogenes (0.9.19-1) unstable; urgency=low
 
   * New upstream release.
   * Do not try to enable PHP support in the webserver or MySQL support in PHP
+  * Update to standards version 3.7.2
+  * Update versioned Build-Depends on debhelper to >= 5
 
  -- Jeremy Lainé <jeremy.laine@m4x.org>  Wed, 31 May 2006 21:03:46 +0200
 

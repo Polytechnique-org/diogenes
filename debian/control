@@ -2,8 +2,8 @@ Source: diogenes
 Section: web
 Priority: optional
 Maintainer: Jeremy Lainé <jeremy.laine@m4x.org>
-Standards-Version: 3.6.2
-Build-Depends-Indep: cdbs, debhelper (>= 4.1.16), po-debconf
+Standards-Version: 3.7.2
+Build-Depends-Indep: cdbs, debhelper (>= 5), po-debconf
 
 Package: diogenes
 Architecture: all
