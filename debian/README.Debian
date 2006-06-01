@@ -1,6 +1,16 @@
 Diogenes for Debian
 -------------------
 
+WEBSERVER CONFIGURATION
+
+  On a Debian system, the default webserver configuration should allow you to
+  run Diogenes. If you have made some configuration changes yourself, you
+  should check the following:
+  
+   - your webserver needs to have PHP support enabled
+   - PHP needs to have MySQL support enabled
+
+
 GETTING STARTED WITH DIOGENES
 
   Diogenes will be available at http://localhost/diogenes/ after installation.

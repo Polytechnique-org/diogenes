@@ -128,29 +128,8 @@ webservers="$RET"
 for server in $webservers; do
     server=$(echo $server | sed 's/,$//')
     servers="$server $servers"
-    # Make sure our web server has PHP support
-    phpver=php4
-    phpini=/etc/$phpver/$server/php.ini
-    . /usr/share/wwwconfig-common/apache-php.sh
-    if [ "$status" = "uncomment" ] ; then
-      restart="$server $restart"
-    elif [ "$status" = "error" ] ; then
-      echo "Error while trying to enable $phpver support for '$server' : $error."
-    fi
-
-    # Make sure that PHP has MySQL support enabled
-    checkextensions=mysql
-    . /usr/share/wwwconfig-common/php-extensions.sh
-    
     includefile=/etc/diogenes/apache.conf
-    # For old versions of Diogenes, remove the include of ourapache.conf
-    if dpkg --compare-versions "$2" le-nl "0.9.9.3-6" ; then
-        . /usr/share/wwwconfig-common/apache-uninclude_all.sh
-        if [ "$status" = "uncomment" ] ; then
-            restart="$server $restart"
-	fi
-    fi
-    
+
     # If necessary, add a symlink to our apache.conf
     if [ -d /etc/$server/conf.d ] && [ ! -e /etc/$server/conf.d/diogenes ] ; then
         ln -s $includefile /etc/$server/conf.d/diogenes
