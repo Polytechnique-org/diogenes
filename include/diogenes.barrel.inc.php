@@ -21,6 +21,7 @@
 
 require_once 'diogenes.page.inc.php';
 require_once 'Barrel.php';
+require_once 'Barrel/Menu.php';
 
 /** This class is used to display a page of a Diogenes barrel,
  *  that is an RCS-managed website with a virtual directory
@@ -354,99 +355,8 @@ class DiogenesBarrel extends DiogenesPage
       return;
    
     // all menu entries from database
-    $mcache = $this->menuRead();
-
-    // try to figure out the current MID from the current PID
-    // and build filiation
-    $filiation = array();
-    foreach ($mcache as $mid => $mentry)
-    {
-      if ($mentry['pid'] == $PID)
-        $filiation = $this->menuToRoot($mcache, $mid, $filiation);
-    }
-
-    // add the user-defined part of the menu
-    $this->menu = array_merge($this->menu,$this->menuRecurse($mcache,0,$filiation,0));
-  }
-
-
-  /** Return the filiation to get to the root element.
-   *
-   * @param mcache
-   * @param MID
-   * @param path
-   */
-  function menuToRoot($mcache, $MID, $path) {
-    /* add ourself to the path */
-    array_push($path,$MID);
-
-    if ($MID) {
-      /* recursion */
-      return $this->menuToRoot($mcache, $mcache[$MID]['parent'], $path);
-    } else {
-      /* termination */
-      return $path;
-    }
-  }
-
-
-  /** Recursively add menu entries
-   *
-   * @param mcache
-   * @param MIDpere
-   * @param filiation
-   * @param level
-   */
-  function menuRecurse($mcache, $MIDpere, $filiation, $level) {
-    // the produced output
-    $out = array();
-
-    foreach ($mcache[$MIDpere]['children'] as $mid)
-    {
-      $mentry = $mcache[$mid];
-//      echo "pid : $pid, location : $location<br/>";
-      $entry = htmlentities(stripslashes($mentry['title']), ENT_QUOTES);
-      if ($mentry['pid'])
-      {
-        $link = $this->urlSite($this->barrel->getLocation($mentry['pid']));
-      } else {
-        $link = $mentry['link'];
-      }
-      // decide whether this menu should be expanded
-      $expanded = ($this->barrel->options->menu_min_level == 0) || 
-                  ($level+1 < $this->barrel->options->menu_min_level) || 
-                   in_array($mid, $filiation);
-      array_push($out, array($level, $entry, $link, $expanded));
-      $out = array_merge($out, $this->menuRecurse($mcache, $mid, $filiation, $level+1));
-    }
-
-    return $out;
-  }
-
-
-  /** Read this barrel's menu entries from database.
-   */
-  function menuRead()
-  {
-    $menu = array();
-    $res = $this->dbh->query("select MID,MIDpere,title,link,PID from {$this->table_menu} order by ordre");
-    while (list($mid, $parent, $title, $link, $pid) = mysql_fetch_row($res))
-    {
-      $menu[$mid]['parent'] = $parent;
-      $menu[$mid]['title'] = $title;
-      $menu[$mid]['link'] = $link;
-      $menu[$mid]['title'] = $title;
-      $menu[$mid]['pid'] = $pid;
-      if (!is_array($menu[$mid]['children']))
-        $menu[$mid]['children'] = array();
-
-      // register this entry with its parent
-      if (!is_array($menu[$parent]['children']))
-        $menu[$parent]['children'] = array();
-      array_push($menu[$parent]['children'], $mid);
-    }
-    mysql_free_result($res);
-    return $menu;
+    $bmenu = new Diogenes_Barrel_Menu($this->dbh, $this->table_menu);
+    $this->menu = array_merge($this->menu, $bmenu->makeMenu($PID, $this->barrel->options->menu_min_level, array($this, 'urlSiteByPid')));
   }
 
 
@@ -496,7 +406,7 @@ class DiogenesBarrel extends DiogenesPage
     }
     return $path;
   }
- 
+
 
   /** Returns the URL to one of the barrel's pages relative to
    *  the current location.
@@ -509,6 +419,18 @@ class DiogenesBarrel extends DiogenesPage
     $tosite = strlen($this->pathinfo['dir']) ? str_repeat("../",1+substr_count($this->pathinfo['dir'],"/")) : '';
     $url = $tosite . (strlen($dir) ? "$dir/" : "") . $file;
     return strlen($url) ? $url : "./";
+  }
+
+
+  /** Returns the URL to one of the barrel's pages relative to
+   *  the current location.
+   *
+   * @param dir
+   * @param file
+   */
+  function urlSiteByPid($PID, $file = '')
+  {
+    return $this->urlSite($this->barrel->getLocation($PID), $file);
   }
 
 }

@@ -1,36 +1,14 @@
 <?php
 require_once 'diogenes.common.inc.php';
 require_once 'diogenes.admin.inc.php';
+require_once 'Barrel/Menu.php';
 
 $page = new DiogenesAdmin;
 $bbarrel =& $page->barrel;
+$bmenu = new Diogenes_Barrel_Menu($globals->db, $bbarrel->table_menu);
 
 // the id of the parent menu
 $MIDpere = isset($_REQUEST['MIDpere']) ? $_REQUEST['MIDpere'] : 0;
-
-/**
- * This function swaps entries $a and $b within $parent.
- */
-function swapentries($parent,$a,$b,$table_menu)
-{
-  global $globals;
-  $res = $globals->db->query("SELECT MID from $table_menu where MIDpere=$parent and (ordre=$a or ordre=$b) ORDER BY ordre");
-  /* make sure that $a <= $b */
-  if ($a > $b)
-  {
-    $c = $a;
-    $a = $b;
-    $b = $c;
-  }
-  /* perform swap */
-  list($MIDa) = mysql_fetch_row($res);
-  list($MIDb) = mysql_fetch_row($res);
-  mysql_free_result($res);
-
-  $globals->db->query("UPDATE $table_menu SET ordre=$b WHERE MID=$MIDa");
-  $globals->db->query("UPDATE $table_menu SET ordre=$a WHERE MID=$MIDb");
-}
-
 
 //// start constructing the page
 
@@ -41,34 +19,19 @@ switch ($action) {
 /* we want to erase the current entry */
 case "supprimer":
   $MID = $_REQUEST['MID'];
-  if (mysql_num_rows($globals->db->query("SELECT MID FROM {$bbarrel->table_menu} WHERE MIDpere=$MID")) > 0) {
-    $page->info(__("The selected menu has child items, please remove them first."));
-    break;
-  }
-
-  /* erase the current entry */
-  $globals->db->query("DELETE FROM {$bbarrel->table_menu} WHERE MID=$MID");
-
-  /* renumber the other menu entries so that they are between 1 and the number of entries */
-  $res = $globals->db->query("SELECT MID FROM {$bbarrel->table_menu} WHERE MIDpere=$MIDpere ORDER BY ordre");
-  $i = 0;
-  while (list($MIDtoorder) = mysql_fetch_array($res)) {
-    $i++;
-    $globals->db->query("UPDATE {$bbarrel->table_menu} SET ordre=$i WHERE MID=$MIDtoorder");
-  }
-  mysql_free_result($res);
+  $bmenu->deleteEntry($MID, $page);
   break;
 
 /* bring an entry up in the menu */
 case "remonter":
   $ordre = $_REQUEST['ordre'];
-  swapentries($MIDpere,$ordre-1,$ordre,$bbarrel->table_menu);
+  $bmenu->swapEntries($MIDpere, $ordre-1, $ordre);
   break;
 
 /* push an entry down in the menu */
 case "descendre":
   $ordre = $_REQUEST['ordre'];
-  swapentries($MIDpere,$ordre,$ordre+1,$bbarrel->table_menu);
+  $bmenu->swapEntries($MIDpere, $ordre, $ordre+1);
   break;
 
 /* create or update a menu entry */
@@ -90,8 +53,7 @@ case "modifier":
     $MID = $_REQUEST['MID'];
     $title = $_REQUEST['title'];
     if ($MID == 0) {
-      $res=$globals->db->query("SELECT MAX(ordre) from {$bbarrel->table_menu} where MIDpere=$MIDpere");
-      list($ordre) = mysql_fetch_row($res);
+      $ordre = $bmenu->maxChildIndex($MIDpere);
       $ordre++;
       $globals->db->query("INSERT INTO {$bbarrel->table_menu} SET MIDpere='$MIDpere',ordre='$ordre',title='$title',link='$link',pid='$pid'");
       $MID = mysql_insert_id();
@@ -168,9 +130,7 @@ case "editer":
 }
 
 // get the maximum order
-$res=$globals->db->query("SELECT MAX(ordre) from {$bbarrel->table_menu} where MIDpere=$MIDpere");
-list($maxOrdre)=mysql_fetch_row($res);
-mysql_free_result($res);
+$maxOrdre = $bmenu->maxChildIndex($MIDpere);
 
 // retrieve the entries
 $res = $globals->db->query("SELECT m.MID,m.ordre,m.title,m.link,m.PID,p.title ".
@@ -208,8 +168,8 @@ while (list($MID,$ordre,$title,$link,$PID,$ptitle) = mysql_fetch_row($res)) {
 mysql_free_result($res);
 
 // all menu entries from database
-$mcache = $page->menuRead();
-$filiation = $page->menuToRoot($mcache,$MIDpere,array());
+$mcache = $bmenu->menuRead();
+$filiation = $bmenu->menuToRoot($mcache,$MIDpere,array());
 $menubar = array();
 foreach($filiation as $mykey=>$myval) {
   if ($myval == 0) {
