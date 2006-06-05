@@ -42,9 +42,10 @@ class Diogenes_Barrel_Menu
   /** Delete the specified entry.
    *
    * @param $MID
+   * @param $parent
    * @param $caller
    */
-  function deleteEntry($MID, &$caller)
+  function deleteEntry($MID, $parent, &$caller)
   {
     if (mysql_num_rows($this->dbh->query("SELECT MID FROM {$this->table_menu} WHERE MIDpere=$MID")) > 0) {
       $caller->info(__("The selected menu has child items, please remove them first."));
@@ -55,24 +56,13 @@ class Diogenes_Barrel_Menu
     $this->dbh->query("DELETE FROM {$this->table_menu} WHERE MID=$MID");
 
     /* renumber the other menu entries so that they are between 1 and the number of entries */
-    $res = $this->dbh->query("SELECT MID FROM {$this->table_menu} WHERE MIDpere=$MIDpere ORDER BY ordre");
+    $res = $this->dbh->query("SELECT MID FROM {$this->table_menu} WHERE MIDpere=$parent ORDER BY ordre");
     $i = 0;
     while (list($MIDtoorder) = mysql_fetch_array($res)) {
       $i++;
       $this->dbh->query("UPDATE {$this->table_menu} SET ordre=$i WHERE MID=$MIDtoorder");
     }
     mysql_free_result($res);
-  }
-
-
-  /** Get the maximum child index for a given menu entry.
-   */
-  function maxChildIndex($MIDpere)
-  {
-    $res=$this->dbh->query("SELECT MAX(ordre) from {$this->table_menu} where MIDpere=$MIDpere");
-    list($maxOrdre)=mysql_fetch_row($res);
-    mysql_free_result($res);
-    return $maxOrdre;
   }
 
 
@@ -99,6 +89,19 @@ class Diogenes_Barrel_Menu
 
     return $menu;
   }
+
+
+  /** Return the maximum index for children of a given entry.
+   *
+   * @param $parent
+   */
+   function maxChildIndex($parent)
+   {
+      $res=$this->dbh->query("SELECT MAX(ordre) from {$this->table_menu} where MIDpere=$parent");
+      list($maxOrdre)=mysql_fetch_row($res);
+      mysql_free_result($res);
+      return $maxOrdre;
+   }
 
 
   /** Return the filiation to get to the root element.
@@ -162,14 +165,15 @@ class Diogenes_Barrel_Menu
   function menuRead()
   {
     $menu = array();
-    $res = $this->dbh->query("select MID,MIDpere,title,link,PID from {$this->table_menu} order by ordre");
-    while (list($mid, $parent, $title, $link, $pid) = mysql_fetch_row($res))
+    $res = $this->dbh->query("select MID,MIDpere,title,link,PID,ordre from {$this->table_menu} order by ordre");
+    while (list($mid, $parent, $title, $link, $pid, $ordre) = mysql_fetch_row($res))
     {
       $menu[$mid]['parent'] = $parent;
       $menu[$mid]['title'] = $title;
       $menu[$mid]['link'] = $link;
       $menu[$mid]['title'] = $title;
       $menu[$mid]['pid'] = $pid;
+      $menu[$mid]['ordre'] = $ordre;
       if (!is_array($menu[$mid]['children']))
         $menu[$mid]['children'] = array();
 
@@ -207,6 +211,42 @@ class Diogenes_Barrel_Menu
 
     $this->dbh->query("UPDATE {$this->table_menu} SET ordre=$b WHERE MID=$MIDa");
     $this->dbh->query("UPDATE {$this->table_menu} SET ordre=$a WHERE MID=$MIDb");
+  }
+
+
+  /**
+   * Write an entry to database. If $mid is 0, a new entry is created.
+   *
+   * @param $mid
+   * @param $props
+   */
+  function writeEntry($mid, $props)
+  {
+    if ($mid == 0) {
+      $props['ordre'] = $this->maxChildIndex($props['parent']) + 1;
+    }
+
+    // build SQL string
+    $nprops = array('parent' => 'MIDpere', 'ordre' => 'ordre', 'title' => 'title', 'link' => 'link', 'pid' => 'pid');
+    $sprops = "";
+    foreach($nprops as $prop => $dbkey)
+    {
+      if (isset($props[$prop]))
+      {
+        $val = $props[$prop];
+        $sprops .= "$dbkey='$val', ";
+      }
+    }
+    if (!$sprops)
+      return;
+    $sprops = substr($sprops, 0, -2);
+    if ($mid == 0) {
+      $this->dbh->query("INSERT INTO {$this->table_menu} SET $sprops");
+      $mid = mysql_insert_id();
+    } else {
+      $this->dbh->query("UPDATE {$this->table_menu} SET $sprops WHERE MID=$mid");
+    }
+    return $mid;
   }
 
 }

@@ -2,6 +2,7 @@
 require_once 'diogenes.common.inc.php';
 require_once 'diogenes.admin.inc.php';
 require_once 'Barrel/Menu.php';
+require_once 'Barrel/Page.php';
 
 $page = new DiogenesAdmin;
 $bbarrel =& $page->barrel;
@@ -19,7 +20,7 @@ switch ($action) {
 /* we want to erase the current entry */
 case "supprimer":
   $MID = $_REQUEST['MID'];
-  $bmenu->deleteEntry($MID, $page);
+  $bmenu->deleteEntry($MID, $MIDpere, $page);
   break;
 
 /* bring an entry up in the menu */
@@ -37,30 +38,21 @@ case "descendre":
 /* create or update a menu entry */
 case "modifier":
     $typelink = $_REQUEST['typelink'];
+    $props = array(
+      'parent' => $MIDpere,
+      'pid' => 0,
+      'link' => '',
+      'title' => $_REQUEST['title'],
+    );
     switch ($typelink) {
     case "boutonPI" :
-      $pid = isset($_REQUEST['PIvaleur']) ? $_REQUEST['PIvaleur'] : 0;
-      $link = "";
+      $props['pid'] = isset($_REQUEST['PIvaleur']) ? $_REQUEST['PIvaleur'] : 0;
       break;
     case "boutonSE" :
-      $pid = 0;
-      $link = $_REQUEST['SEvaleur'];
+      $props['link'] = $_REQUEST['SEvaleur'];
       break;
-    default:
-      $pid = 0;
-      $link = "";
     }
-    $MID = $_REQUEST['MID'];
-    $title = $_REQUEST['title'];
-    if ($MID == 0) {
-      $ordre = $bmenu->maxChildIndex($MIDpere);
-      $ordre++;
-      $globals->db->query("INSERT INTO {$bbarrel->table_menu} SET MIDpere='$MIDpere',ordre='$ordre',title='$title',link='$link',pid='$pid'");
-      $MID = mysql_insert_id();
-    } else {
-      $globals->db->query("UPDATE {$bbarrel->table_menu} SET title='$title',link='$link',pid='$pid' WHERE MID=$MID");
-    }
-
+    $MID = $bmenu->writeEntry($_REQUEST['MID'], $props);
     break;
 
 /* display the form to edit an entry */
@@ -73,9 +65,10 @@ case "editer":
 
   // if this is an existing entry, retrieve data
   if ($MID) {
-    $res = $globals->db->query("SELECT link,title,pid FROM {$bbarrel->table_menu} WHERE MID=$MID");
-    list($link, $title, $pid) = mysql_fetch_row($res);
-    mysql_free_result($res);
+    $mcache = $bmenu->menuRead();
+    $link = $mcache[$MID]['link'];
+    $title = $mcache[$MID]['title'];
+    $pid = $mcache[$MID]['pid'];
   }
 
   // fill out form data
@@ -132,12 +125,15 @@ case "editer":
 // get the maximum order
 $maxOrdre = $bmenu->maxChildIndex($MIDpere);
 
-// retrieve the entries
-$res = $globals->db->query("SELECT m.MID,m.ordre,m.title,m.link,m.PID,p.title ".
-                       "from {$bbarrel->table_menu} as m ".
-                       "left join {$bbarrel->table_page} as p on m.PID=p.PID ".
-                       "where MIDpere=$MIDpere order by ordre");
-while (list($MID,$ordre,$title,$link,$PID,$ptitle) = mysql_fetch_row($res)) {
+// all menu entries from database
+$mcache = $bmenu->menuRead();
+
+foreach($mcache[$MIDpere]['children'] as $MID)
+{
+  $ordre = $mcache[$MID]['ordre'];
+  $title = $mcache[$MID]['title'];
+  $link = $mcache[$MID]['link'];
+  $PID = $mcache[$MID]['pid'];
   $clickup="?action=remonter&amp;MIDpere=$MIDpere&amp;ordre=$ordre";
   $clickdown="?action=descendre&amp;MIDpere=$MIDpere&amp;ordre=$ordre";
 
@@ -152,7 +148,8 @@ while (list($MID,$ordre,$title,$link,$PID,$ptitle) = mysql_fetch_row($res)) {
   
   // describe the current link
   if ($PID) {
-    $descr = "<a href=\"pages?dir=$PID\">$ptitle</a>";
+    $tpage = Diogenes_Barrel_Page::fromDb($bbarrel, $PID);
+    $descr = "<a href=\"pages?dir=$PID\">".$tpage->props['title']."</a>";
   } elseif ($link) {
     $descr = "<a href=\"$link\">[ext] $link</a>";
   } else {
@@ -165,20 +162,14 @@ while (list($MID,$ordre,$title,$link,$PID,$ptitle) = mysql_fetch_row($res)) {
           stripslashes($descr),
           $edit,$del,$up,$down));
 }
-mysql_free_result($res);
 
-// all menu entries from database
-$mcache = $bmenu->menuRead();
 $filiation = $bmenu->menuToRoot($mcache,$MIDpere,array());
 $menubar = array();
 foreach($filiation as $mykey=>$myval) {
   if ($myval == 0) {
     $blab = "<i>home</i>";
   } else {
-    $res = $globals->db->query("SELECT title FROM {$bbarrel->table_menu} WHERE MID='$myval'");
-    list($blab) = mysql_fetch_row($res);
-    $blab = stripslashes($blab);
-    mysql_free_result($res);
+    $blab = stripslashes($mcache[$myval]['title']);
   }
   array_unshift($menubar,$mykey ? array($blab,"?MIDpere=$myval") : array($blab));
 }
