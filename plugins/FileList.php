@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Filter.php';
+require_once 'Plugin/Skel/Filter.php';
 require_once 'diogenes.icons.inc.php';
 
 
@@ -28,7 +28,7 @@ require_once 'diogenes.icons.inc.php';
  * To make use of this plugin, insert {FileList} in your page where 
  * the file list should appear.
  */
-class FileList extends Diogenes_Plugin_Filter {
+class FileList extends Diogenes_Plugin_Skel_Filter {
   /** Plugin name */
   var $name = "FileList";
   

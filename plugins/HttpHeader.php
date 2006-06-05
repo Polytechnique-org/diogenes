@@ -18,12 +18,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Filter.php';
+require_once 'Plugin/Skel/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The HttpHeader plugin allows you to add an HTTP header to a page.
  */
-class HttpHeader extends Diogenes_Plugin_Filter
+class HttpHeader extends Diogenes_Plugin_Skel_Filter
 {  
   /** Plugin name */
   var $name = "HttpHeader";

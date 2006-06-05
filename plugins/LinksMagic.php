@@ -18,13 +18,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Filter.php';
+require_once 'Plugin/Skel/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The MailForm plugin allows you to insert a form to send
  *  an e-mail to a fixed recipient.
 */  
-class LinksMagic extends Diogenes_Plugin_Filter
+class LinksMagic extends Diogenes_Plugin_Skel_Filter
 {  
   /** Plugin name */
   var $name = "LinksMagic";

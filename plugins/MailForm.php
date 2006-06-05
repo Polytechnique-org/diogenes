@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Filter.php';
+require_once 'Plugin/Skel/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The MailForm plugin allows you to insert a form to send
@@ -27,7 +27,7 @@ require_once 'diogenes/diogenes.hermes.inc.php';
  * To make use of this plugin, insert {MailForm}in your page
  * where the mail form should appear.
  */
-class MailForm extends Diogenes_Plugin_Filter
+class MailForm extends Diogenes_Plugin_Skel_Filter
 {  
   /** Plugin name */
   var $name = "MailForm";

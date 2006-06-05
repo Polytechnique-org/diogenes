@@ -18,13 +18,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Filter.php';
+require_once 'Plugin/Skel/Filter.php';
 require_once 'Text/Wiki.php';
 
 
 /** The WikiMarkup plugin allows you to render Wiki markup into XHTML. 
  */
-class WikiMarkup extends Diogenes_Plugin_Filter
+class WikiMarkup extends Diogenes_Plugin_Skel_Filter
 {
   /** Plugin name */
   var $name = "WikiMarkup";
