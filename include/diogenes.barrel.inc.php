@@ -354,7 +354,7 @@ class DiogenesBarrel extends DiogenesPage
     if (!isset($this->table_menu))
       return;
    
-    // all menu entries from database
+    // add the user-defined part of the menu
     $bmenu = new Diogenes_Barrel_Menu($this->dbh, $this->table_menu);
     $this->menu = array_merge($this->menu, $bmenu->makeMenu($PID, $this->barrel->options->menu_min_level, array($this, 'urlSiteByPid')));
   }
