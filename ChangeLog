@@ -1,5 +1,6 @@
 Diogenes 0.9.20
  * improved - overhaul of the plugin system
+ * added - add RSS feeds describing public changes to barrels
 
 Diogenes 0.9.19
  * fixed - fix handling of filter plugins without arguments
