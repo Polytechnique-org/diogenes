@@ -23,6 +23,6 @@ foreach($event_arr as $event)
     $page->append('items', $item);
   }
 }
-header("Content-Type: text/xml");
+header("Content-Type: application/rss+xml");
 $page->display('', 'admin-rss.tpl');
 ?>
