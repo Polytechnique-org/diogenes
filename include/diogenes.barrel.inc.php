@@ -314,6 +314,9 @@ class DiogenesBarrel extends DiogenesPage
     // favicon
     if ($bbarrel->options->favicon)
       array_push($this->head, '<link rel="icon" href="'.$this->urlSite("", $bbarrel->options->favicon).'" type="image/png" />');
+
+    // RSS feed
+    array_push($this->head, '<link rel="alternate" type="text/xml" title="RSS .92" href="'.$this->urlSite("admin", "rss").'" />');
   }
 
 
