@@ -18,7 +18,7 @@ foreach($event_arr as $event)
   if ($event['flags'] & EVENT_FLAG_PUBLIC)
   {
     $item = $event;
-    $item['date'] = gmstrftime("%a, %d %b %Y %T %Z", $event['stamp']);
+    $item['date'] = gmstrftime("%a, %d %b %Y %T %Z", strtotime($event['stamp']));
     $item['title'] .= " : ". $item['opfile'];
     $page->append('items', $item);
   }
