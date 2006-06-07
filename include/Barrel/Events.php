@@ -77,7 +77,7 @@ class Diogenes_Barrel_Events
                   ."order by stamp desc limit 0,10");
     while ($myarr = mysql_fetch_array($res)) {
       $myarr['author'] = call_user_func(array($globals->session,'getUsername'),$myarr['auth'],$myarr['uid']);
-      $myarr['flags'] |= EVENT_FLAG_NONE;
+      $myarr['flags'] = EVENT_FLAG_NONE;
       list($op_alias, $op_file) = split(":",$myarr['data']);
 
       switch($myarr['text']) {
@@ -100,8 +100,9 @@ class Diogenes_Barrel_Events
       case "page_create":
         $myarr['title'] = __("page created");
         $myarr['icon'] = $globals->icons->get_action_icon('add');    
-        list($op_file, $myarr['dir'], $myarr['file']) = $this->makeFileLoc($op_file, $caller);
+        list($op_file, $myarr['dir'], $myarr['file'], $myarr['link']) = $this->makeFileLoc($op_file, $caller);
         $myarr['link_admin'] = "pages?dir={$myarr['dir']}";
+        $myarr['flags'] |= EVENT_FLAG_PUBLIC;
         break;
 
       case "page_delete":
@@ -127,8 +128,8 @@ class Diogenes_Barrel_Events
         $myarr['title'] = __("file updated");
         $myarr['icon'] = $globals->icons->get_action_icon('update');    
         list($op_file, $myarr['dir'], $myarr['file'], $myarr['link']) = $this->makeFileLoc($op_file, $caller);  
-        $myarr['flags'] = EVENT_FLAG_PUBLIC;
         $myarr['link_admin'] = "files?action=revs&amp;dir={$myarr['dir']}&amp;target={$myarr['file']}";
+        $myarr['flags'] |= EVENT_FLAG_PUBLIC;
 
         break;
       
