@@ -49,7 +49,9 @@ class TextileMarkup extends Diogenes_Plugin_Filter
   function filter($input)
   {
     $textile = new Textile();
-    return $textile->TextileThis($input);
+    $data = htmlProtectFromTextism($input);
+    $data = $textile->TextileThis($data);
+    return htmlUnprotectFromTextism($data);
   }
   
 }
