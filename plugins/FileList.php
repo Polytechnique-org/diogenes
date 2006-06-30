@@ -85,7 +85,7 @@ class FileList extends Diogenes_Plugin_Filter {
     
     /* display the link */
     if ($show)
-      return "<tr><td><img class=\"fileicon\" src=\"$icon\" /><a href=\"$url\">$title</a></td><td><small>$modified</small></td><td>$size</td><td>$desc</td></tr>\n";
+      return "<tr><td><img alt=\"file\" class=\"fileicon\" src=\"$icon\" /><a href=\"$url\">$title</a></td><td><small>$modified</small></td><td>$size</td><td>$desc</td></tr>\n";
   }
   
   
