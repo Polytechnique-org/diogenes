@@ -7,6 +7,7 @@ Diogenes 0.9.19
  * improved - reduce database calls used to build a page's menu
  * improved - in debug mode, trace database calls used to build page menu
  * improved - protect some HTML tags before passing to Textile plugin
+ * fixed - make the FileList plugin generate valid XHTML
 
 Diogenes 0.9.18
  * improved - resync Textile plugin with Textpattern 4.0.2
