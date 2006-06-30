@@ -1,7 +1,7 @@
 <?php
 require_once 'diogenes.common.inc.php';
 require_once 'diogenes.admin.inc.php';
-require_once 'diogenes.compose.inc.php';
+require_once 'diogenes.text.inc.php';
 require_once 'Barrel/Page.php';
 require_once 'Barrel/File.php';
 
