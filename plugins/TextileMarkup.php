@@ -30,7 +30,7 @@ class TextileMarkup extends Diogenes_Plugin_Skel_Filter
   var $name = "TextileMarkup";
   
   /** Plugin description */
-  var $description = "This plugin allows you to render Textile markup into XHTML. To get started, take a look at some <a href=\"http://www.textism.com/tools/textile/\">sample Textile markup pages</a>.";
+  var $description = "This plugin allows you to render Textile markup into XHTML. To get started, take a look at some <a href=\"http://www.textism.com/tools/textile/\">sample Textile markup pages</a>. You can protect HTML code from this plugin by enclosing it between &lt;protect&gt; and &lt;/protect&gt; tags.";
   
   
   /** Is the plugin allowed with respect to a given write permission on a page ?
