@@ -20,6 +20,7 @@
 
 require_once 'Plugin/Skel/Filter.php';
 require_once 'classTextile.php';
+require_once 'diogenes.text.inc.php';
 
 /** The TextileMarkup plugin allows you to render Textile markup into XHTML.
  */
