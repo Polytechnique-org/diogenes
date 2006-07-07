@@ -78,7 +78,7 @@ function textUnprotectTags($prot_open, $prot_close, $input)
  */
 function htmlProtectFromTextism($input)
 {
-  return textProtectTag("<table\s*?[^>]*>", "<\/table>", "{NOP:", ":NOP}", $input);
+  return textProtectTag("<protect>", "<\/protect>", "{NOP:", ":NOP}", $input);
 }
 
 
@@ -86,7 +86,9 @@ function htmlProtectFromTextism($input)
  */
 function htmlUnprotectFromTextism($input)
 {
-  return textUnprotectTags("{NOP:", ":NOP}", $input);
+  $input = textUnprotectTags("<p>\s*{NOP:", ":NOP}\s*<\/p>", $input);
+  $input = textUnprotectTags("{NOP:", ":NOP}", $input);
+  return preg_replace('/<\/?protect>/', "", $input);
 }
 
 
