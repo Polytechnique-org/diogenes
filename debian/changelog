@@ -5,7 +5,7 @@ diogenes (0.9.19-1) unstable; urgency=low
   * Update to standards version 3.7.2
   * Update versioned Build-Depends on debhelper to >= 5
 
- -- Jeremy Lainé <jeremy.laine@m4x.org>  Wed, 31 May 2006 21:03:46 +0200
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Sun,  9 Jul 2006 17:58:27 +0200
 
 diogenes (0.9.18-1) unstable; urgency=low
 
