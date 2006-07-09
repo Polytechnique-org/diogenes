@@ -7,7 +7,7 @@ Build-Depends-Indep: cdbs, debhelper (>= 5), po-debconf
 
 Package: diogenes
 Architecture: all
-Depends: ${misc:Depends}, libphp-diogenes (= ${Source-Version}), gettext, wwwconfig-common (>=0.0.41), apache | apache2 | httpd, php4-cli | php5-cli, php-pear, cvs, rcs, perl-modules, ucf (>=0.28)
+Depends: ${misc:Depends}, libphp-diogenes (= ${Source-Version}), gettext, wwwconfig-common (>=0.0.41), apache | apache2 | httpd, php4-cli | php5-cli, php-pear | php4-pear, cvs, rcs, perl-modules, ucf (>=0.28)
 Recommends: mysql-server
 Suggests: wv
 Description: web content management system
