@@ -165,6 +165,7 @@ class Diogenes_Barrel_Menu
   function menuRead()
   {
     $menu = array();
+    $menu[0]['children'] = array();
     $res = $this->dbh->query("select MID,MIDpere,title,link,PID,ordre from {$this->table_menu} order by ordre");
     while (list($mid, $parent, $title, $link, $pid, $ordre) = mysql_fetch_row($res))
     {
