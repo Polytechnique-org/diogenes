@@ -428,6 +428,7 @@ class DiogenesBarrel extends DiogenesPage
   function menuRead()
   {
     $menu = array();
+    $menu[0]['children'] = array();
     $res = $this->dbh->query("select MID,MIDpere,title,link,PID from {$this->table_menu} order by ordre");
     while (list($mid, $parent, $title, $link, $pid) = mysql_fetch_row($res))
     {
