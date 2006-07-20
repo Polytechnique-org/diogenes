@@ -362,33 +362,6 @@ class DiogenesBarrel extends DiogenesPage
   }
 
 
-  /** Read this barrel's menu entries from database.
-   */
-  function menuRead()
-  {
-    $menu = array();
-    $menu[0]['children'] = array();
-    $res = $this->dbh->query("select MID,MIDpere,title,link,PID from {$this->table_menu} order by ordre");
-    while (list($mid, $parent, $title, $link, $pid) = mysql_fetch_row($res))
-    {
-      $menu[$mid]['parent'] = $parent;
-      $menu[$mid]['title'] = $title;
-      $menu[$mid]['link'] = $link;
-      $menu[$mid]['title'] = $title;
-      $menu[$mid]['pid'] = $pid;
-      if (!is_array($menu[$mid]['children']))
-        $menu[$mid]['children'] = array();
-
-      // register this entry with its parent
-      if (!is_array($menu[$parent]['children']))
-        $menu[$parent]['children'] = array();
-      array_push($menu[$parent]['children'], $mid);
-    }
-    mysql_free_result($res);
-    return $menu;
-  }
-
-
   /** 
    * Break down a PATH_INFO into site, page id and file
    * Directories *must* be accessed with a final slash.
