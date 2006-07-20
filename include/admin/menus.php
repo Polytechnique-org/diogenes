@@ -163,6 +163,7 @@ foreach($mcache[$MIDpere]['children'] as $MID)
           $edit,$del,$up,$down));
 }
 
+// all menu entries from database
 $filiation = $bmenu->menuToRoot($mcache,$MIDpere,array());
 $menubar = array();
 foreach($filiation as $mykey=>$myval) {
