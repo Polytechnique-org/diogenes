@@ -61,7 +61,7 @@ $page->assign('submit',__("Submit"));
 if ($file == $globals->cssfile) {
    $page->assign('style_sheets', $globals->style_sheets);
    $page->assign('preset_style_sheet', $globals->barrel_style_sheet);
-   $page->assign('msg_set_stylesheet', __("replace current style sheet by a preset one"));
+   $page->assign('msg_set_stylesheet', __("replace by a preset style sheet"));
    $page->assign('msg_replace',__("Replace"));
 }
 
