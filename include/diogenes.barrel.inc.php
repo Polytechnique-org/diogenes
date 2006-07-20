@@ -316,7 +316,8 @@ class DiogenesBarrel extends DiogenesPage
       array_push($this->head, '<link rel="icon" href="'.$this->urlSite("", $bbarrel->options->favicon).'" type="image/png" />');
 
     // RSS feed
-    array_push($this->head, '<link rel="alternate" type="application/rss+xml" title="'.stripslashes($bbarrel->options->title).'" href="'.$this->urlSite("admin", "rss").'" />');
+    if ($bbarrel->options->feed_enable)
+      array_push($this->head, '<link rel="alternate" type="application/rss+xml" title="'.stripslashes($bbarrel->options->title).'" href="'.$this->urlSite("admin", "rss").'" />');
   }
 
 

@@ -58,6 +58,18 @@
 </tr>
 </table>
 
+<br/>
+
+<table class="light" style="width:80%">
+<tr>
+  <th colspan="2">{$msg_feed_options}</th>
+</tr>
+<tr>
+  <td>{$msg_feed_enable}</td>
+  <td>{html_options name='feed_enable' selected=$feed_enable options=$feed_enable_vals}</td>
+</tr>
+</table>
+
 <p>
   <input type="submit" value="{$msg_submit}" />
 </p>

@@ -11,19 +11,12 @@ $page->assign('post',$page->script_self());
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
 switch ($action) {
 case "update":
-  $bbarrel->options->updateOption("title", $_REQUEST['title']);
-  $bbarrel->options->updateOption("description", $_REQUEST['description']);
-  $bbarrel->options->updateOption("keywords", $_REQUEST['keywords']);
-  $bbarrel->options->updateOption("favicon", $_REQUEST['favicon']);
-  if (isset($_REQUEST['template']))
-    $bbarrel->options->updateOption("template", $_REQUEST['template']);
-  if (isset($_REQUEST['template_dir']))
-    $bbarrel->options->updateOption("template_dir", $_REQUEST['template_dir']);
-  $bbarrel->options->updateOption("menu_min_level", $_REQUEST['menu_min_level']);
-  $bbarrel->options->updateOption("menu_style", $_REQUEST['menu_style']);
-  if (isset($_REQUEST['menu_theme']))
-    $bbarrel->options->updateOption("menu_theme", $_REQUEST['menu_theme']);
-  $bbarrel->options->updateOption("menu_hide_diogenes", $_REQUEST['menu_hide_diogenes']);
+  $opt_names = array ('title', 'description', 'keywords', 'favicon', 'template', 'template_dir', 'menu_min_level', 'menu_style', 'menu_theme', 'menu_hide_diogenes', 'feed_enable');
+  foreach ($opt_names as $opt_name)
+  {
+    if (isset($_REQUEST[$opt_name]))
+      $bbarrel->options->updateOption($opt_name, $_REQUEST[$opt_name]);
+  }
   
   // log this action
   $page->log('barrel_options', $bbarrel->alias.":*");
@@ -47,6 +40,7 @@ if ($bbarrel->hasFlag('tpl')) {
   mysql_free_result($res);
   $page->assign('template_dirs', $template_dirs);
 }
+
 /* menu options */
 $page->assign('menu_hide_diogeness', array(0 => __("no"), 1 => __("yes")));
 $page->assign('menu_hide_diogenes', $bbarrel->options->menu_hide_diogenes);
@@ -58,6 +52,10 @@ if ($bbarrel->options->menu_style == 1 || $bbarrel->options->menu_style == 2) {
 }
 $page->assign('menu_levels',array(0=> __("fully expanded"), 1=>'1', 2=>'2', 3=>'3', 4=>'4'));
 $page->assign('menu_min_level', $bbarrel->options->menu_min_level);
+
+/* RSS feed options */
+$page->assign('feed_enable_vals', array(0 => __("no"), 1 => __("yes")));
+$page->assign('feed_enable', $bbarrel->options->feed_enable);
 
 // translations
 $page->assign('msg_general_options', __("general options"));
@@ -73,6 +71,8 @@ $page->assign('msg_menu_hide_diogenes', __("hide Diogenes menu"));
 $page->assign('msg_menu_style', __("menu style"));
 $page->assign('msg_menu_theme', __("menu theme"));
 $page->assign('msg_menu_min_level', __("minimum menu levels to expand"));
+$page->assign('msg_feed_options', __("RSS feed options"));
+$page->assign('msg_feed_enable', __("enable RSS feed"));
 $page->assign('msg_submit', __("Submit"));
 $page->display('admin-options.tpl');
 ?>
