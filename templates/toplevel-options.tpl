@@ -23,7 +23,7 @@
   <td>{html_options name='template' selected=$template options=$templates}</td>
 </tr>
 <tr>
-  <td>{$msg_site_style_sheet}</td>
+  <td>{$msg_barrel_style_sheet}</td>
   <td>{html_options name='barrel_style_sheet' selected=$barrel_style_sheet options=$style_sheets}</td>
 <tr>
   <td>{$msg_validate_pages}</td>

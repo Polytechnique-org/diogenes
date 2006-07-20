@@ -63,6 +63,7 @@ $page->assign('msg_word_import', __("Word document import"));
 $page->assign('msg_debug_options', __("debugging options"));
 $page->assign('msg_debug_database', __("debug database"));
 $page->assign('msg_debug_plugins', __("debug plugins"));
+$page->assign('msg_barrel_style_sheet', __("default style sheet for new barrels"));
 $page->assign('msg_submit', __("Submit"));
 
 $page->display('toplevel-options.tpl');
