@@ -1,0 +1,94 @@
+/* insert your CSS customisations below */
+
+#header {
+  margin: 5px;
+  padding: 5px;
+  border: 1px dotted #2050a0;
+  background-color: #bbddee;
+  color: black;
+}
+
+#header .logo {
+  display: none;
+}
+
+#header .titlebar {
+  margin-left: 50px;
+  padding: 5px;
+}
+
+#main {
+  margin-left: 230px;
+  margin-bottom: 15px;
+}
+
+#sidebar {
+  margin: 10px;
+  padding: 5px;
+  background-color: #f7f7f7;
+  border: 1px dotted #2050a0;
+  width: auto;
+}
+
+#footer {
+  margin: 5px;
+  padding: 5px;
+  border: 1px dotted #2050a0;
+  background-color: #bbddee;
+}
+
+body {
+  background-color: white;
+  color: inherit;
+}
+
+a {
+  color: #0d2c92;
+}
+
+a.phplm {
+  font-size: 0.9em;
+}
+
+.menu .item a {
+  background-color: #bbddee;
+  color: inherit;
+}
+
+.menu .item a.odd {
+  background-color: #bbddee;
+  color: inherit;
+}
+
+.menu .item a:hover {
+  background-color: #3050d0;
+  color: white;
+}
+
+.menu .item a.top {
+  background-color: #447788;
+  color: white;
+}
+
+/* table class 'light' */
+table.light {
+  border-collapse: collapse;
+  background-color: #edf8ff;
+  border: 2px solid #447788;
+  color: black;
+}
+
+table.light tr.odd {
+  background-color: #90c0e0;
+}
+
+table.light th {
+  background-color: #447788;
+  color: white;
+}
+
+pre {
+  border: 1px solid #447788;
+  background-color: #edf8ff;
+  padding: 10px;
+}
