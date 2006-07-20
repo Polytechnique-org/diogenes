@@ -5,7 +5,7 @@ PKG_DIST = diogenes-$(VERSION)
 LIB_DIST = libdiogenes-$(VERSION)
 
 PKG_FILES = AUTHORS ChangeLog COPYING README Makefile \
-            cvs.pl style.css
+            cvs.pl
 	    
 PKG_DIRS = config htdocs include locale po plugins styles templates
 
