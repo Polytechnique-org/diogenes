@@ -1,5 +1,20 @@
 /* insert your CSS customisations below */
 
+#header {
+  margin: 1px;
+  padding: 3px;
+  border: 1px dotted #2050a0;
+  background-color: #edf8ff;
+  color: #2050a0;
+}
+
+#footer {
+  margin: 1px;
+  padding: 3px;
+  border: 1px dotted #2050a0;
+  background-color: #edf8ff;
+}
+
 body {
   background-color: #60a5e0;
   color: inherit;
@@ -40,4 +55,15 @@ table.light tr.odd {
 table.light th {
   background-color: #2050a0;
   color: white;
+}
+
+/* version */
+.version {
+  font-size: 8pt;
+}
+
+.hidden {
+/*  display: none */;
+  color: #60a5e0;
+  font-size: 1pt;
 }
