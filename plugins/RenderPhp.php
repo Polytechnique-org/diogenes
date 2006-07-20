@@ -18,12 +18,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Render.php';
+require_once 'Plugin/Render.php';
 
 /** The RenderPhp plugin allows you to execute a file as PHP
  *  rather than return its content.
  **/
-class RenderPhp extends Diogenes_Plugin_Skel_Render
+class RenderPhp extends Diogenes_Plugin_Render
 {
   /** Plugin name */
   var $name = "RenderPhp";

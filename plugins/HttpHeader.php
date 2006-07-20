@@ -18,12 +18,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Filter.php';
+require_once 'Plugin/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The HttpHeader plugin allows you to add an HTTP header to a page.
  */
-class HttpHeader extends Diogenes_Plugin_Skel_Filter
+class HttpHeader extends Diogenes_Plugin_Filter
 {  
   /** Plugin name */
   var $name = "HttpHeader";
@@ -31,14 +31,8 @@ class HttpHeader extends Diogenes_Plugin_Skel_Filter
   /** Plugin description */
   var $description = "This plugin allows you to add an HTTP header to a page.";
   
-
-  /** Constructor.
-   */
-  function HttpHeader()
-  {
-    $this->declareParam('contents', '');
-  }
-   
+  /** Plugin parameters */
+  var $params = array('contents' => '');
 
   /** Apply filtering to the input and return an output.
    *
@@ -46,11 +40,13 @@ class HttpHeader extends Diogenes_Plugin_Skel_Filter
    */
   function filter($input)
   {
-    $header = $this->getParamValue('contents');
+    $header = $this->params['contents'];
+
     if ($header) 
     {
       header($header);
     }
+   
     return $input;
   }
   

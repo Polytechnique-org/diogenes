@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Filter.php';
+require_once 'Plugin/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The MailForm plugin allows you to insert a form to send
@@ -27,7 +27,7 @@ require_once 'diogenes/diogenes.hermes.inc.php';
  * To make use of this plugin, insert {MailForm}in your page
  * where the mail form should appear.
  */
-class MailForm extends Diogenes_Plugin_Skel_Filter
+class MailForm extends Diogenes_Plugin_Filter
 {  
   /** Plugin name */
   var $name = "MailForm";
@@ -35,16 +35,8 @@ class MailForm extends Diogenes_Plugin_Skel_Filter
   /** Plugin description */
   var $description = "This plugin allows you to insert a form to send an e-mail to a fixed recipient. To make use of this plugin, insert <b>{MailForm}</b> in your page where the mail form should appear.";
   
-
-  /** Constructor.
-   */
-  function MailForm()
-  {
-    $this->declareParam('email', '');
-    $this->declareParam('title', '');
-    $this->declareParam('subject_tag', '[web form]');
-  }
-
+  /** Plugin parameters */
+  var $params = array('email' => '', 'title' => '', 'subject_tag' => '[web form] ');
 
   /** Show an instance of the MailForm plugin.
    */
@@ -52,9 +44,9 @@ class MailForm extends Diogenes_Plugin_Skel_Filter
   {
     global $page;
 
-    // get parameters
-    $to_email = $this->getParamValue('email');
-    $form_title = $this->getParamValue('title');
+    // get params
+    $to_email = $this->params['email'];
+    $form_title = $this->params['title'];
     
     if (!isvalid_email($to_email)) {
       return '<p>You must specify a valid e-mail in the "email" parameter to make use of the MailForm plugin.<p>';
@@ -88,7 +80,7 @@ class MailForm extends Diogenes_Plugin_Skel_Filter
       
       $mymail = new HermesMailer();
       $mymail->setFrom($from);
-      $mymail->setSubject($this->getParamValue('subject_tag').$subject);
+      $mymail->setSubject($this->params['subject_tag'].$subject);
       $mymail->addTo($to_email);
       $mymail->setTxtBody($message);
       $mymail->send();

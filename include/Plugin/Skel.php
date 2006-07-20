@@ -20,12 +20,6 @@
 
 // dependency on PEAR
 require_once 'System.php';
-require_once 'Tree/Node.php';
-
-define('PLUG_DISABLED', 0);
-define('PLUG_ACTIVE', 1);
-define('PLUG_LOCK', 2);
-define('PLUG_SET', 4);
 
 /** Recursive stripslashes.
  *
@@ -44,7 +38,7 @@ function stripslashes_recurse($value)
  */
 class Diogenes_Plugin_Skel {
   /** Plugin type (object, filter) */
-  var $type = '';
+  var $type;
   
   /** Array of plugin parameters */
   var $params = array();
@@ -59,11 +53,12 @@ class Diogenes_Plugin_Skel {
   var $version = "0.1";
 
   /** Position of the plugin */
-  var $pos = 0;
+  var $pos;
   
-  /** The plugin status (disabled, available, active) */
-  var $status = PLUG_DISABLED;
- 
+  /** Is the plugin active ? */
+  var $active = 0;
+  
+  
   /** Is the plugin allowed with respect to a given write permission on a page ?
    *
    * @param $wperms
@@ -72,107 +67,89 @@ class Diogenes_Plugin_Skel {
   {
     return ($wperms != 'public');
   }
+   
 
-
-  /** Declare a plugin parameter.
+  /** Set plugin parameters.
+   *
+   * @param $params
    */
-  function declareParam($key, $val)
+  function setParams($params)
   {
-    $this->params[$key]['value'] = $val;
-  }
-
-
-  /** Return an array of parameter names.
-   */
-  function getParamNames()
-  {
-    return array_keys($this->params);
-  }
-
-
-  /** Return the value of a parameter of the plugin.
-   */
-  function getParamValue($key)
-  {
-    return isset($this->params[$key]['value']) ? $this->params[$key]['value'] : '';
-  }
-
-
-  /** Set the value of a parameter of the plugin.
-   */
-  function setParamValue($key, $val)
-  {
-    if (isset($this->params[$key]['value'])) {
-      $this->params[$key]['value'] = $val; 
+    $bits = explode("\0", $params);      
+    foreach ($bits as $bit)
+    {
+      $frags = explode("=", $bit, 2);
+      $key = $frags[0];
+      $val = isset($frags[1]) ? $frags[1] : '';
+      if (isset($this->params[$key])) {
+        $this->params[$key] = $val;
+      }
     }
   }
-
-
+  
+  
   /** Erase parameters from database.
    *
    * @param $barrel
    * @param $page
    */
-  function eraseParameters($barrel = '', $page = 0)
+  function eraseParams($barrel = '', $page = 0)
   {
     global $globals;
-    //echo $this->name . " : eraseParams($barrel, $page)<br/>\n";
+    
+    //echo $this->name . " : deleteParams($barrel, $page)<br/>\n";
     $globals->db->query("delete from diogenes_plugin where plugin='{$this->name}' and barrel='$barrel' and page='$page'");
-
+    
+    $this->active = 0;
     unset($this->pos);
-    foreach ($this->getParamNames() as $key)
+    foreach ($this->params as $key => $val)
     {
-      //echo "$this->name : erasing param<br/>\n";
-      $this->setParamValue($key, '');
+      $this->params[$key] = '';
     }
   }
-
-
-  /** Read parameters from an array.
-    */
-  function fromArray($plugentry)
-  {
-      $this->pos = $plugentry['pos'];
-      $this->status = $plugentry['status'];
-      foreach ($plugentry['params'] as $key => $val)
-      {
-        $this->setParamValue($key, $val['value']);
-      }
-  }
-
-
+   
+    
   /** Store parameters to database.
    *
    * @param $barrel
    * @param $page
-   * @param $pos
+   * @param $pos   
    */
-  function toDatabase($barrel = '', $page = 0, $pos = 0)
+  function writeParams($barrel = '', $page = 0, $pos = 0)
   {
     global $globals;
 
     $this->pos = $pos;
-    $params = var_encode_bin($this->params);
-    //echo "toDatabase called for '{$this->name}' in barrel '$barrel' (status : {$this->status}, params : '$params')<br/>";
-    $globals->db->query("replace into diogenes_plugin set plugin='{$this->name}', status='{$this->status}', barrel='$barrel', page='$page', pos='$pos', params='$params'");
+    $this->active = 1;
+    
+    $params = '';
+    foreach ($this->params as $key => $val)
+    { 
+      //echo $this->name . " $key=$val<br/>";
+      $params .= "$key=$val\0";     
+    }        
+    $globals->db->query("replace into diogenes_plugin set plugin='{$this->name}', barrel='$barrel', page='$page', pos='$pos', params='$params'");
   }
-
-
+  
+  
   /** Dump parameters to a table.
    */
-  function toArray()
+  function dump()
   {
     $plugentr = array();
 
     // copy over properties
-    $props = array('status', 'name', 'params', 'description', 'version', 'type', 'pos');
+    $props = array('active', 'name', 'params', 'description', 'version', 'type', 'pos');
     foreach ($props as $prop)
     {
-      $plugentr[$prop] =  stripslashes_recurse($this->$prop);
-    }
+      if (isset($this->$prop))
+      {
+        $plugentr[$prop] =  stripslashes_recurse($this->$prop);
+      }
+    }    
     return $plugentr;
   }
-
+  
 }
   
 ?>

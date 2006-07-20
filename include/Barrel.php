@@ -21,7 +21,6 @@
 require_once 'Barrel/Page.php';
 require_once 'Barrel/Options.php';
 require_once 'diogenes/diogenes.flagset.inc.php';
-require_once 'Plugin/Skel.php';
  
 
 /** This class describes a Diogenes Barrel.
@@ -245,6 +244,24 @@ class Diogenes_Barrel
   }
   
   
+  /** List the plugins that are active in a given context
+   *
+   * @param $page   
+   */
+  function getPlugins($page = 0)
+  {
+    $plugins = array();
+    foreach ($this->pluginsCache as $plug)
+    {
+      if ($plug['page'] == $page) 
+      {
+        array_push($plugins, $plug);
+      }
+    }
+    return $plugins;    
+  }
+
+  
   /** Check whether the barrel has a given flag
    *
    * @param $flag
@@ -309,7 +326,7 @@ class Diogenes_Barrel
   }
 
   
-  /** Load all active plugins for the specified page.
+  /** Load all plugins for the specified page.
    *
    * @param $bpage
    */
@@ -317,11 +334,12 @@ class Diogenes_Barrel
   {
     global $globals;
   
-    $plugins = $globals->plugins->cacheGetActive($this->pluginsCache, $this->alias, $page);
+    $plugins = $this->getPlugins($bpage->props['PID']);
+    
     $loaded = array();
-    foreach ($plugins as $plugname => $plugentry) 
+    foreach ($plugins as $plugentry) 
     {
-      $loaded[$plugname] =& $globals->plugins->load($plugname, $plugentry);
+      $loaded[$plugentry['plugin']] =& $globals->plugins->load($plugentry);
     }
     return $loaded;
   }

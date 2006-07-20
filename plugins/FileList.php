@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Filter.php';
+require_once 'Plugin/Filter.php';
 require_once 'diogenes.icons.inc.php';
 
 
@@ -28,24 +28,16 @@ require_once 'diogenes.icons.inc.php';
  * To make use of this plugin, insert {FileList} in your page where 
  * the file list should appear.
  */
-class FileList extends Diogenes_Plugin_Skel_Filter {
+class FileList extends Diogenes_Plugin_Filter {
   /** Plugin name */
   var $name = "FileList";
   
   /** Plugin description */
   var $description = "This plugin allows you to insert a directory listing with icons and modification date. To make use of this plugin, insert <b>{FileList}</b> in your page where the file list should appear.";
   
- 
-  /** Constructor.
-   */
-  function FileList()
-  {
-    global $page;
-    $this->declareParam('dirbase', '');
-    $this->declareParam('urlbase', '');
-    $this->declareParam('match', '');
-  }
-
+  /** Plugin parameters */
+  var $params = array('dirbase' => "", 'urlbase' => "", 'match' => "");
+    
   
   /** Prepare the output for a single file of the list.
    *
@@ -105,21 +97,21 @@ class FileList extends Diogenes_Plugin_Skel_Filter {
   {
     global $page;
     $bbarel = $page->barrel;
-   
+    
     // process arguments
-    $instance_vals = array();
-    foreach($this->getParamNames() as $key) {
-      $instance_vals[$key] = isset($args[$key]) ? $args[key] : $this->getParamValue($key);
+    $params = array();
+    foreach($this->params as $key => $val) {
+      $params[$key] = isset($args[$key]) ? $args[$key] : $this->params[$key];
     }
     
-   //print_r($instance_vals);
-    if (empty($instance_vals['dirbase'])) {
-      $instance_vals['dirbase'] =  $bbarel->spool->spoolPath($page->curpage->props['PID']);
+   //print_r($params);
+    if (empty($params['dirbase'])) {
+      $params['dirbase'] = $bbarel->spool->spoolPath($page->curpage->props['PID']);
     }
 
     // process parameters 
     $output = '';
-    $dir = $instance_vals['dirbase'];
+    $dir = $params['dirbase'];    
     if (is_dir($dir) && ($dh = opendir($dir))) {
       $output .= 
        '<table class="light">
@@ -133,7 +125,7 @@ class FileList extends Diogenes_Plugin_Skel_Filter {
       /* get the matching files */
       while (($fname = readdir($dh)) !== false) {
         if ( is_file("$dir/$fname") 
-              && preg_match('/^'.$instance_vals['match'].'/',$fname) )
+              && preg_match('/^'.$params['match'].'/',$fname) )
           $filelist[] = $fname;
       }
       closedir($dh);
@@ -142,7 +134,7 @@ class FileList extends Diogenes_Plugin_Skel_Filter {
       if (is_array($filelist)) {
         rsort($filelist);
         while(list ($key,$val) = each($filelist)) {
-          $output .= $this->list_file("$dir/$val",$val,$instance_vals['urlbase'].$val);
+          $output .= $this->list_file("$dir/$val",$val,$params['urlbase'].$val);
         }
       } else {
         $output .= '<tr><td colspan="4"><i>'.__("no files").'</i></td></tr>';

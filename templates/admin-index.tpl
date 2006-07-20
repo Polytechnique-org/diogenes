@@ -9,9 +9,9 @@
 <tr>
   <td>{if $myevent.icon}<img class="fileicon" src="{$myevent.icon}" />{else}&nbsp;{/if}</td>
   <td class="logdate">{$myevent.stamp|date_format:"%Y-%m-%d %H:%M:%S"}</td>
-  <td class="logauthor">{$myevent.author}</td>
-  <td><a {if $myevent.link_admin}href="{$myevent.link_admin}"{else}class="empty"{/if}>{$myevent.title}</a></td>
-  <td>{$myevent.opfile}</td>
+  <td class="logauthor">{$myevent.username}</td>
+  <td>{a lnk=$myevent.desc}</td>
+  <td>{$myevent.file}</td>
 </tr>
 {/foreach}
 </table>

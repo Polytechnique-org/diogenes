@@ -18,30 +18,23 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Filter.php';
+require_once 'Plugin/Filter.php';
 require_once 'diogenes/diogenes.hermes.inc.php';
 
 /** The MailForm plugin allows you to insert a form to send
  *  an e-mail to a fixed recipient.
 */  
-class LinksMagic extends Diogenes_Plugin_Skel_Filter
+class LinksMagic extends Diogenes_Plugin_Filter
 {  
   /** Plugin name */
   var $name = "LinksMagic";
   
   /** Plugin description */
   var $description = "This plugin allows you to mark external and secure (HTTPS) links in your pages.";
- 
-
-  /** Constructor.
-   */
-  function LinksMagic()
-  {
-    $this->declareParam('main', 1);
-    $this->declareParam('sidebar', 1);
-  }
-
   
+  /** Plugin parameters */
+  var $params = array('main' => 1, 'sidebar' => 1);
+
   /** Apply filtering to the input and return an output.
    *
    * @param $input
@@ -50,12 +43,12 @@ class LinksMagic extends Diogenes_Plugin_Skel_Filter
   {
     global $page;
  
-    if ($this->getParamValue('sidebar'))
+    if ($this->params['sidebar'])
     {
       array_unshift($page->head, '<link rel="stylesheet" href="'.$page->url('links-sidebar.css').'" type="text/css" />');
     }
 
-    if ($this->getParamValue('main'))
+    if ($this->params['main'])
     {
       array_unshift($page->head, '<link rel="stylesheet" href="'.$page->url('links-main.css').'" type="text/css" />');
     }

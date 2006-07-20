@@ -23,8 +23,25 @@ if ($barrel)
 
 /* plugin editor */
 $editor = new Diogenes_Plugin_Editor($barrel, 0);
-$editor->set_mode(MODE_ROOT);
+$editor->hide_params(1);
 $editor->run($page,'editor_content');
+
+// if necessary, rebuild site plugin caches
+if ($action == "update" && !$barrel)
+{
+  $res = $globals->db->query("select alias,flags from diogenes_site");
+  while (list($p_alias, $p_flags) = mysql_fetch_row($res))
+  {
+    $flags = new flagset($p_flags);
+    if ($p_alias && $flags->hasFlag('plug')) 
+    {
+      $page->info(sprintf( __("Rebuilding plugin cache for barrel '%s'"), $p_alias));
+      $cachefile = $globals->plugins->cacheFile($p_alias);
+      $globals->plugins->compileCache($cachefile, $p_alias);
+    }
+  }
+  mysql_free_result($res);
+}
 
 // translations
 $page->assign('msg_clean_database', __('Clean plugins database'));

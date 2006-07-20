@@ -23,7 +23,7 @@ require_once 'Plugin/Skel.php';
 
 /** This class describes a Diogenes rendering plugin. 
  */
-class Diogenes_Plugin_Skel_Render extends Diogenes_Plugin_Skel
+class Diogenes_Plugin_Render extends Diogenes_Plugin_Skel
 {
   var $name = "Plugin_Render";
   var $description = "Rendering plugin skeleton";

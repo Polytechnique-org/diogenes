@@ -18,13 +18,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'Plugin/Skel/Filter.php';
+require_once 'Plugin/Filter.php';
 require_once 'classTextile.php';
 require_once 'diogenes.text.inc.php';
 
 /** The TextileMarkup plugin allows you to render Textile markup into XHTML.
  */
-class TextileMarkup extends Diogenes_Plugin_Skel_Filter
+class TextileMarkup extends Diogenes_Plugin_Filter
 {
   /** Plugin name */
   var $name = "TextileMarkup";

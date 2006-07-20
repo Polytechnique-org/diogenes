@@ -30,7 +30,8 @@ if ($dir != 0)
 /* plugin editor */
 $editor = new Diogenes_Plugin_Editor($page->alias, $dir, $wperms);
 if ($dir == 0) {
-  $editor->set_mode(MODE_NOPARAMS);
+  $editor->readonly = 1;
+  $editor->hide_params(1);
 }
 $editor->run($page,'page_content');
 $page->display('');

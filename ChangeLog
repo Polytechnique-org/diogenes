@@ -1,7 +1,3 @@
-Diogenes 0.9.20
- * improved - overhaul of the plugin system
- * added - add RSS feeds describing public changes to barrels
-
 Diogenes 0.9.19.1
  * fixed - fix a warning when a barrel's menu is empty
 

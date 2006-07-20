@@ -23,7 +23,7 @@ require_once 'Plugin/Skel.php';
 
 /** This class describes a Diogenes filter plugin. 
  */
-class Diogenes_Plugin_Skel_Filter extends Diogenes_Plugin_Skel
+class Diogenes_Plugin_Filter extends Diogenes_Plugin_Skel
 {
   /** Plugin name */
   var $name = "Plugin_Filter";
