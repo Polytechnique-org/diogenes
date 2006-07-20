@@ -27,6 +27,14 @@ $myfile = $bbarrel->spool->spoolPath($dir,$file);
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 switch($action)
 {
+case "set_stylesheet":
+  if (isset($_REQUEST['preset_style_sheet'])) {
+    $sheet = $_REQUEST['preset_style_sheet'];
+    $page->info(__("Copying style sheet") . " $sheet.css");
+    $rcs->commit($dir,$file,file_get_contents("{$globals->root}/styles/$sheet.css"), "replaced by $sheet.css");
+  }
+  break;
+ 
 case "update":
   // update the current file with form contents
   if (isset($_REQUEST['file_content'])) {
@@ -48,6 +56,14 @@ $page->assign('source',__("File source"));
 $page->assign('msg_log',__("log message"));
 $page->assign('file_content',htmlspecialchars(file_get_contents($myfile), ENT_NOQUOTES));
 $page->assign('submit',__("Submit"));
+
+// menu for stylesheet replacement
+if ($file == $globals->cssfile) {
+   $page->assign('style_sheets', $globals->style_sheets);
+   $page->assign('preset_style_sheet', $globals->barrel_style_sheet);
+   $page->assign('msg_set_stylesheet', __("replace current style sheet by a preset one"));
+   $page->assign('msg_replace',__("Replace"));
+}
 
 // top toolbar
 $page->toolbar(__("Page"), $bpage->make_toolbar());
