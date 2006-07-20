@@ -214,6 +214,7 @@ class DiogenesBarrel extends DiogenesPage
         $render_plugin = $plugobj;
       }
     }
+
     // source page or pass it to a rendering plugin
     if (is_object($render_plugin)) {    
       $content = $render_plugin->render($path);
