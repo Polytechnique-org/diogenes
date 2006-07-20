@@ -9,43 +9,44 @@ $page = new $globals->toplevel(true);
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
 
+$rw_str_opts = array ('menu_style', 'menu_theme', 'template_dir', 'template', 'html_editor', 'word_import', 'barrel_style_sheet');
+$rw_bool_opts = array('debugdatabase', 'debugplugins', 'validatepages');
+$ro_opts = array ('menu_styles', 'menu_themes', 'html_editors', 'word_imports', 'style_sheets');
+
 switch ($action) {
 case "options":
-  $globals->updateOption("menu_style", $_REQUEST['menu_style']);
-  if (isset($_REQUEST['menu_theme']))
-    $globals->updateOption("menu_theme", $_REQUEST['menu_theme']);
-  $globals->updateOption("template_dir", $_REQUEST['template_dir']);
-  $globals->updateOption("template", $_REQUEST['template']);
-  $globals->updateOption("html_editor", $_REQUEST['html_editor']);
-  $globals->updateOption("word_import", $_REQUEST['word_import']);
-  $globals->updateOption("debugdatabase", $_REQUEST['debugdatabase'] ? 1 : 0);
-  $globals->updateOption("debugplugins", $_REQUEST['debugplugins'] ? 1 : 0);
-  $globals->updateOption("validatepages", $_REQUEST['validatepages'] ? 1 : 0);
+  foreach ($rw_str_opts as $opt_name)
+  {
+    if (isset($_REQUEST[$opt_name]))
+      $globals->updateOption($opt_name, $_REQUEST[$opt_name]);
+  }
+  foreach ($rw_bool_opts as $opt_name)
+  {
+    if (isset($_REQUEST[$opt_name]))
+      $globals->updateOption($opt_name, $_REQUEST[$opt_name] ? 1 : 0);
+  }
   break;
 }
 
 
 // fill out values
-$page->assign('menu_styles', $globals->menu_styles);
-$page->assign('menu_style', $globals->menu_style);
+$all_opts = array_merge($ro_opts, $rw_str_opts, $ro_opts);
+$all_opts = array_merge($all_opts, $rw_bool_opts);
+foreach ($all_opts as $opt_name)
+{
+  if (!isset($globals->$opt_name)) {
+    $page->info("warning : unknown option '$opt_name'");
+  } else {
+    $page->assign($opt_name, $globals->$opt_name);
+  }
+}
+/*
 if ($globals->menu_style == 1 || $globals->menu_style == 2) {
   $page->assign('menu_themes', $globals->menu_themes);
   $page->assign('menu_theme', $globals->menu_theme);
 }
-$page->assign('template_dir', $globals->template_dir);
-$page->assign('template', $globals->template);
+*/
 $page->assign('templates', $page->getTemplates());
-
-$page->assign('validatepages', $globals->validatepages);
-
-$page->assign('html_editors', $globals->html_editors);
-$page->assign('html_editor', $globals->html_editor);
-
-$page->assign('word_imports', $globals->word_imports);
-$page->assign('word_import', $globals->word_import);
-
-$page->assign('debugdatabase', $globals->debugdatabase);
-$page->assign('debugplugins', $globals->debugplugins);
 
 // translations
 $page->assign('greeting', __("Global options"));

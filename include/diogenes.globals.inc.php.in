@@ -116,6 +116,15 @@ class DiogenesGlobals extends DiogenesCoreGlobals {
                            'lush' => 'lush',
                            'mozilla' => 'mozilla'
                           );
+
+   /** Available style sheets */
+   var $style_sheets = array(
+                           'default_blue' => 'Default Blue',
+                           'funky_doc' => 'Funky Doc',
+                          );
+  
+  /** Default stylesheet for new barrels */
+  var $barrel_style_sheet = 'default_blue';
   
   /** The HTML editor to use (ekit, kafenio) */
   var $html_editor = "kafenio";

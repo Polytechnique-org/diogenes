@@ -164,12 +164,14 @@ class Diogenes_Barrel
     $homepage = mysql_insert_id();
     $globals->db->query("update {$alias}_page set location='',title='Home',perms='public' where PID='$homepage'");
 
-    /* create home page & copy CSS template */
+    /* create home page */
     $rcs = new $globals->rcs($caller,$alias,$_SESSION['session']->username,true);
     $rcs->newdir("",$homepage);
     $rcs->commit($homepage,$globals->htmlfile,"");
-    $rcs->commit($homepage,$globals->cssfile,
-                        file_get_contents("{$globals->root}/{$globals->cssfile}") );
+
+    /* copy CSS template */
+    $def_css = file_get_contents("{$globals->root}/styles/{$globals->barrel_style_sheet}.css");
+    $rcs->commit($homepage,$globals->cssfile, $def_css);
   }
 
   
