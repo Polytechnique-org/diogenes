@@ -67,7 +67,7 @@ class Diogenes_Barrel_Options
   var $template_dir = "";
 
   /** Enable RSS feed */
-  var $feed_enable = 1;
+  var $feed_enable = 0;
 
   /** The constructor, reads the current preferences from database.
    */
