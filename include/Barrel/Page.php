@@ -87,7 +87,7 @@ class Diogenes_Barrel_Page
     if ($num > 0)
     {
       $caller->info(__("Not deleting page, it has child pages!"));
-      return;
+      return false;
     }
     
     $rcs = $caller->getRcs();
@@ -97,6 +97,7 @@ class Diogenes_Barrel_Page
     system("rm -rf ". escapeshellarg($rcs->spoolPath($dir)));
     $barrel->compileTree();
     $barrel->readTree();
+    return true;
   }
   
 
