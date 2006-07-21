@@ -159,12 +159,13 @@ class Diogenes_Barrel_Page
   
   /** Build the 'Page' toolbar
    */
-  function make_toolbar()
+  function make_toolbar(&$caller)
   {
     global $globals;
     $props = $this->props;
     
     $topbar = array ();
+    $from = htmlentities($caller->script_uri());
     
     if ($props['PID']) {    
       $hp = $this->barrel->getPID('');
@@ -174,7 +175,7 @@ class Diogenes_Barrel_Page
       array_push($topbar, array( __("browse files"), "files?dir={$props['PID']}" ));
       array_push($topbar, array( __("page properties"), "pages?dir={$props['PID']}" ));
       array_push($topbar, array( __("view page"), "../". $this->getLocation()));
-      array_push($topbar, array(__("add a page"), "pages?action=edit&parent=".$props['PID']) );
+      array_push($topbar, array(__("add a page"), "pages?action=edit&amp;parent=".$props['PID']."&amp;from=$from") );
       if ($this->barrel->flags->hasFlag("plug")) {
         array_push($topbar, array( __("plugins"), "plugins?plug_page={$props['PID']}" ) );
       }
@@ -202,7 +203,7 @@ class Diogenes_Barrel_Page
   }
 
 
-  /** Write the page's properties to database
+  /** Write the page's properties to database and returns the PID of that page.
    *
    * @param $homepage
    * @param $caller
@@ -233,7 +234,6 @@ class Diogenes_Barrel_Page
         }
       }
     }
-
     
     // check that the location is valid
     if ($homepage) 
@@ -324,8 +324,11 @@ class Diogenes_Barrel_Page
     
     // recompile tree
     $this->barrel->compileTree(); 
-    $this->barrel->readTree();         
-  }  
+    $this->barrel->readTree();
+
+    return $props['PID'];
+  } 
+
 }
  
 ?>
