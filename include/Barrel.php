@@ -310,6 +310,10 @@ class Diogenes_Barrel
   {
     global $globals;
 
+    if (!$path) {
+      $caller->info("rmPath: will not delete from root!");
+      return false;
+    }
     $curpid = $this->getPID($path);
     if (!$curpid) {
       $caller->info("rmPath: could not find '$path'");

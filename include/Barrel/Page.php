@@ -78,7 +78,14 @@ class Diogenes_Barrel_Page
   {     
     global $globals;
       
-    $caller->info(__("Deleting page"). " $dir");    
+    $loc = $barrel->getLocation($dir);
+    if (!$loc)
+    {
+      $caller->info("Error : not deleting page $dir\n");
+      return false;
+    }
+    
+    $caller->info(__("Deleting page"). " '$loc'");
     
     // check there are no child pages
     $res = $globals->db->query("select PID from {$barrel->table_page} where parent=$dir");
@@ -92,7 +99,7 @@ class Diogenes_Barrel_Page
     
     $rcs = $caller->getRcs();
     $globals->db->query("delete from {$barrel->table_page} where PID=$dir");
-    $caller->log("page_delete","{$barrel->alias}:$dir");
+    $caller->log("page_delete","{$barrel->alias}:$loc");
     system("rm -rf ". escapeshellarg($rcs->rcsPath($dir)));
     system("rm -rf ". escapeshellarg($rcs->spoolPath($dir)));
     $barrel->compileTree();

@@ -27,7 +27,7 @@ $page->assign('msg_add_page', array(__("Add a page"),"?action=edit") );
 
 $page->assign('post', $page->script_self());
 $page->assign('table', $bbarrel->table_page);
-
+$page->assign('from', $_REQUEST['from']);
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $target = isset($_REQUEST["target"]) ? $_REQUEST["target"] : "";
 
@@ -94,12 +94,11 @@ case "update":
     }    
     
     $bpage = new Diogenes_Barrel_Page($bbarrel, $props);
-    $bpage->toDb($homepage, $page);
-    break;
-    
-   
-case "page_delete":
-    Diogenes_Barrel_Page::delete($bbarrel, $target, $page);
+    if ($bpage->toDb($homepage, $page) && $_REQUEST['from'])
+    {
+      header("Location: {$_REQUEST['from']}");
+      exit;
+    }
     break;
 }
 
@@ -119,7 +118,7 @@ if ($dir)
 // "Page" toolbar  
 //if (isset($bpage->props['PID'])) {
 if ($dir != 0) {
-  $page->toolbar(__("Page"), $bpage->make_toolbar());
+  $page->toolbar(__("Page"), $bpage->make_toolbar($page));
   $page->toolbar(__("File"), $bpage->make_doc_toolbar($rcs));
 }
   

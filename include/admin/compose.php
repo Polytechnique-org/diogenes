@@ -58,7 +58,7 @@ $page->assign('file_content',chunk_split(base64_encode($protdoc)));
 $page->assign('msg_log',__("log message"));
 
 // build toolbars
-$page->toolbar(__("Page"), $bpage->make_toolbar());
+$page->toolbar(__("Page"), $bpage->make_toolbar($page));
 $page->toolbar(__("File"), $bfile->make_toolbar(true));
 
 $auxpage = new DiogenesBarrel("/".$bbarrel->alias."/". $bpage->getLocation());

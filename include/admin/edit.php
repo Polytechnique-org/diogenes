@@ -66,7 +66,7 @@ if ($file == $globals->cssfile) {
 }
 
 // top toolbar
-$page->toolbar(__("Page"), $bpage->make_toolbar());
+$page->toolbar(__("Page"), $bpage->make_toolbar($page));
 $page->toolbar(__("File"), $bfile->make_toolbar(true));
 $page->display('admin-edit.tpl');
 ?>

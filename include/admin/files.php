@@ -58,7 +58,7 @@ $page->assign('msg_read_perms',__("read access"));
 $page->assign('msg_write_perms',__("write access"));
 
 // build navigation toolbar
-$page->toolbar(__("Page"), $fpage->make_toolbar());
+$page->toolbar(__("Page"), $fpage->make_toolbar($page));
 
 
 switch ($action) {
@@ -102,7 +102,8 @@ case "file_rename":
   break;
 
 case "page_delete":
-  Diogenes_Barrel_Page::delete($bbarrel, $target, $page);
+  $target_path = $bbarrel->getLocation($target);
+  $bbarrel->rmPath($target_path, $page);
   $fpages = $bbarrel->getPages();
   break;
   

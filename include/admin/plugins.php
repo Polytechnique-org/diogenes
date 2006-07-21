@@ -20,7 +20,7 @@ if ($dir != 0)
 {
   $bpage = Diogenes_Barrel_Page::fromDb($bbarrel, $dir);
   $page->assign('greeting',__("Page plugins ") . " - " . ($bpage->props['location'] ? $bpage->props['location'] : __("home")) );    
-  $page->toolbar(__("Page"), $bpage->make_toolbar());
+  $page->toolbar(__("Page"), $bpage->make_toolbar($page));
   $wperms = $bpage->props['wperms'];
 } else {
   $page->assign('greeting',__("Available plugins"));

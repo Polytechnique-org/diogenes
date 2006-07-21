@@ -1,6 +1,7 @@
 <form method="post" action="{$post}">
 <input type="hidden" name="action" value="update" />
 <input type="hidden" name="dir" value="{$page_obj.PID}" />
+<input type="hidden" name="from" value="{$from}" />
 <table class="light" style="width:70%">
 <tr>
   <th colspan="2">{$msg_properties}</th>
