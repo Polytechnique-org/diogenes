@@ -75,17 +75,85 @@ function importPods(&$caller, $docarray, $docbase, $template = '')
  */
 function usage()
 {
-  echo "Usage : pod2diogenes.php 
+  echo "Usage: pod2diogenes [options] barrel podmap\n\n";
+  echo "Options\n\n";
+  echo "  -b<docbase>   the base URL for Perl docs (default: '')\n";
+  echo "  -h            display help message\n";
+  echo "  -t<template>  set page template to <template>\n";
+  echo "  -u<user>      make commits as <user> (default : current user)\n";
   exit(1);
+}
+
+
+/** Parse a podmap file.
+ */
+function parsePodmap($mapfile)
+{
+  if (!($fp = fopen($mapfile, "r")))
+  {
+    echo "could not open '$mapfile'\n";
+    return;
+  }
+  $podmap = array();
+  while ($line = fgets($fp))
+  {
+    $bits = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
+    $podmap[$bits[0]] = $bits[1];
+    
+  }
+  fclose($fp);
+  return $podmap;
 }
 
 
 function main()
 {
-  $alias = "umts_tools";
-  $script = new Diogenes_Script($alias, "sharky");
-  $podmap = array();
-  importPods($script, $docs, "docs", "barrel:pod.tpl");
+  global $argv;
+
+  // set defaults
+  $docbase = '';
+  $user = get_current_user();
+  $template = '';
+  
+  // parse options
+  $opts = Console_GetOpt::getopt($argv, "b:hu:t:");
+  if ( PEAR::isError($opts) ) {
+    echo $opts->getMessage();
+    usage();
+  } else {
+    $argv = $opts[1];
+    $opts = $opts[0];
+    foreach ( $opts as $opt) {
+      switch ($opt[0]) {
+      case "h":
+        usage();
+        break;
+      case "b":
+        $docbase = $opt[1];
+        break;
+      case "u":
+        $user = $opt[1];
+        break;
+      case "t":
+        $template = $opt[1];
+        break;
+      }
+    }
+  }
+  if (sizeof($argv) != 2) 
+    usage();
+  list($alias, $mapfile) = $argv;
+
+  // parse the podmap file
+  if (!($podmap = parsePodmap($mapfile)))
+  {
+    echo "failed to parse '$mapfile'\n";
+    exit(1);
+  }
+
+  // perform the actual work
+  $script = new Diogenes_Script($alias, $user);
+  importPods($script, $podmap, $docbase, $template);
 }
 
 main();
