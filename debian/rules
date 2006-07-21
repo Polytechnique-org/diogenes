@@ -33,7 +33,7 @@ binary-install/diogenes::
 	# PHP files, templates, locales et al.
 	dh_install -X.svn -pdiogenes -Xdiogenes.globals.inc.php.in \
 	                       cvs.pl \
-	                       htdocs include locale plugins styles templates \
+	                       htdocs include locale plugins scripts styles templates \
 			       usr/share/diogenes
 	
 	# remove library files

@@ -7,7 +7,7 @@ LIB_DIST = libdiogenes-$(VERSION)
 PKG_FILES = AUTHORS ChangeLog COPYING README Makefile \
             cvs.pl
 	    
-PKG_DIRS = config htdocs include locale po plugins styles templates
+PKG_DIRS = config htdocs include locale po plugins scripts styles templates
 
 LIB_FILES = COPYING
 LIB_BASE = include/diogenes
