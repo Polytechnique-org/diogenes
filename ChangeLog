@@ -2,6 +2,7 @@ Diogenes 0.9.20pre1
  * added - add RSS feeds describing changes to barrels
  * added - offer preset style sheets for barrels
  * fixed - fix a warning when a barrel's menu is empty
+ * fixed - reduce webserver logging of RCS operations
 
 Diogenes 0.9.19
  * fixed - fix handling of filter plugins without arguments

@@ -118,7 +118,7 @@ class DiogenesRcs extends DiogenesSpool {
   {
     $this->info("RCS : checkout out $file ($rev)..");
     $rfile = $this->rcsFile($dir,$file);
-    if ($this->cmdExec("co -r".escapeshellarg($rev)." ".escapeshellarg($rfile)." ".escapeshellarg("$output/$file")))
+    if ($this->cmdExec("co -q -r".escapeshellarg($rev)." ".escapeshellarg($rfile)." ".escapeshellarg("$output/$file")))
     {
       $this->info("RCS : Error, checkout failed!");
       $this->info($this->cmdStatus());
@@ -154,7 +154,7 @@ class DiogenesRcs extends DiogenesSpool {
 
     // if the RCS file does not exist, create it
     if (!file_exists($rfile)) {
-      if ($this->cmdExec("rcs -i ".escapeshellarg($rfile)))
+      if ($this->cmdExec("echo '' | rcs -q -i ".escapeshellarg($rfile)))
       {
         // error
         $this->info("RCS : Error, could not initialise RCS file '$rfile'!");
@@ -164,7 +164,7 @@ class DiogenesRcs extends DiogenesSpool {
     }
 
     // lock the spool file
-    if ($this->cmdExec("co -l ".escapeshellarg($rfile)." ".escapeshellarg($sfile)))
+    if ($this->cmdExec("co -q -l ".escapeshellarg($rfile)." ".escapeshellarg($sfile)))
     {
         // error
         $this->info("RCS : Error, could not get RCS lock on file '$file'!");
@@ -175,7 +175,7 @@ class DiogenesRcs extends DiogenesSpool {
       fwrite($fp,$content);
       fclose($fp);
       
-      if ($this->cmdExec("ci -w".escapeshellarg($this->login). ($message ? " -m".escapeshellarg($message) : "").
+      if ($this->cmdExec("ci -q -w".escapeshellarg($this->login). ($message ? " -m".escapeshellarg($message) : "").
              " ". escapeshellarg($sfile). " ". escapeshellarg($rfile)))
       {
         // error
@@ -184,7 +184,7 @@ class DiogenesRcs extends DiogenesSpool {
         return false;
       }
       
-      if ($this->cmdExec("co ".escapeshellarg($rfile)." ".escapeshellarg($sfile)))
+      if ($this->cmdExec("co -q ".escapeshellarg($rfile)." ".escapeshellarg($sfile)))
       {
         // error
         $this->info("RCS : Error, checkout after checkin failed!");
