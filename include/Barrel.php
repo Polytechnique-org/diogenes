@@ -277,6 +277,7 @@ class Diogenes_Barrel
   /** Create a page with the given path, and return its PID.
    *
    * @param $path
+   * @param $caller
    */
   function makePath($path, &$caller)
   {
@@ -299,6 +300,42 @@ class Diogenes_Barrel
     return $curpid;
   }
   
+
+  /** Recursively delete a given path.
+   *
+   * @param $path
+   * @param $caller
+   */
+  function rmPath($path, &$caller)
+  {
+    global $globals;
+
+    $curpid = $this->getPID($path);
+    if (!$curpid) {
+      $caller->info("rmPath: could not find '$path'");
+      return false;
+    }
+
+    // lookup children
+    $res = $globals->db->query("select PID from {$this->table_page} where parent=$curpid");
+    $children = array();
+    while (list($child) = mysql_fetch_row($res))
+      array_push($children, $child);
+    mysql_free_result($res);
+
+    // recurse into children
+    foreach ($children as $child)
+    {
+      $childpath = $this->getLocation($child);
+      if ($childpath) {
+        if (!$this->rmPath($childpath, $caller)) 
+          return false;
+      }
+    }
+    
+    // delete this page
+    return Diogenes_Barrel_Page::delete($this, $curpid, $caller);
+  }
 
   /** Compile the directory tree
    */
