@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Diogenes 0.9.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 16:41+0100\n"
+"POT-Creation-Date: 2006-07-21 22:57+0200\n"
 "PO-Revision-Date: 2004-07-02 05:19-0300\n"
 "Last-Translator: Pablo Castellazzi <pcastell@adinet.com.uy>\n"
 "Language-Team: Spanish\n"
@@ -99,14 +99,17 @@ msgstr "Cambiar"
 
 #: include/admin/compose.php:32 include/admin/edit.php:31
 #: include/admin/compose.php:34 include/admin/edit.php:33
+#: include/admin/edit.php:41
 msgid "Commiting changes to file"
 msgstr "Guardar cambios en archivo"
 
 #: include/admin/edit.php:41 include/admin/edit.php:43
+#: include/admin/edit.php:51
 msgid "File editor"
 msgstr "Editor de archivos"
 
 #: include/admin/edit.php:45 include/admin/edit.php:47
+#: include/admin/edit.php:55
 msgid "File source"
 msgstr "Código del archivo"
 
@@ -127,6 +130,8 @@ msgstr "Código del archivo"
 #: include/admin/pages.php:14 include/Barrel/Editor.php:164
 #: include/Plugin/Editor.php:264
 #: include/diogenes/diogenes.logger-view.inc.php:378
+#: htdocs/toplevel/options.php:67 include/admin/menus.php:119
+#: include/admin/edit.php:58
 msgid "Submit"
 msgstr "Enviar"
 
@@ -139,7 +144,8 @@ msgstr "catalogo de páginas"
 #: include/admin/files.php:28 include/admin/pages.php:154
 #: include/admin/compose.php:59 include/admin/edit.php:51
 #: include/Barrel/Page.php:147 include/admin/index.php:74
-#: include/Barrel/Page.php:174
+#: include/Barrel/Page.php:174 include/Barrel/Page.php:183
+#: include/Barrel/Events.php:114
 msgid "page properties"
 msgstr "propiedades de la página"
 
@@ -147,7 +153,8 @@ msgstr "propiedades de la página"
 #: include/admin/compose.php:60 include/admin/edit.php:52
 #: include/diogenes.rcs.inc.php:452 include/diogenes.rcs.inc.php:621
 #: include/Barrel/Page.php:148 include/admin/files.php:146
-#: include/Barrel/Page.php:175
+#: include/Barrel/Page.php:175 include/admin/files.php:147
+#: include/Barrel/Page.php:184
 msgid "view page"
 msgstr "ver página"
 
@@ -155,6 +162,7 @@ msgstr "ver página"
 #: include/admin/files.php:101 include/admin/pages.php:156
 #: include/admin/compose.php:61 include/admin/edit.php:53
 #: include/Barrel/Page.php:149 include/Barrel/Page.php:173
+#: include/Barrel/Page.php:182
 msgid "browse files"
 msgstr "examinar archivos"
 
@@ -171,6 +179,7 @@ msgstr "editor en grueso"
 #: htdocs/toplevel/options.php:51 include/admin/pages.php:133
 #: include/diogenes.barrel.inc.php:347 include/Barrel/File.php:95
 #: include/Barrel/File.php:115 include/diogenes.barrel.inc.php:343
+#: htdocs/toplevel/options.php:61 include/diogenes.barrel.inc.php:353
 msgid "HTML editor"
 msgstr "editor HTML"
 
@@ -186,41 +195,45 @@ msgid "Ekit"
 msgstr "Ekit"
 
 #: include/admin/menus.php:36 include/admin/menus.php:37
+#: include/admin/menus.php:16
 msgid "The site's menus"
 msgstr "Menú del sitio"
 
 #: include/admin/menus.php:44 include/admin/menus.php:45
+#: include/Barrel/Menu.php:51
 msgid "The selected menu has child items, please remove them first."
 msgstr ""
 "El menú seleccionado tiene elementos hijo, por favor eliminelos primero."
 
 #: include/admin/menus.php:144 include/admin/menus.php:145
-#: include/admin/menus.php:157
+#: include/admin/menus.php:157 include/admin/menus.php:112
 msgid "menu entry properties"
 msgstr "propiedades de la entrada"
 
 #: include/admin/menus.php:147 include/admin/menus.php:148
-#: include/admin/menus.php:160
+#: include/admin/menus.php:160 include/admin/menus.php:115
 msgid "none"
 msgstr "ninguno"
 
 #: include/admin/menus.php:148 include/admin/menus.php:149
-#: include/admin/menus.php:161
+#: include/admin/menus.php:161 include/admin/menus.php:116
 msgid "internal link"
 msgstr "enlace interno"
 
 #: include/admin/menus.php:149 include/admin/menus.php:150
-#: include/admin/menus.php:162
+#: include/admin/menus.php:162 include/admin/menus.php:117
 msgid "external link"
 msgstr "enlace externo"
 
 #: include/admin/menus.php:173 include/diogenes.plugin-editor.inc.php:240
 #: include/admin/menus.php:185 include/Plugin/Editor.php:269
+#: include/admin/menus.php:141
 msgid "move up"
 msgstr "mover hacia arriba"
 
 #: include/admin/menus.php:176 include/diogenes.plugin-editor.inc.php:241
 #: include/admin/menus.php:188 include/Plugin/Editor.php:270
+#: include/admin/menus.php:144
 msgid "move down"
 msgstr "mover hacia abajo"
 
@@ -231,7 +244,8 @@ msgstr "mover hacia abajo"
 #: include/diogenes.barrel-editor.inc.php:43 include/Barrel/Page.php:119
 #: include/Barrel/File.php:74 include/admin/menus.php:190
 #: include/Barrel/File.php:92 include/Barrel/Page.php:143
-#: include/Barrel/Editor.php:45
+#: include/Barrel/Editor.php:45 include/admin/menus.php:146
+#: include/Barrel/Page.php:151
 msgid "edit"
 msgstr "editar"
 
@@ -242,17 +256,18 @@ msgstr "editar"
 #: include/diogenes.barrel-editor.inc.php:52 include/Barrel/Page.php:129
 #: include/Barrel/File.php:77 include/admin/menus.php:191
 #: include/Barrel/File.php:95 include/Barrel/Page.php:153
-#: include/Barrel/Editor.php:54
+#: include/Barrel/Editor.php:54 include/admin/menus.php:147
+#: include/Barrel/Page.php:161
 msgid "delete"
 msgstr "eliminar"
 
 #: include/admin/menus.php:217 include/admin/menus.php:216
-#: include/admin/menus.php:228
+#: include/admin/menus.php:228 include/admin/menus.php:182
 msgid "External links are denoted with the [ext] prefix."
 msgstr "Los enlaces externos están marcados con el prefijo [ext]."
 
 #: include/admin/menus.php:222 include/admin/menus.php:221
-#: include/admin/menus.php:233
+#: include/admin/menus.php:233 include/admin/menus.php:187
 msgid "Add new entry"
 msgstr "Agregar nueva entrada"
 
@@ -267,17 +282,17 @@ msgid "Deleting file"
 msgstr "Eliminando archivo"
 
 #: include/admin/files.php:81 include/admin/files.php:112
-#: include/admin/files.php:120
+#: include/admin/files.php:120 include/admin/files.php:121
 msgid "Revision differences"
 msgstr "Diferentes revisiones"
 
 #: include/admin/files.php:90 include/admin/files.php:120
-#: include/admin/files.php:128
+#: include/admin/files.php:128 include/admin/files.php:129
 msgid "File revisions"
 msgstr "Revisiones del archivo"
 
 #: include/admin/files.php:103 include/admin/files.php:155
-#: include/admin/files.php:194
+#: include/admin/files.php:194 include/admin/files.php:195
 msgid "File manager"
 msgstr "Manajador de archivos"
 
@@ -292,7 +307,7 @@ msgstr "Importar archivo"
 
 #: include/admin/files.php:42 include/admin/pages.php:210
 #: include/admin/pages.php:191 include/admin/files.php:39
-#: include/admin/pages.php:163
+#: include/admin/pages.php:163 include/admin/pages.php:162
 msgid "Send"
 msgstr "Enviar"
 
@@ -301,12 +316,12 @@ msgid "File to upload"
 msgstr "Archivo a subir"
 
 #: include/admin/index.php:20 include/admin/index.php:45
-#: include/admin/index.php:47
+#: include/admin/index.php:47 include/Barrel/Events.php:85
 msgid "site created"
 msgstr "sitio creado"
 
 #: include/admin/index.php:23 include/admin/index.php:50
-#: include/admin/index.php:63
+#: include/admin/index.php:63 include/Barrel/Events.php:101
 msgid "page created"
 msgstr "página creada"
 
@@ -315,7 +330,7 @@ msgid "page deleted"
 msgstr "página eliminada"
 
 #: include/admin/index.php:31 include/admin/index.php:59
-#: include/admin/index.php:86
+#: include/admin/index.php:86 include/Barrel/Events.php:128
 msgid "file updated"
 msgstr "archivo actualizado"
 
@@ -324,7 +339,7 @@ msgid "file removed"
 msgstr "archivo eliminado"
 
 #: include/admin/index.php:43 include/admin/index.php:77
-#: include/admin/index.php:105
+#: include/admin/index.php:105 include/admin/index.php:16
 msgid "Welcome to the Diogenes backoffice"
 msgstr "Bienvenido a Diogenes backoffice"
 
@@ -334,6 +349,7 @@ msgstr "Bienvenido a Diogenes backoffice"
 #: include/diogenes/diogenes.logger-view.inc.php:369
 #: include/admin/files.php:46 include/admin/index.php:106
 #: include/diogenes/diogenes.logger-view.inc.php:368
+#: include/admin/index.php:17
 msgid "date"
 msgstr "fecha"
 
@@ -343,16 +359,17 @@ msgstr "fecha"
 #: include/diogenes/diogenes.logger-view.inc.php:366
 #: include/admin/index.php:107
 #: include/diogenes/diogenes.logger-view.inc.php:365
+#: include/admin/index.php:18
 msgid "user"
 msgstr "usuario"
 
 #: include/admin/index.php:46 include/admin/index.php:80
-#: include/admin/index.php:108
+#: include/admin/index.php:108 include/admin/index.php:19
 msgid "event"
 msgstr "evento"
 
 #: include/admin/pages.php:11 include/admin/pages.php:14
-#: include/admin/pages.php:158
+#: include/admin/pages.php:158 include/admin/pages.php:157
 msgid "Page manager"
 msgstr "Administrador de páginas"
 
@@ -364,6 +381,7 @@ msgstr "Reiniciar"
 #: include/admin/pages.php:14 include/diogenes.barrel.inc.php:312
 #: include/admin/pages.php:17 include/diogenes.barrel.inc.php:343
 #: include/admin/pages.php:16 include/diogenes.barrel.inc.php:339
+#: include/diogenes.barrel.inc.php:349
 msgid "Page properties"
 msgstr "Propiedades de la página"
 
@@ -418,7 +436,7 @@ msgid "Raw file import"
 msgstr "Importando archivo en grueso"
 
 #: include/admin/pages.php:184 include/admin/pages.php:169
-#: include/admin/pages.php:167
+#: include/admin/pages.php:167 include/admin/pages.php:166
 msgid "visible"
 msgstr "mostrar"
 
@@ -430,11 +448,12 @@ msgstr "ocultar"
 #: include/diogenes.rcs.inc.php:619 include/Barrel/Page.php:118
 #: include/Barrel/File.php:73 include/admin/files.php:144
 #: include/Barrel/File.php:91 include/Barrel/Page.php:142
+#: include/admin/files.php:145 include/Barrel/Page.php:150
 msgid "view"
 msgstr "ver"
 
 #: include/admin/pages.php:197 include/Barrel/Page.php:120
-#: include/Barrel/Page.php:144
+#: include/Barrel/Page.php:144 include/Barrel/Page.php:152
 msgid "properties"
 msgstr "propiedades"
 
@@ -445,48 +464,49 @@ msgstr "archivos"
 #: include/admin/pages.php:199 include/diogenes.rcs.inc.php:418
 #: include/Barrel/Page.php:121 include/Barrel/File.php:75
 #: include/Barrel/File.php:93 include/Barrel/Page.php:145
+#: include/Barrel/Page.php:153
 msgid "revisions"
 msgstr "revisiones"
 
 #: include/admin/pages.php:211 include/admin/pages.php:195
-#: include/admin/pages.php:172
+#: include/admin/pages.php:172 include/admin/pages.php:171
 msgid "Import a Word document"
 msgstr "Importar documento Word"
 
 #: include/admin/pages.php:214 include/admin/pages.php:198
-#: include/admin/pages.php:176
+#: include/admin/pages.php:176 include/admin/pages.php:175
 msgid "This page's master document is currently a Word document."
 msgstr "El documento maestro es actualemente un documento Word"
 
 #: include/admin/pages.php:215 include/admin/pages.php:199
-#: include/admin/pages.php:177
+#: include/admin/pages.php:177 include/admin/pages.php:176
 msgid "You can upload a new version of the Word document below."
 msgstr "A continuaicón puede subir una nueva version del documento Word."
 
 #: include/admin/pages.php:216 include/admin/pages.php:200
-#: include/admin/pages.php:178
+#: include/admin/pages.php:178 include/admin/pages.php:177
 msgid "You can get the current version of the file here"
 msgstr "Aquí obtendrá la versión actual del archivo"
 
 #: include/admin/pages.php:219 include/admin/pages.php:203
-#: include/admin/pages.php:181
+#: include/admin/pages.php:181 include/admin/pages.php:180
 msgid "If you wish, you can set this page's content from a Word document."
 msgstr ""
 "Si lo desea, puede cargar el contenido de esta página desde un documento de "
 "Word."
 
 #: include/admin/pages.php:220 include/admin/pages.php:204
-#: include/admin/pages.php:182
+#: include/admin/pages.php:182 include/admin/pages.php:181
 msgid "To do so, simply upload the Word document below."
 msgstr "Para hacerlo, a continuación simplemente suba el documento."
 
 #: include/admin/pages.php:222 include/admin/pages.php:208
-#: include/admin/pages.php:160
+#: include/admin/pages.php:160 include/admin/pages.php:159
 msgid "Import HTML"
 msgstr "Importar HTML"
 
 #: include/admin/pages.php:223 include/admin/pages.php:209
-#: include/admin/pages.php:161
+#: include/admin/pages.php:161 include/admin/pages.php:160
 msgid ""
 "You can replace the current page's contents by uploading an HTML file below."
 msgstr ""
@@ -494,7 +514,7 @@ msgstr ""
 "archivo HTML."
 
 #: include/admin/pages.php:224 include/admin/pages.php:210
-#: include/admin/pages.php:162
+#: include/admin/pages.php:162 include/admin/pages.php:161
 msgid ""
 "If the file name ends with .htm or .html, anything outside the &lt;body&gt;"
 "&lt;/body&gt; pair will be stripped."
@@ -547,7 +567,7 @@ msgstr "contraseña"
 
 #: include/diogenes.toplevel.inc.php:52 include/diogenes.barrel.inc.php:104
 #: include/diogenes.barrel.inc.php:105 include/diogenes.toplevel.inc.php:53
-#: include/diogenes.barrel.inc.php:107
+#: include/diogenes.barrel.inc.php:107 include/diogenes.barrel.inc.php:108
 msgid "You are not authorized to view this page!"
 msgstr "No está autorizado a ver esta página!"
 
@@ -556,36 +576,38 @@ msgstr "No está autorizado a ver esta página!"
 #: include/diogenes.toplevel.inc.php:81 include/diogenes.barrel.inc.php:332
 #: include/diogenes.admin.inc.php:69 include/diogenes.toplevel.inc.php:39
 #: include/diogenes.toplevel.inc.php:82 include/diogenes.admin.inc.php:68
-#: include/diogenes.barrel.inc.php:328
+#: include/diogenes.barrel.inc.php:328 include/diogenes.barrel.inc.php:338
 msgid "Home"
 msgstr "Inicio"
 
 #: include/diogenes.toplevel.inc.php:192 include/diogenes.barrel.inc.php:303
 #: include/diogenes.toplevel.inc.php:86 include/diogenes.barrel.inc.php:334
 #: include/diogenes.toplevel.inc.php:87 include/diogenes.barrel.inc.php:330
+#: include/diogenes.barrel.inc.php:340
 msgid "Logout"
 msgstr "Desconectar"
 
 #: include/diogenes.toplevel.inc.php:194 include/diogenes.barrel.inc.php:306
 #: include/diogenes.toplevel.inc.php:88 include/diogenes.barrel.inc.php:337
 #: include/diogenes.toplevel.inc.php:89 include/diogenes.barrel.inc.php:333
+#: include/diogenes.barrel.inc.php:343
 msgid "Login"
 msgstr "Iniciar sesión"
 
 #: include/diogenes.admin.inc.php:37 include/diogenes.admin.inc.php:64
 #: include/diogenes.barrel.inc.php:310 include/diogenes.barrel.inc.php:341
 #: include/diogenes.admin.inc.php:71 include/diogenes.admin.inc.php:70
-#: include/diogenes.barrel.inc.php:337
+#: include/diogenes.barrel.inc.php:337 include/diogenes.barrel.inc.php:347
 msgid "Administration"
 msgstr "Administración"
 
 #: include/diogenes.rcs.inc.php:455 include/diogenes.rcs.inc.php:624
-#: include/admin/files.php:149
+#: include/admin/files.php:149 include/admin/files.php:150
 msgid "diff to"
 msgstr "diferencias con"
 
 #: include/diogenes.rcs.inc.php:459 include/diogenes.rcs.inc.php:628
-#: include/admin/files.php:153
+#: include/admin/files.php:153 include/admin/files.php:154
 msgid "restore"
 msgstr "recuperar"
 
@@ -632,7 +654,7 @@ msgid "Powered by Diogenes"
 msgstr "Construído con Diogenes"
 
 #: include/diogenes.page.inc.php:213 include/diogenes.page.inc.php:216
-#: include/diogenes.page.inc.php:212
+#: include/diogenes.page.inc.php:212 include/diogenes.page.inc.php:214
 msgid "The requested document was not found."
 msgstr "El documento solicitado no existe."
 
@@ -644,6 +666,7 @@ msgstr "Manual de usuario"
 #: include/diogenes.toplevel.inc.php:191 include/diogenes.barrel.inc.php:304
 #: include/diogenes.toplevel.inc.php:85 include/diogenes.barrel.inc.php:335
 #: include/diogenes.toplevel.inc.php:86 include/diogenes.barrel.inc.php:331
+#: include/diogenes.barrel.inc.php:341
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -683,12 +706,12 @@ msgid "Logger actions"
 msgstr "Registrar acciones"
 
 #: include/diogenes.page.inc.php:198 include/diogenes.page.inc.php:201
-#: include/diogenes.page.inc.php:197
+#: include/diogenes.page.inc.php:197 include/diogenes.page.inc.php:199
 msgid "Diogenes error"
 msgstr "Error de Diogenes"
 
 #: include/diogenes.page.inc.php:199 include/diogenes.page.inc.php:202
-#: include/diogenes.page.inc.php:198
+#: include/diogenes.page.inc.php:198 include/diogenes.page.inc.php:200
 msgid "Error"
 msgstr "Error"
 
@@ -729,6 +752,7 @@ msgstr "administrador"
 #: include/diogenes/diogenes.logger-view.inc.php:375
 #: include/admin/files.php:49 include/admin/menus.php:231
 #: include/diogenes/diogenes.logger-view.inc.php:374
+#: include/admin/menus.php:185
 msgid "actions"
 msgstr "acciones"
 
@@ -806,12 +830,12 @@ msgstr ""
 "PHP está activa."
 
 #: include/diogenes.barrel.inc.php:314 include/diogenes.barrel.inc.php:345
-#: include/diogenes.barrel.inc.php:341
+#: include/diogenes.barrel.inc.php:341 include/diogenes.barrel.inc.php:351
 msgid "Edit this page"
 msgstr "Editar es página"
 
 #: include/diogenes.barrel.inc.php:315 include/diogenes.barrel.inc.php:346
-#: include/diogenes.barrel.inc.php:342
+#: include/diogenes.barrel.inc.php:342 include/diogenes.barrel.inc.php:352
 msgid "Raw editor"
 msgstr "Editor en grueso"
 
@@ -862,14 +886,14 @@ msgid "size"
 msgstr "tamaño"
 
 #: include/admin/pages.php:91 include/Barrel/Page.php:205
-#: include/Barrel/Page.php:248
+#: include/Barrel/Page.php:248 include/Barrel/Page.php:256
 msgid "the page location cannot contain spaces or special characters"
 msgstr ""
 "la ubicación de la página no pueden contener espacios o símbolos de "
 "puntuación."
 
 #: include/admin/pages.php:95 include/Barrel/Page.php:212
-#: include/Barrel/Page.php:255
+#: include/Barrel/Page.php:255 include/Barrel/Page.php:263
 msgid "this location cannot be used, it is reserved by Diogenes"
 msgstr "esta ubicación no puede ser usada, es reservada para Diogenes"
 
@@ -879,28 +903,29 @@ msgid "log"
 msgstr "registro"
 
 #: include/admin/menus.php:145 include/admin/menus.php:146
-#: include/admin/menus.php:158
+#: include/admin/menus.php:158 include/admin/menus.php:113
 msgid "entry title"
 msgstr "ingrese título"
 
 #: include/admin/menus.php:146 include/admin/menus.php:147
-#: include/admin/menus.php:159
+#: include/admin/menus.php:159 include/admin/menus.php:114
 msgid "type of link"
 msgstr "tipo del enlace"
 
 #: include/admin/menus.php:218 include/admin/menus.php:217
-#: include/admin/menus.php:229
+#: include/admin/menus.php:229 include/admin/menus.php:183
 msgid "menu name"
 msgstr "nombre del menú"
 
 #: include/admin/menus.php:219 include/admin/menus.php:218
-#: include/admin/menus.php:230
+#: include/admin/menus.php:230 include/admin/menus.php:184
 msgid "link"
 msgstr "enlace"
 
 #: htdocs/toplevel/options.php:80 htdocs/toplevel/options_expert.php:8
 #: include/diogenes.toplevel.inc.php:201 htdocs/toplevel/options.php:43
 #: include/diogenes.toplevel.inc.php:95 include/diogenes.toplevel.inc.php:96
+#: htdocs/toplevel/options.php:52
 msgid "Global options"
 msgstr "Opciones globales"
 
@@ -909,13 +934,13 @@ msgstr "opciones del menú"
 
 #: htdocs/toplevel/options.php:83 include/admin/options.php:69
 #: htdocs/toplevel/options.php:46 include/admin/options.php:71
-#: include/admin/options.php:73
+#: include/admin/options.php:73 htdocs/toplevel/options.php:55
 msgid "menu style"
 msgstr "estilo del menú"
 
 #: htdocs/toplevel/options.php:84 include/admin/options.php:70
 #: htdocs/toplevel/options.php:47 include/admin/options.php:72
-#: include/admin/options.php:74
+#: include/admin/options.php:74 htdocs/toplevel/options.php:56
 msgid "menu theme"
 msgstr "tema del menú"
 
@@ -928,7 +953,7 @@ msgid "Site options"
 msgstr "Opciones del sitio"
 
 #: include/admin/options.php:55 include/admin/options.php:57
-#: include/admin/options.php:59
+#: include/admin/options.php:59 include/admin/options.php:53
 msgid "fully expanded"
 msgstr "completamente expandido"
 
@@ -1053,7 +1078,8 @@ msgstr "Error de autenticación!"
 #: include/admin/files.php:154 include/admin/pages.php:124
 #: include/admin/compose.php:61 include/admin/edit.php:53
 #: include/admin/plugins.php:23 include/admin/files.php:61
-#: include/admin/pages.php:122
+#: include/admin/pages.php:122 include/admin/pages.php:121
+#: include/admin/edit.php:69
 msgid "Page"
 msgstr "Página"
 
@@ -1063,7 +1089,8 @@ msgstr "Página"
 #: include/admin/files.php:123 include/admin/pages.php:136
 #: include/admin/compose.php:62 include/admin/edit.php:54
 #: include/admin/files.php:122 include/admin/files.php:161
-#: include/admin/pages.php:123
+#: include/admin/pages.php:123 include/admin/pages.php:122
+#: include/admin/files.php:162 include/admin/edit.php:70
 msgid "File"
 msgstr "Archivo"
 
@@ -1095,18 +1122,19 @@ msgstr "opciones de la plantilla"
 
 #: htdocs/toplevel/options.php:85 include/admin/options.php:66
 #: htdocs/toplevel/options.php:48 include/admin/options.php:68
-#: include/admin/options.php:70
+#: include/admin/options.php:70 htdocs/toplevel/options.php:57
 msgid "templates directory"
 msgstr "directiorio de plantillas"
 
 #: htdocs/toplevel/options.php:86 include/admin/options.php:67
 #: htdocs/toplevel/options.php:49 include/admin/options.php:69
-#: include/admin/options.php:71
+#: include/admin/options.php:71 htdocs/toplevel/options.php:58
 msgid "default template"
 msgstr "plantilla por omisión"
 
 #: include/admin/compose.php:56 include/admin/edit.php:46
 #: include/admin/compose.php:58 include/admin/edit.php:48
+#: include/admin/edit.php:56
 msgid "log message"
 msgstr "registrar mensaje"
 
@@ -1133,27 +1161,27 @@ msgid "status"
 msgstr "estado"
 
 #: include/admin/pages.php:184 include/admin/pages.php:169
-#: include/admin/pages.php:167
+#: include/admin/pages.php:167 include/admin/pages.php:166
 msgid "under construction"
 msgstr "en construcción"
 
 #: include/admin/pages.php:184 include/admin/pages.php:169
-#: include/admin/pages.php:167
+#: include/admin/pages.php:167 include/admin/pages.php:166
 msgid "disabled"
 msgstr "deshabilitado"
 
 #: include/admin/pages.php:184 include/admin/pages.php:169
-#: include/admin/pages.php:167
+#: include/admin/pages.php:167 include/admin/pages.php:166
 msgid "archived"
 msgstr "archivado"
 
 #: include/diogenes.barrel.inc.php:152 include/diogenes.barrel.inc.php:153
-#: include/diogenes.barrel.inc.php:155
+#: include/diogenes.barrel.inc.php:155 include/diogenes.barrel.inc.php:156
 msgid "This page is currently under construction."
 msgstr "Esta página se encuentra en construcción."
 
 #: include/diogenes.barrel.inc.php:156 include/diogenes.barrel.inc.php:157
-#: include/diogenes.barrel.inc.php:159
+#: include/diogenes.barrel.inc.php:159 include/diogenes.barrel.inc.php:160
 msgid "This page is currently unavailable."
 msgstr "Está página no se encuentra disponible."
 
@@ -1173,29 +1201,30 @@ msgid "http://diogenes-doc.polytechnique.org/en-root/"
 msgstr "http://diogenes-doc.polytechnique.org/en-root/"
 
 #: htdocs/toplevel/options.php:81 htdocs/toplevel/options_expert.php:9
-#: htdocs/toplevel/options.php:44
+#: htdocs/toplevel/options.php:44 htdocs/toplevel/options.php:53
 msgid "Mode"
 msgstr ""
 
 #: htdocs/toplevel/options.php:81 htdocs/toplevel/options_expert.php:9
-#: htdocs/toplevel/options.php:44
+#: htdocs/toplevel/options.php:44 htdocs/toplevel/options.php:53
 #, fuzzy
 msgid "standard"
 msgstr "comenzar"
 
 #: htdocs/toplevel/options.php:81 htdocs/toplevel/options_expert.php:9
-#: htdocs/toplevel/options.php:44
+#: htdocs/toplevel/options.php:44 htdocs/toplevel/options.php:53
 msgid "expert"
 msgstr ""
 
 #: htdocs/toplevel/options.php:82 include/admin/options.php:65
 #: htdocs/toplevel/options.php:45 include/admin/options.php:67
-#: include/admin/options.php:69
+#: include/admin/options.php:69 htdocs/toplevel/options.php:54
 #, fuzzy
 msgid "display options"
 msgstr "opciones de la plantilla"
 
 #: htdocs/toplevel/options.php:87 htdocs/toplevel/options.php:50
+#: htdocs/toplevel/options.php:60
 #, fuzzy
 msgid "system options"
 msgstr "Opciones del sitio"
@@ -1224,7 +1253,7 @@ msgid "value"
 msgstr ""
 
 #: include/admin/menus.php:221 include/admin/menus.php:220
-#: include/admin/menus.php:232
+#: include/admin/menus.php:232 include/admin/menus.php:186
 msgid "Menu"
 msgstr ""
 
@@ -1278,13 +1307,15 @@ msgid "The initial setup of the database was performed successfuly."
 msgstr ""
 
 #: include/admin/options.php:47 include/admin/options.php:49
-#: include/admin/options.php:51
+#: include/admin/options.php:51 include/admin/options.php:45
+#: include/admin/options.php:57
 #, fuzzy
 msgid "no"
 msgstr "ninguno"
 
 #: include/admin/options.php:47 include/admin/options.php:49
-#: include/admin/options.php:51
+#: include/admin/options.php:51 include/admin/options.php:45
+#: include/admin/options.php:57
 msgid "yes"
 msgstr ""
 
@@ -1344,7 +1375,7 @@ msgid ""
 "'plugins' next to the barrel of your choice."
 msgstr ""
 
-#: htdocs/toplevel/options.php:52
+#: htdocs/toplevel/options.php:52 htdocs/toplevel/options.php:62
 #, fuzzy
 msgid "Word document import"
 msgstr "Importar documento Word"
@@ -1394,21 +1425,25 @@ msgstr ""
 #: include/admin/files.php:155 include/admin/pages.php:160
 #: include/admin/plugins.php:22 include/admin/files.php:194
 #: include/admin/pages.php:156 include/Barrel/Page.php:170
+#: include/admin/pages.php:155 include/admin/files.php:195
+#: include/Barrel/Page.php:179
 #, fuzzy
 msgid "home"
 msgstr "Inicio"
 
 #: include/admin/files.php:182 include/admin/files.php:224
+#: include/admin/files.php:225
 msgid "Copy"
 msgstr ""
 
 #: include/admin/files.php:182 include/admin/files.php:224
+#: include/admin/files.php:225
 #, fuzzy
 msgid "Move"
 msgstr "Eliminar"
 
 #: include/admin/pages.php:18 include/admin/pages.php:17
-#: include/Barrel/Page.php:171
+#: include/Barrel/Page.php:171 include/Barrel/Page.php:180
 #, fuzzy
 msgid "parent page"
 msgstr "ver página"
@@ -1438,6 +1473,7 @@ msgstr ""
 #: include/Barrel/Page.php:150 include/Barrel/Page.php:178
 #: include/Barrel/Editor.php:52 include/Barrel/Editor.php:113
 #: include/Plugin/Editor.php:266 include/diogenes.page.inc.php:68
+#: include/Barrel/Page.php:158 include/Barrel/Page.php:187
 msgid "plugins"
 msgstr ""
 
@@ -1447,6 +1483,7 @@ msgid "Plugins"
 msgstr ""
 
 #: include/Barrel/Page.php:70 include/Barrel/Page.php:89
+#: include/Barrel/Page.php:96
 msgid "Not deleting page, it has child pages!"
 msgstr ""
 
@@ -1465,31 +1502,31 @@ msgstr "enlace"
 msgid "parameters"
 msgstr "propiedades"
 
-#: include/admin/files.php:192
+#: include/admin/files.php:192 include/admin/files.php:193
 msgid "Document"
 msgstr ""
 
-#: include/admin/index.php:52
+#: include/admin/index.php:52 include/Barrel/Events.php:90
 #, fuzzy
 msgid "barrel options"
 msgstr "Opciones globales"
 
-#: include/admin/index.php:57
+#: include/admin/index.php:57 include/Barrel/Events.php:95
 #, fuzzy
 msgid "barrel plugins"
 msgstr "Opciones globales"
 
-#: include/admin/index.php:68
+#: include/admin/index.php:68 include/Barrel/Events.php:109
 #, fuzzy
 msgid "page removed"
 msgstr "página creada"
 
-#: include/admin/index.php:80
+#: include/admin/index.php:80 include/Barrel/Events.php:121
 #, fuzzy
 msgid "page plugins"
 msgstr "enlace"
 
-#: include/admin/index.php:92
+#: include/admin/index.php:92 include/Barrel/Events.php:137
 #, fuzzy
 msgid "file deleted"
 msgstr "página eliminada"
@@ -1501,17 +1538,17 @@ msgid ""
 "file."
 msgstr ""
 
-#: include/Barrel/Page.php:81
+#: include/Barrel/Page.php:81 include/Barrel/Page.php:88
 #, fuzzy
 msgid "Deleting page"
 msgstr "Eliminando archivo"
 
-#: include/Barrel/Page.php:176
+#: include/Barrel/Page.php:176 include/Barrel/Page.php:185
 #, fuzzy
 msgid "add a page"
 msgstr "Agregar página"
 
-#: include/Barrel/Page.php:266
+#: include/Barrel/Page.php:266 include/Barrel/Page.php:274
 #, fuzzy
 msgid "Creating new page"
 msgstr "Eliminando archivo"
@@ -1525,4 +1562,48 @@ msgid ""
 "Warning : in order to make use of virtual hosts or WebDAV, you need to set "
 "$globals->rooturl to a full URL starting with http:// or https:// in your "
 "Diogenes configuration file."
+msgstr ""
+
+#: htdocs/toplevel/options.php:59
+msgid "display W3C validator links for barrel pages"
+msgstr ""
+
+#: htdocs/toplevel/options.php:63
+#, fuzzy
+msgid "debugging options"
+msgstr "opciones del menú"
+
+#: htdocs/toplevel/options.php:64
+msgid "debug database"
+msgstr ""
+
+#: htdocs/toplevel/options.php:65
+#, fuzzy
+msgid "debug plugins"
+msgstr "enlace"
+
+#: htdocs/toplevel/options.php:66
+msgid "default style sheet for new barrels"
+msgstr ""
+
+#: include/admin/options.php:74
+#, fuzzy
+msgid "RSS feed options"
+msgstr "Opciones del sitio"
+
+#: include/admin/options.php:75
+msgid "enable RSS feed"
+msgstr ""
+
+#: include/admin/edit.php:33
+#, fuzzy
+msgid "Copying style sheet"
+msgstr "Editar CSS"
+
+#: include/admin/edit.php:64
+msgid "replace by a preset style sheet"
+msgstr ""
+
+#: include/admin/edit.php:65
+msgid "Replace"
 msgstr ""
