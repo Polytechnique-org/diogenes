@@ -273,7 +273,33 @@ class Diogenes_Barrel
     return $this->flags->hasFlag($flag);
   }
 
-    
+
+  /** Create a page with the given path, and return its PID.
+   *
+   * @param $path
+   */
+  function makePath($path, &$caller)
+  {
+    $pathbits = split("/", $path);
+    $curpath = '';
+    $curpid = $this->getPID($curpath);;
+    foreach ($pathbits as $pathbit)
+    {
+      $newpath = ($curpath ? "$curpath/" : "") . $pathbit;
+      $newpid = $this->getPID($newpath);
+      if (!$newpid)
+      {
+        $tpage = new Diogenes_Barrel_Page($this, array('parent' => $curpid, 'location' => $pathbit));
+        $tpage->toDb(0, $caller);
+        $newpid = $this->getPID($newpath);
+      }
+      $curpath = $newpath;
+      $curpid = $newpid;
+    }
+    return $curpid;
+  }
+  
+
   /** Compile the directory tree
    */
   function compileTree()
