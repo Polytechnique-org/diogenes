@@ -21,20 +21,19 @@ DEB_INSTALL_DIRS_diogenes := etc/diogenes var/lib/diogenes var/spool/diogenes/te
 binary-install/diogenes::
 	# config
 	dh_install -pdiogenes debian/diogenes.debian.inc.php \
-			      debian/diogenes.config.inc.php \
-	                      config/apache.conf \
-			      usr/share/diogenes/config
+		debian/diogenes.config.inc.php \
+		config/apache.conf \
+		usr/share/diogenes/config
 	
 	# files for db installation
-	dh_install -pdiogenes config/updatedb.php $(SCRIPTDIR)
 	cat debian/prefix.sql config/db/diogenes.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.tables.sql.in
 	cat debian/prefix.sql config/db/diogenes.logactions.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.logactions.sql.in
 
 	# PHP files, templates, locales et al.
 	dh_install -X.svn -pdiogenes -Xdiogenes.globals.inc.php.in \
-	                       cvs.pl \
-	                       htdocs include locale plugins scripts styles templates \
-			       usr/share/diogenes
+		cvs.pl \
+		htdocs include locale plugins scripts styles templates \
+		usr/share/diogenes
 	
 	# remove library files
 	rm -rf debian/diogenes/usr/share/diogenes/include/diogenes
