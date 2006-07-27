@@ -1,6 +1,7 @@
 diogenes (0.9.20-1) unstable; urgency=low
 
   * New upstream release.
+  * Add Swedish translation of debconf messages (Closes: #342866)
 
  -- Jeremy Lainé <jeremy.laine@m4x.org>  Thu, 27 Jul 2006 22:56:30 +0200
 
