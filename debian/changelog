@@ -1,8 +1,8 @@
-diogenes (0.9.19+0.9.20pre2-1) unstable; urgency=low
+diogenes (0.9.20-1) unstable; urgency=low
 
   * New upstream release.
 
- -- Jeremy Lainé <jeremy.laine@m4x.org>  Thu, 20 Jul 2006 23:22:38 +0200
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Thu, 27 Jul 2006 22:56:30 +0200
 
 diogenes (0.9.19-1) unstable; urgency=low
 

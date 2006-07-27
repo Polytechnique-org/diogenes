@@ -2,9 +2,6 @@
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/makefile.mk
 
-# definitions
-SCRIPTDIR := usr/share/diogenes/scripts
-
 # documentation
 DEB_INSTALL_DOCS_ALL :=
 DEB_INSTALL_DOCS_diogenes := AUTHORS README
@@ -25,15 +22,17 @@ binary-install/diogenes::
 		config/apache.conf \
 		usr/share/diogenes/config
 	
-	# files for db installation
-	cat debian/prefix.sql config/db/diogenes.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.tables.sql.in
-	cat debian/prefix.sql config/db/diogenes.logactions.sql > debian/diogenes/$(SCRIPTDIR)/diogenes.logactions.sql.in
-
 	# PHP files, templates, locales et al.
 	dh_install -X.svn -pdiogenes -Xdiogenes.globals.inc.php.in \
 		cvs.pl \
 		htdocs include locale plugins scripts styles templates \
 		usr/share/diogenes
+	
+	# files for db installation
+	cat debian/prefix.sql config/db/diogenes.sql \
+	  > debian/diogenes/usr/share/diogenes/scripts/diogenes.tables.sql.in
+	cat debian/prefix.sql config/db/diogenes.logactions.sql \
+	  > debian/diogenes/usr/share/diogenes/scripts/diogenes.logactions.sql.in
 	
 	# remove library files
 	rm -rf debian/diogenes/usr/share/diogenes/include/diogenes
