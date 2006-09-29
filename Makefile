@@ -5,7 +5,7 @@ PKG_DIST = diogenes-$(VERSION)
 LIB_DIST = libdiogenes-$(VERSION)
 
 PKG_FILES = AUTHORS ChangeLog COPYING README Makefile \
-            cvs.pl
+            cvs.pl Doxyfile.in
 	    
 PKG_DIRS = config htdocs include locale po plugins scripts styles templates
 
@@ -33,7 +33,7 @@ clean:
 
 # diogenes package targets
 
-pkg-build: include/diogenes.globals.inc.php
+pkg-build: include/diogenes.globals.inc.php Doxyfile
 	make -C po
 
 pkg-dist: pkg-build
