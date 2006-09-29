@@ -68,12 +68,13 @@ RECURSIVE              = YES
 EXCLUDE                = 
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = \
+			 */include/classTextile.php \
 			 */include/admin/* \
 			 */include/HTTP/* \
 			 */include/Text/* \
 			 */include/phplayersmenu/* \
 			 */testing/* \
-			 */{arch}/*
+			 */.svn/*
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = 
 EXAMPLE_RECURSIVE      = NO
