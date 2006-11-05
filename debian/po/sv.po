@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: diogenes 0.9.17.1-2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-14 01:45+0100\n"
+"Report-Msgid-Bugs-To: jeremy.laine@m4x.org\n"
+"POT-Creation-Date: 2006-11-05 14:16+0100\n"
 "PO-Revision-Date: 2005-12-11 12:29+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -25,169 +25,210 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../diogenes.templates:3
+#: ../diogenes.templates:1001
 msgid "Welcome to the Diogenes setup program"
 msgstr "Välkommen till konfigurationen av Diogenes"
 
 #. Type: note
 #. Description
-#: ../diogenes.templates:3
-msgid "You must have a database server already setup and ready to go if you are going to have this program configure your database for you.  If you are not comfortable with this, you should tell the debconf process that you do not have any database server.  You will then need to configure Diogenes manually."
-msgstr "Du måste ha en databasserver konfigurerad och klar att köras om du ska låta detta program konfigurera din databas åt dig. Om du inte känner dig komfortabel med detta bör du instruera debconf att du inte har någon databasservern.  Du kommer då att behöva konfigurera Diogenes manuellt."
+#: ../diogenes.templates:1001
+msgid ""
+"You must have a database server already setup and ready to go if you are "
+"going to have this program configure your database for you.  If you are not "
+"comfortable with this, you should tell the debconf process that you do not "
+"have any database server.  You will then need to configure Diogenes manually."
+msgstr ""
+"Du måste ha en databasserver konfigurerad och klar att köras om du ska låta "
+"detta program konfigurera din databas åt dig. Om du inte känner dig "
+"komfortabel med detta bör du instruera debconf att du inte har någon "
+"databasservern.  Du kommer då att behöva konfigurera Diogenes manuellt."
 
 #. Type: note
 #. Description
-#: ../diogenes.templates:3
-msgid "If debconf is set up in a way that you will not be asked questions interactively (i.e. you do not see this note during installation but as a mail to your root account), Diogenes will assume that your web server is apache and your database server is MySQL and no MySQL root password is set.  If any of these do not apply, Diogenes will not run unless you configure it manually by creating its database and editing the files in /etc/diogenes."
-msgstr "Om debconf är inställd så att du inte kommer att bli frågad frågor interaktivt (alltså att du inte ser denna notering under installation men som ett e-postmeddelande till ditt root-konto) antar Diogenes att din webbserver är apache och din databasserver är MySQL och inget lösenord för MySQL-användaren root är satt. Om någon av dessa inte stämmer kommer Diogenes inte att kunna köras om du inte konfigurerar den manuellt genom att skapa dess databas och redigera filerna i /etc/diogenes."
+#: ../diogenes.templates:1001
+msgid ""
+"If debconf is set up in a way that you will not be asked questions "
+"interactively (i.e. you do not see this note during installation but as a "
+"mail to your root account), Diogenes will assume that your web server is "
+"apache and your database server is MySQL and no MySQL root password is set.  "
+"If any of these do not apply, Diogenes will not run unless you configure it "
+"manually by creating its database and editing the files in /etc/diogenes."
+msgstr ""
+"Om debconf är inställd så att du inte kommer att bli frågad frågor "
+"interaktivt (alltså att du inte ser denna notering under installation men "
+"som ett e-postmeddelande till ditt root-konto) antar Diogenes att din "
+"webbserver är apache och din databasserver är MySQL och inget lösenord för "
+"MySQL-användaren root är satt. Om någon av dessa inte stämmer kommer "
+"Diogenes inte att kunna köras om du inte konfigurerar den manuellt genom att "
+"skapa dess databas och redigera filerna i /etc/diogenes."
 
 #. Type: boolean
 #. Description
-#: ../diogenes.templates:19
+#: ../diogenes.templates:2001
 msgid "Remove web site data after \"purging\" the diogenes package?"
 msgstr "Ta bort webbdata efter \"rensning\" av diogenes-paketet?"
 
 #. Type: boolean
 #. Description
-#: ../diogenes.templates:19
-msgid "Should the data that makes up Diogenes's web sites be removed when the diogenes packages is purged with the \"dpkg --purge diogenes\" command (i.e. remove everything including the configuration)?"
-msgstr "Ska data som är innehållet i Diogenes webbplatser tas bort när diogenes-paketet rensas med kommandot \"dpkg --purge diogenes\" (alltså, ta bort allt inklusive konfigurationen)?"
+#: ../diogenes.templates:2001
+msgid ""
+"Should the data that makes up Diogenes's web sites be removed when the "
+"diogenes packages is purged with the \"dpkg --purge diogenes\" command (i.e. "
+"remove everything including the configuration)?"
+msgstr ""
+"Ska data som är innehållet i Diogenes webbplatser tas bort när diogenes-"
+"paketet rensas med kommandot \"dpkg --purge diogenes\" (alltså, ta bort allt "
+"inklusive konfigurationen)?"
 
 #. Type: multiselect
 #. Choices
-#: ../diogenes.templates:26
+#: ../diogenes.templates:3001
 msgid "apache, apache-ssl, apache-perl, apache2"
 msgstr "apache, apache-ssl, apache-perl, apache2"
 
 #. Type: multiselect
 #. Description
-#: ../diogenes.templates:28
+#: ../diogenes.templates:3002
 msgid "Type of web server:"
 msgstr "Typ av webbserver:"
 
 #. Type: multiselect
 #. Description
-#: ../diogenes.templates:28
-msgid "By default Diogenes supports any web server that php4 does.  This config process currently only supports Apache directly.  If you use another one you will have to handle the web ends manually.  If you choose the first option, this install process will manage the configuration (or attempt to) of the Apache specific portions necessary to run Diogenes properly."
-msgstr "Som standard stöder Diogenes alla webbserver som php4 gör.  Denna konfigurationsprocess har för närvarande endast stöd för Apache.  Om du använder en annan måste du hantera detta manuellt.  Om du väljer första valet kommer denna installationsprocess att hantera konfigurationen (eller försök att) av specifika delar av Apache för att köra Diogenes på ett korrekt sätt."
+#: ../diogenes.templates:3002
+msgid ""
+"By default Diogenes supports any web server that php4 does.  This config "
+"process currently only supports Apache directly.  If you use another one you "
+"will have to handle the web ends manually.  If you choose the first option, "
+"this install process will manage the configuration (or attempt to) of the "
+"Apache specific portions necessary to run Diogenes properly."
+msgstr ""
+"Som standard stöder Diogenes alla webbserver som php4 gör.  Denna "
+"konfigurationsprocess har för närvarande endast stöd för Apache.  Om du "
+"använder en annan måste du hantera detta manuellt.  Om du väljer första "
+"valet kommer denna installationsprocess att hantera konfigurationen (eller "
+"försök att) av specifika delar av Apache för att köra Diogenes på ett "
+"korrekt sätt."
 
 #. Type: string
 #. Description
-#: ../diogenes.templates:38
+#: ../diogenes.templates:4001
 msgid "User your web server runs as:"
 msgstr "Användare som din webbserver körs som:"
 
 #. Type: string
 #. Description
-#: ../diogenes.templates:38
-msgid "Unable to obtain the user your web server runs as. This is needed in order to allow the web server to write the files that make up the Diogenes-managed web sites."
-msgstr "Kunde inte fastställa vilken användare som din webbserver körs som. Detta behöver för att tillåta webbservern att skriva filer för Diogenes-hanterade webbplatser."
+#: ../diogenes.templates:4001
+msgid ""
+"Unable to obtain the user your web server runs as. This is needed in order "
+"to allow the web server to write the files that make up the Diogenes-managed "
+"web sites."
+msgstr ""
+"Kunde inte fastställa vilken användare som din webbserver körs som. Detta "
+"behöver för att tillåta webbservern att skriva filer för Diogenes-hanterade "
+"webbplatser."
 
 #. Type: string
 #. Description
-#: ../diogenes.templates:46
+#: ../diogenes.templates:5001
 msgid "Group your web server runs as:"
 msgstr "Grupp som din webbserver körs som:"
 
 #. Type: string
 #. Description
-#: ../diogenes.templates:46
-msgid "Unable to obtain the group your web server runs as.  This is needed in order to allow the web server to read Diogenes's configuration files."
-msgstr "Kunde inte fastställa vilken grupp som din webbserver körs som. Detta behöver för att tillåta webbservern att läsa konfigurationsfiler för Diogenes."
+#: ../diogenes.templates:5001
+msgid ""
+"Unable to obtain the group your web server runs as.  This is needed in order "
+"to allow the web server to read Diogenes's configuration files."
+msgstr ""
+"Kunde inte fastställa vilken grupp som din webbserver körs som. Detta "
+"behöver för att tillåta webbservern att läsa konfigurationsfiler för "
+"Diogenes."
 
-#. Type: select
-#. Choices
-#: ../diogenes.templates:52
-msgid "Automatic, Manual"
-msgstr "Automatisk, Manuell"
+#~ msgid "Automatic, Manual"
+#~ msgstr "Automatisk, Manuell"
 
-#. Type: select
-#. Description
-#: ../diogenes.templates:54
-msgid "Type of database installation:"
-msgstr "Typ av databasinstallation:"
+#~ msgid "Type of database installation:"
+#~ msgstr "Typ av databasinstallation:"
 
-#. Type: select
-#. Description
-#: ../diogenes.templates:54
-msgid "If you want the setup program to ask you questions and do the database setup for you, select \"Automatic\". (Recommended)"
-msgstr "Om du vill att konfigurationsprogrammet ska fråga dig frågor och göra databasinställningar åt dig, välj \"Automatisk\". (Rekommenderas)"
+#~ msgid ""
+#~ "If you want the setup program to ask you questions and do the database "
+#~ "setup for you, select \"Automatic\". (Recommended)"
+#~ msgstr ""
+#~ "Om du vill att konfigurationsprogrammet ska fråga dig frågor och göra "
+#~ "databasinställningar åt dig, välj \"Automatisk\". (Rekommenderas)"
 
-#. Type: select
-#. Description
-#: ../diogenes.templates:54
-msgid "If you want to configure your database by hand, select \"Manual\".  In this case you will have to create the Diogenes database and user by hand and handle database upgrades manually."
-msgstr "Om du vill konfigurera din databas på egen hand, välj \"Manuell\".  I detta fall måste du skapa Diogenes databas och användare på egen hand och hantera databasuppgraderingar manuellt."
+#~ msgid ""
+#~ "If you want to configure your database by hand, select \"Manual\".  In "
+#~ "this case you will have to create the Diogenes database and user by hand "
+#~ "and handle database upgrades manually."
+#~ msgstr ""
+#~ "Om du vill konfigurera din databas på egen hand, välj \"Manuell\".  I "
+#~ "detta fall måste du skapa Diogenes databas och användare på egen hand och "
+#~ "hantera databasuppgraderingar manuellt."
 
-#. Type: password
-#. Description
-#: ../diogenes.templates:64
-msgid "Database admin password:"
-msgstr "Databasadministratörens lösenord:"
+#~ msgid "Database admin password:"
+#~ msgstr "Databasadministratörens lösenord:"
 
-#. Type: password
-#. Description
-#: ../diogenes.templates:64
-msgid "Enter the password for your database admin user to access the database. This password had been set when installing your database.  It is most likely NOT the same password that your Diogenes manager account will use."
-msgstr "Ange lösenord för din administratörsanvändare i databasen för att tillgå databasen. Detta lösenord har satts när du installerade din databas. Det är antagligen INTE samma lösenord som ditt administratörskonto i Diogenes använder."
+#~ msgid ""
+#~ "Enter the password for your database admin user to access the database. "
+#~ "This password had been set when installing your database.  It is most "
+#~ "likely NOT the same password that your Diogenes manager account will use."
+#~ msgstr ""
+#~ "Ange lösenord för din administratörsanvändare i databasen för att tillgå "
+#~ "databasen. Detta lösenord har satts när du installerade din databas. Det "
+#~ "är antagligen INTE samma lösenord som ditt administratörskonto i Diogenes "
+#~ "använder."
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:72
-msgid "Hostname of the database server:"
-msgstr "Värdnamn för databasserver:"
+#~ msgid "Hostname of the database server:"
+#~ msgstr "Värdnamn för databasserver:"
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:72
-msgid "If your database is on another machine besides the one that Diogenes is running on then you need to change this value to the fully qualified domain name for that system."
-msgstr "Om din databas finns på en annan maskin förutom den som Diogenes körs på behöver du ändra detta värde till det fullt kvalificerade domännamnet för det systemet."
+#~ msgid ""
+#~ "If your database is on another machine besides the one that Diogenes is "
+#~ "running on then you need to change this value to the fully qualified "
+#~ "domain name for that system."
+#~ msgstr ""
+#~ "Om din databas finns på en annan maskin förutom den som Diogenes körs på "
+#~ "behöver du ändra detta värde till det fullt kvalificerade domännamnet för "
+#~ "det systemet."
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:80
-msgid "Name for the Diogenes database:"
-msgstr "Namn på Diogenes databas:"
+#~ msgid "Name for the Diogenes database:"
+#~ msgstr "Namn på Diogenes databas:"
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:80
-msgid "By default this will be \"diogenes\".  This is where all the Diogenes related database items will be setup and stored."
-msgstr "Som standard kommer detta vara \"diogenes\".  Det är där alla Diogenes-relaterade databasposter kommer att ställas in och lagras."
+#~ msgid ""
+#~ "By default this will be \"diogenes\".  This is where all the Diogenes "
+#~ "related database items will be setup and stored."
+#~ msgstr ""
+#~ "Som standard kommer detta vara \"diogenes\".  Det är där alla Diogenes-"
+#~ "relaterade databasposter kommer att ställas in och lagras."
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:87
-msgid "Database username:"
-msgstr "Användarnamn för databas:"
+#~ msgid "Database username:"
+#~ msgstr "Användarnamn för databas:"
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:87
-msgid "What username will access the database for Diogenes?  By default this is it's own user \"diogenes\" so that permissions can be tightened down."
-msgstr "Vilken användarnamn ska användas för att tillgå Diogenes databas?  Som standard är detta dess egna användare \"diogenes\" så att rättigheterna kan minskas ner till ett minimum."
+#~ msgid ""
+#~ "What username will access the database for Diogenes?  By default this is "
+#~ "it's own user \"diogenes\" so that permissions can be tightened down."
+#~ msgstr ""
+#~ "Vilken användarnamn ska användas för att tillgå Diogenes databas?  Som "
+#~ "standard är detta dess egna användare \"diogenes\" så att rättigheterna "
+#~ "kan minskas ner till ett minimum."
 
-#. Type: password
-#. Description
-#: ../diogenes.templates:94
-msgid "Password for the Diogenes user:"
-msgstr "Lösenord för Diogenes användare:"
+#~ msgid "Password for the Diogenes user:"
+#~ msgstr "Lösenord för Diogenes användare:"
 
-#. Type: password
-#. Description
-#: ../diogenes.templates:94
-msgid "Enter a password for the database user which will be used along with the database user name you have already supplied to connect to the database."
-msgstr "Ange ett lösenord för databasanvändaren som ska användas tillsammans med användarnamnet för databasen du redan angivit för att ansluta till databasen."
+#~ msgid ""
+#~ "Enter a password for the database user which will be used along with the "
+#~ "database user name you have already supplied to connect to the database."
+#~ msgstr ""
+#~ "Ange ett lösenord för databasanvändaren som ska användas tillsammans med "
+#~ "användarnamnet för databasen du redan angivit för att ansluta till "
+#~ "databasen."
 
-#. Type: password
-#. Description
-#: ../diogenes.templates:94
-msgid "If you wish to leave the password empty, type \"none\".  If you wish to use an automatically generated random password type \"auto\"."
-msgstr "Om du önskar lämna lösenordet blankt, ange \"none\". Om du önskar att automatiskt generera ett slumpmässigt lösenord, ange \"auto\"."
+#~ msgid ""
+#~ "If you wish to leave the password empty, type \"none\".  If you wish to "
+#~ "use an automatically generated random password type \"auto\"."
+#~ msgstr ""
+#~ "Om du önskar lämna lösenordet blankt, ange \"none\". Om du önskar att "
+#~ "automatiskt generera ett slumpmässigt lösenord, ange \"auto\"."
 
-#. Type: string
-#. Description
-#: ../diogenes.templates:105
-msgid "MySQL administrator username:"
-msgstr "Användarnamn för MySQL-administratören:"
-
+#~ msgid "MySQL administrator username:"
+#~ msgstr "Användarnamn för MySQL-administratören:"

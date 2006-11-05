@@ -60,6 +60,7 @@ create_file_from_template() {
 . /usr/share/debconf/confmodule
 db_version 2.0
 
+dbc_first_version=0.9.20-2
 # source dbconfig-common shell library, and call the hook function
 if [ -f /usr/share/dbconfig-common/dpkg/postinst.mysql ]; then
     . /usr/share/dbconfig-common/dpkg/postinst.mysql 
