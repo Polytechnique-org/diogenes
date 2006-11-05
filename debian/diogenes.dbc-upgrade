@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+updatedb=/usr/share/diogenes/scripts/updatedb.php
+dbconfig=/etc/dbconfig-common/diogenes.conf
+
+if [ ! -f "$dbconfig" ]; then
+    echo "Could not find config file : $dbconfig"
+    exit 0
+fi
+
+. $dbconfig
+if [ -z "$dbc_dbserver" ]; then
+    dbc_dbserver="localhost"
+fi
+
+if [ -x "$updatedb" ]; then
+    $updatedb -q -s "$dbc_dbserver" -d "$dbc_dbname" -u "$dbc_dbuser" -p "$dbc_dbpass"
+fi

@@ -1,5 +1,5 @@
 #! /bin/sh
-# Horde postinst script using debconf
+# Diogenes postinst script using debconf and dbconfig-common
 # Written by Ola Lundqvist <opal@debian.org>
 # Adapted for Horde2 by Nils Rennebarth <nils@debian.org>
 # Adapted for Diogenes by Jeremy Lainé <jeremy.laine@m4x.org>
@@ -30,9 +30,16 @@ set -e
 create_file_from_template() {
   infile=$1
   outfile=$2
+  if [ -f /etc/dbconfig-common/diogenes.conf ]; then
+    . /etc/dbconfig-common/diogenes.conf
+  fi
+  # If dbc_dbserver is empty, use localhost
+  if [ -z "$dbc_dbserver" ]; then
+      dbc_dbserver="localhost"
+  fi
   # Password may contain anything, so we need to descend to quoting
   # hell.
-  safepass="$dbpass"
+  safepass="$dbc_dbpass"
   # quote normal quote and final backslash because we need to write
   # a single quoted PHP string
   safepass=$(echo "$safepass" | sed -e "s/'/\\\\'/g" -e 's/\\$/\\\\'/)
@@ -42,13 +49,22 @@ create_file_from_template() {
   # we use the hash sign as a delimiter
   safepass=$(echo "$safepass" | sed -e 's/#/\\#/g')
   sed -e "				\
-    s#@dbname@#$dbname#;		\
-    s#@dbserver@#$dbserver#;	\
-    s#@dbuser@#$dbuser#;		\
+    s#@dbname@#$dbc_dbname#;		\
+    s#@dbserver@#$dbc_dbserver#;	\
+    s#@dbuser@#$dbc_dbuser#;		\
     s#@dbpass@#$safepass#;		\
     " <$infile >$outfile
 }
 
+# get debconf started
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/postinst.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/postinst.mysql 
+    dbc_go diogenes $@
+fi
 
 case "$1" in
     configure)
@@ -56,67 +72,6 @@ case "$1" in
 # install ucf-managed files
 ucf --debconf-ok /usr/share/diogenes/config/diogenes.debian.inc.php /etc/diogenes/diogenes.debian.inc.php
 ucf --debconf-ok /usr/share/diogenes/config/apache.conf /etc/diogenes/apache.conf
-
-# get debconf started
-. /usr/share/debconf/confmodule
-db_version 2.0
-
-###############################################################################
-############################### Configure database ############################
-###############################################################################
-
-# Type of the databasemgr to use.
-db_get "diogenes/databasemgr_type"
-dbtype="$RET"
-if [ "$dbtype" = "Automatic" ] ; then
-  # Where it is located.
-  db_get "diogenes/databasemgr_server"
-  dbserver="$RET"
-  # Name of the database
-  db_get "diogenes/database_name"
-  dbname="$RET"
-  # Name of the user to have access.
-  db_get "diogenes/database_user"
-  dbuser="$RET"
-  # Its password.
-  db_get "diogenes/database_pass"
-  dbpass="$RET"
-
-  if [ ! -z $(which mysql) ]; then
-
-    # retrieve admin user and password
-    db_get "diogenes/dbmyadmin"
-    dbadmin="$RET"
-    db_get "diogenes/dbadmpass"
-    dbadmpass="$RET"
-    db_reset "diogenes/dbadmpass"
-
-    . /usr/share/wwwconfig-common/mysql-createdb.sh
-    if [ "$status" = "create" ] ; then
-      sqlfile=/usr/share/diogenes/scripts/diogenes.tables.sql
-      create_file_from_template $sqlfile.in $sqlfile
-      . /usr/share/wwwconfig-common/mysql-exec.sh
-      rm $sqlfile
-      sqlfile=/usr/share/diogenes/scripts/diogenes.logactions.sql
-      create_file_from_template $sqlfile.in $sqlfile
-      . /usr/share/wwwconfig-common/mysql-exec.sh
-      rm $sqlfile
-    elif [ "$status" = "nothing" ] ; then
-      if ! /usr/share/diogenes/scripts/updatedb.php -q -s "$dbserver" -d "$dbname" -u "$dbadmin" -p "$dbadmpass" ; then
-        echo "There was an error while upgrading the Diogenes database."
-      fi
-    else
-      echo $error
-    fi
-    . /usr/share/wwwconfig-common/mysql-createuser.sh
-  else
-    echo "Not configuring MySQL database because we cannot locate"
-    echo "the mysql client executable (mysql-client package missing)."
-  fi
-else
-    echo "Not configuring MySQL database at your request."
-fi
-
 
 ###############################################################################
 ########################## Configure web servers ##############################
@@ -133,7 +88,7 @@ for server in $webservers; do
     # If necessary, add a symlink to our apache.conf
     if [ -d /etc/$server/conf.d ] && [ ! -e /etc/$server/conf.d/diogenes ] ; then
         ln -s $includefile /etc/$server/conf.d/diogenes
-	restart="$server $restart"
+        restart_servers="$server $restart_servers"
     fi
 done
 
@@ -163,10 +118,18 @@ chown -R $webuser /var/spool/diogenes
 ###############################################################################
 ############################# Servers restart #################################
 ###############################################################################
-if ! eval . /usr/share/wwwconfig-common/restart.sh ; then
-  echo "There was a problem restarting web server(s)."
-fi
 
+if [ -n "$restart_servers" ]; then
+    for server in $restart_servers; do
+        if [ -x /etc/init.d/$server ]; then
+            if which invoke-rc.d >/dev/null 2>&1; then
+                invoke-rc.d $server reload
+            else
+                /etc/init.d/$server reload
+            fi
+        fi
+    done
+fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

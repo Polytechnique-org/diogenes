@@ -13,7 +13,7 @@ DEB_INSTALL_CHANGELOGS_diogenes := ChangeLog
 DEB_INSTALL_CHANGELOGS_libphp-diogenes := include/diogenes/ChangeLog
 
 #directories
-DEB_INSTALL_DIRS_diogenes := etc/diogenes var/lib/diogenes var/spool/diogenes/templates_c var/spool/diogenes/diogenes_c
+DEB_INSTALL_DIRS_diogenes := etc/diogenes var/lib/diogenes var/spool/diogenes/templates_c var/spool/diogenes/diogenes_c usr/share/dbconfig-common/data/diogenes/install usr/share/dbconfig-common/scripts/diogenes/upgrade/mysql
 
 binary-install/diogenes::
 	# config
@@ -29,10 +29,9 @@ binary-install/diogenes::
 		usr/share/diogenes
 	
 	# files for db installation
-	cat debian/prefix.sql config/db/diogenes.sql \
-	  > debian/diogenes/usr/share/diogenes/scripts/diogenes.tables.sql.in
-	cat debian/prefix.sql config/db/diogenes.logactions.sql \
-	  > debian/diogenes/usr/share/diogenes/scripts/diogenes.logactions.sql.in
+	cat config/db/diogenes.sql config/db/diogenes.logactions.sql > debian/diogenes/usr/share/dbconfig-common/data/diogenes/install/mysql
+	#cp debian/diogenes.dbc-upgrade debian/diogenes/usr/share/dbconfig-common/scripts/diogenes/upgrade/mysql/0.9.20-2
+	#chmod +x debian/diogenes/usr/share/dbconfig-common/scripts/diogenes/upgrade/mysql/0.9.20-2
 	
 	# remove library files
 	rm -rf debian/diogenes/usr/share/diogenes/include/diogenes

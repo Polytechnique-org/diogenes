@@ -1,3 +1,9 @@
+diogenes (0.9.20-2) unstable; urgency=low
+
+  * Switch to dbconfig-common for database setup. 
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Sun,  5 Nov 2006 12:03:28 +0100
+
 diogenes (0.9.20-1) unstable; urgency=low
 
   * New upstream release.

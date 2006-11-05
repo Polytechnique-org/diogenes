@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# Horde postrm script using debconf
+# Diogenes postrm script using debconf
 # Originally written for horde by Ola Lundqvist <opal@debian.org>
 # Adapted for horde2 by Nils Rennebarth <nils@debian.org>
 # Adapted for Diogenes by Jeremy Lainé <jeremy.laine@m4x.org>
@@ -13,24 +13,35 @@ remove_from_webconfig () {
         servers="$server $servers"
         if [ -s /etc/$server/conf.d/diogenes ] ; then
             rm -f /etc/$server/conf.d/diogenes
-            restart="$server $restart"
+            restart_servers="$server $restart_servers"
         fi
     done
 
     # Restart servers
-    if [ -e /usr/share/wwwconfig-common/restart.sh ] ; then
-        . /usr/share/wwwconfig-common/restart.sh
+    if [ -n "$restart_servers" ]; then
+        for server in $restart_servers; do
+            if [ -x /etc/init.d/$server ]; then
+                if which invoke-rc.d >/dev/null 2>&1; then
+                    invoke-rc.d $server reload
+                else
+                    /etc/init.d/$server reload
+                fi
+            fi
+        done
     fi
 }
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm.mysql 
+    dbc_go diogenes $@
+fi
 
 ACTION=$1
 case "$ACTION" in
 remove)
-    #
-    # Remove Diogenes from the webserver configuration
-    #
-    . /usr/share/debconf/confmodule
-    db_version 2.0
 
     #
     # Only try to remove Diogenes from the webserver configs if the db key
@@ -43,8 +54,6 @@ remove)
     ;;
 
 purge)
-    . /usr/share/debconf/confmodule
-    db_version 2.0
 	
     #
     # Remove ucf-managed files
@@ -61,26 +70,6 @@ purge)
     if [ "$RET" = "true" ]; then
         # remove files
         rm -rf /var/spool/diogenes /var/lib/diogenes
-
-        # drop the database if we are Automatic mode
-        db_get "diogenes/databasemgr_type"
-        if [ "$RET" = "Automatic" ] ; then
-            db_get "diogenes/databasemgr_server"
-            dbserver="$RET"
-            db_get "diogenes/database_name"
-            dbname="$RET"
-            # we use the Diogenes user as the "admin", as he is authorized to do a drop
-            db_get "diogenes/database_user"
-            dbadmin="$RET"
-            db_get "diogenes/database_pass"
-            dbadmpass="$RET"
-	    if [ -f /usr/share/wwwconfig-common/mysql.get ] && [ -x $(which mysql) ] ; then
-	        . /usr/share/wwwconfig-common/mysql.get
-                if eval $mysqlcmd -f -e "\"DROP DATABASE $dbname;\"" ; then
-		  status=dropped
-		fi
-	    fi
-        fi
     fi
     ;;
 
