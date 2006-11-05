@@ -15,7 +15,7 @@ _Description: Welcome to the Diogenes setup program
 
 Template: diogenes/purge_removes_data
 Type: boolean
-Default: true
+Default: false
 _Description: Remove web site data after "purging" the diogenes package?
  Should the data that makes up Diogenes's web sites be removed when
  the diogenes packages is purged with the "dpkg --purge diogenes" command
