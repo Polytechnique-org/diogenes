@@ -35,7 +35,7 @@ class HermesMailer extends Mail_Mime {
 
     function HermesMailer() {
 	$this->Mail_Mime("\n");
-	$this->_mail =& Mail::factory('sendmail', Array('-oi'));
+	$this->_mail =& Mail::factory('sendmail', Array('sendmail_args' => '-oi'));
     }
 
     // }}}
