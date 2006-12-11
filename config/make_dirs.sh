@@ -38,6 +38,7 @@ echo -n "Creating directories... "
 mkdir -p $RCS_DIR
 mkdir -p $SPOOL_DIR
 mkdir -p $SPOOL_DIR/templates_c
+mkdir -p $SPOOL_DIR/diogenes_c
 echo "done."
 
 # Set ownership 
