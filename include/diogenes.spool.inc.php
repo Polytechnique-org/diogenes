@@ -154,6 +154,33 @@ class DiogenesSpool {
    */
   function importHtmlString($html)
   {
+    // If available, run tidy to clean sources
+    if (function_exists('tidy_repair_string')) {
+        $tidy_config = array('drop-empty-paras' => true,
+                             'drop-proprietary-attributes' => true,
+                             'hide-comments' => true,
+                             'logical-emphasis' => true,
+                             'output-xhtml' => true,
+                             'replace-color' => true,
+                             'join-classes'  => true,
+                             'join-style' => true, 
+                             'clean' => true,
+                             'show-body-only' => true,
+                             'alt-text' => '[ inserted by TIDY ]',
+                             'break-before-br' => true,
+                             'indent' => true,
+                             'vertical-space' => true,
+                             'wrap' => 120);
+        if (function_exists('tidy_setopt')) { // Tidy 1.0
+            foreach ($tidy_config as $field=>$value) {
+                tidy_setopt($field, $value);
+            }
+            $html = tidy_repair_string($html);
+        } else { // Tidy 2.0
+            $html = tidy_repair_string($html, $tidy_config);
+        }
+    }
+ 
     // if we cannot find the body open & close tags, return raw file
     if (!preg_match("/<body(\s[^>]*|)>(.*)<\/body>/si",$html,$matches))
       return $html;
