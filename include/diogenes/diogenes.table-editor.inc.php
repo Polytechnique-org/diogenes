@@ -255,7 +255,7 @@ class DiogenesTableEditor extends DiogenesDatabaseTable {
     $sql = $this->make_select(false,$id);
     $res = $this->dbh->query($sql);
 
-    if ($myrow = mysql_fetch_array($res)) {
+    if ($myrow = mysql_fetch_assoc($res)) {
       $this->id = $id;
       foreach ($this->vars as $key => $val) {
         $this->vars[$key]['value'] = $myrow[$key];
@@ -491,7 +491,7 @@ class DiogenesTableEditor extends DiogenesDatabaseTable {
       $p_stop = $this->maxrows ? min($p_total, $p_start + $this->maxrows) : $p_total;
       $counter = 0;
 
-      while (($counter < $p_stop) and ($myarr = mysql_fetch_array($res))) {
+      while (($counter < $p_stop) and ($myarr = mysql_fetch_assoc($res))) {
         if ($counter >= $p_start) {
           $actions = array();
           foreach ($this->actions as $myaction) {
