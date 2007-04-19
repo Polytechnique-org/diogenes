@@ -58,7 +58,7 @@ class Diogenes_Barrel_Menu
     /* renumber the other menu entries so that they are between 1 and the number of entries */
     $res = $this->dbh->query("SELECT MID FROM {$this->table_menu} WHERE MIDpere=$parent ORDER BY ordre");
     $i = 0;
-    while (list($MIDtoorder) = mysql_fetch_array($res)) {
+    while (list($MIDtoorder) = mysql_fetch_row($res)) {
       $i++;
       $this->dbh->query("UPDATE {$this->table_menu} SET ordre=$i WHERE MID=$MIDtoorder");
     }

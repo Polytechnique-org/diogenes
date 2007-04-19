@@ -75,7 +75,7 @@ class Diogenes_Barrel_Events
                   ."left join {$globals->table_log_sessions} as s on e.session=s.id "
                   ."where e.data like '{$this->barrel->alias}:%' "
                   ."order by stamp desc limit 0,10");
-    while ($myarr = mysql_fetch_array($res)) {
+    while ($myarr = mysql_fetch_assoc($res)) {
       $myarr['author'] = call_user_func(array($globals->session,'getUsername'),$myarr['auth'],$myarr['uid']);
       $myarr['flags'] = EVENT_FLAG_NONE;
       list($op_alias, $op_file) = split(":",$myarr['data']);
