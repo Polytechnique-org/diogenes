@@ -76,7 +76,7 @@ class DiogenesCoreLogger {
     $ip = $_SERVER['REMOTE_ADDR'];
     $host = strtolower(gethostbyaddr($_SERVER['REMOTE_ADDR']));
     $browser = (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
-    $sql = "insert into {$this->table_sessions} set uid='$uid',host='$host',ip='$ip',browser='$browser'";
+    $sql = "INSERT INTO {$this->table_sessions} SET uid='$uid',host='$host',ip='$ip',browser='$browser'";
     // optional parameters
     if ($suid)
       $sql .= ",suid='$suid'";
@@ -98,7 +98,7 @@ class DiogenesCoreLogger {
   function readActions() {
     global $globals;
 
-    $res=$globals->db->query("select id,text from {$this->table_actions}");
+    $res=$globals->db->query("SELECT id,text FROM {$this->table_actions}");
     while(list($action_id,$action_text)=mysql_fetch_row($res))
       $actions[$action_text] = $action_id;
 
@@ -118,7 +118,7 @@ class DiogenesCoreLogger {
     global $globals;
 
     if (isset($this->actions[$action]))
-      $globals->db->query("insert into {$this->table_events} set session='{$this->session}',action='{$this->actions[$action]}',data='{$data}'");
+      $globals->db->query("INSERT INTO {$this->table_events} SET session='{$this->session}',action='{$this->actions[$action]}',data='{$data}'");
     else
       echo "unknown action : $action<br />";
   }
