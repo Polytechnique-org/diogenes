@@ -110,7 +110,7 @@ class DiogenesSession extends DiogenesCoreSession {
 
     // check credentials
     $pass = md5($pass);
-    $res = $globals->db->query("select user_id,username,perms from {$globals->tauth['native']} where username='$user' and password='$pass'");
+    $res = $globals->db->query("SELECT user_id,username,perms FROM {$globals->tauth['native']} WHERE username='$user' AND password='$pass'");
     if (!list($uid,$user,$perms) = mysql_fetch_row($res))
       return false;      
 
@@ -168,11 +168,9 @@ class DiogenesSession extends DiogenesCoreSession {
       }
 
       // read site specific permissions
-      $res = $globals->db->query("select perms from diogenes_perm where alias='{$alias}'".
-                         " and auth='{$this->auth}' and uid='{$this->uid}'");
-      if (mysql_num_rows($res)>0) {
+      $res = $globals->db->query("SELECT perms FROM diogenes_perm WHERE alias='{$alias}' AND auth='{$this->auth}' AND uid='{$this->uid}'");
+      if (list($tmp) = mysql_fetch_row($res)) {
         $this->perms->addflag('user');
-        list($tmp) = mysql_fetch_row($res);
         $this->perms->addflag($tmp);
       }
       mysql_free_result($res);
