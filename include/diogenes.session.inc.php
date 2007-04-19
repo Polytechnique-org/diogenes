@@ -55,14 +55,15 @@ class DiogenesSession extends DiogenesCoreSession {
       // remember login for a year
       setcookie('DiogenesLogin',$_REQUEST['login'],(time()+25920000));
 
-      // check response
-      $res = $globals->db->query( "SELECT user_id,password FROM {$globals->tauth['native']} WHERE username='{$_REQUEST['login']}'");
-
-      if (!list($uid,$password) = mysql_fetch_row($res)) {
+      // lookup user
+      $res = $globals->db->query("SELECT user_id,username,password,firstname,lastname,perms FROM {$globals->tauth['native']} WHERE username='{$_REQUEST['login']}'");
+      if (!list($uid,$username,$password,$firstname,$lastname,$perms) = mysql_fetch_row($res)) {
         $page->info(__("Authentication error!"));
         $this->doLogin($page);
       }
+      mysql_free_result($res);
 
+      // check response
       if ($_REQUEST['response'] != md5("{$_REQUEST['login']}:$password:{$this->challenge}"))
       {
         // log the login failure
@@ -73,8 +74,10 @@ class DiogenesSession extends DiogenesCoreSession {
       }
 
       // retrieve user info
-      $res = $globals->db->query("select user_id,username,firstname,lastname,perms from {$globals->tauth['native']} where username='{$_REQUEST['login']}'");
-      list($this->uid,$this->username,$firstname,$lastname,$perms) = mysql_fetch_row($res);
+      $this->uid = $uid;
+      $this->username = $username;
+      $this->firstname = $firstname;
+      $this->lastname = $lastname;
       $this->fullname = $firstname . ($lastname ? " $lastname" : "");
 
       // create logger
