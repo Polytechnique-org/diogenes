@@ -22,6 +22,7 @@
   require_once 'diogenes.globals.inc.php';
   require_once 'diogenes/diogenes.database.inc.php';
   require_once 'diogenes.session.inc.php';
+  require_once 'Icons.php';
   require_once 'VCS/CVS.php';
   require_once 'Plugins.php';
 
@@ -43,7 +44,7 @@
   $globals->plugins = new Diogenes_Plugins($globals->db, $globals->root . "/plugins", $globals->spoolroot . "/diogenes_c");
 
   // set up the icons
-  $globals->icons = new DiogenesIcons();
+  $globals->icons = new Diogenes_Icons();
 
   // do we want to debug database calls ?
   if ($globals->debugdatabase)

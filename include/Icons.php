@@ -21,11 +21,11 @@
 
 /** This class describes Diogenes' icons.
  */
-class DiogenesIcons
+class Diogenes_Icons
 {
   /** Construct an object to manipulate Diogenes's icons.
    */
-  function DiogenesIcons($theme = 'gartoon')
+  function Diogenes_Icons($theme = 'gartoon')
   {
     $this->theme = $theme;
   }

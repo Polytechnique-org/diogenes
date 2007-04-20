@@ -1,7 +1,6 @@
 <?php
 require_once 'diogenes.common.inc.php';
 require_once 'diogenes.admin.inc.php';
-require_once 'diogenes.icons.inc.php';
 require_once 'Barrel/Events.php';
 
 $page = new DiogenesAdmin;

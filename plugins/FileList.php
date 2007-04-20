@@ -19,7 +19,6 @@
  */
 
 require_once 'Plugin/Filter.php';
-require_once 'diogenes.icons.inc.php';
 
 
 /** This plugin allows you to insert a directory listing with icons 
