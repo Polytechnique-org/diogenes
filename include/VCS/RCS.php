@@ -19,7 +19,7 @@
  */
 
 
-require_once 'diogenes.spool.inc.php';
+require_once 'VCS/Spool.php';
 require_once 'diogenes.icons.inc.php';
 // dependency on PEAR
 require_once 'System.php';

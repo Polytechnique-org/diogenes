@@ -22,7 +22,7 @@
   require_once 'diogenes.globals.inc.php';
   require_once 'diogenes/diogenes.database.inc.php';
   require_once 'diogenes.session.inc.php';
-  require_once 'diogenes.cvs.inc.php';
+  require_once 'VCS/CVS.php';
   require_once 'Plugins.php';
 
   // get custom definitions

@@ -19,7 +19,7 @@
  */
 
 
-require_once 'diogenes.rcs.inc.php';
+require_once 'VCS/RCS.php';
 
 /** This class handles Diogenes CVS operations.
  */
