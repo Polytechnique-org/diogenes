@@ -21,7 +21,7 @@
 
 /** This class handles Diogenes spool operations.
  */
-class DiogenesSpool {
+class Diogenes_VCS_Spool {
   /** The barrel we are running on */
   var $alias;
   /** Absolute directory location for the barrel's spool. */
@@ -47,7 +47,7 @@ class DiogenesSpool {
    * @param caller the caller
    * @param alias the alias to work on
    */
-  function DiogenesSpool(&$caller,$alias) {
+  function Diogenes_VCS_Spool(&$caller,$alias) {
     global $globals;
     $this->datadir = "{$globals->spoolroot}/$alias";
     $this->caller =& $caller;

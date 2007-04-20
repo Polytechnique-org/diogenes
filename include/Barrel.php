@@ -87,7 +87,7 @@ class Diogenes_Barrel
 
     $this->flags = new flagset($flags);    
     $this->options = new Diogenes_Barrel_Options($this->alias);
-    $this->spool = new DiogenesSpool($this,$this->alias);
+    $this->spool = new Diogenes_VCS_Spool($this,$this->alias);
     
     $this->readTree();
   }

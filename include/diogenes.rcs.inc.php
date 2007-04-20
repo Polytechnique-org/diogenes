@@ -26,7 +26,7 @@ require_once 'System.php';
 
 /** This class handles Diogenes RCS operations.
  */
-class DiogenesRcs extends DiogenesSpool {
+class Diogenes_VCS_RCS extends Diogenes_VCS_Spool {
   /** Absolute directory location for the barrel's RCS files. */
   var $rcsdir;
 
@@ -39,9 +39,9 @@ class DiogenesRcs extends DiogenesSpool {
    * @param login the current user's login
    * @param init should create this module?
    */
-  function DiogenesRcs(&$caller,$alias,$login,$init = false) {
+  function Diogenes_VCS_RCS(&$caller,$alias,$login,$init = false) {
     global $globals;
-    $this->DiogenesSpool($caller,$alias);
+    $this->Diogenes_VCS_Spool($caller,$alias);
     $this->rcsdir = "{$globals->rcsroot}/$alias";
     $this->login = $login;
 

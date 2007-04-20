@@ -42,10 +42,10 @@ class DiogenesGlobals extends DiogenesCoreGlobals {
   /** The Word file containing a barrel page definition */
   var $wordfile = "page.doc";
 
-  /** The revision control system (DiogenesRcs or DiogenesCvs).
+  /** The revision control system (Diogenes_VCS_RCS or Diogenes_VCS_RCS).
    *  This can be set from the toplevel interface
    */
-  var $rcs = "DiogenesRcs";
+  var $rcs = "Diogenes_VCS_RCS";
   /** The class for display toplevel pages. */
   var $toplevel = 'DiogenesToplevel';
   /** The class for displaying sites. */

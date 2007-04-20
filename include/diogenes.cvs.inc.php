@@ -23,7 +23,7 @@ require_once 'diogenes.rcs.inc.php';
 
 /** This class handles Diogenes CVS operations.
  */
-class DiogenesCvs extends DiogenesRcs {
+class Diogenes_VCS_CVS extends Diogenes_VCS_RCS {
   /** CVS command options */
   var $cvsopt;
 
@@ -37,10 +37,10 @@ class DiogenesCvs extends DiogenesRcs {
    * @param login the current user's login
    * @param init should create this module?
    */
-  function DiogenesCvs(&$caller,$alias,$login,$init = false) {
+  function Diogenes_VCS_CVS(&$caller,$alias,$login,$init = false) {
     global $globals;
     // call parent constructor
-    $this->DiogenesRcs($caller,$alias,$login,$init);
+    $this->Diogenes_VCS_RCS($caller,$alias,$login,$init);
 
     // set CVS environment, fire up pserver
     // the pserver suicides after 5mn of inactivity

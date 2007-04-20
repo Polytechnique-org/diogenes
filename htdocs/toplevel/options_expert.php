@@ -16,7 +16,7 @@ case "cvs-rcs":
   $res = $globals->db->query("select alias from diogenes_site");
   while(list($site) = mysql_fetch_row($res)) {
     $page->info("processing '$site'..");
-    $spool = new DiogenesSpool($page,$site);
+    $spool = new Diogenes_VCS_Spool($page,$site);
     $page->info("-> deleting 'CVS' subdirectories from spool..");
     $goners = System::find($spool->datadir.' -type d');
     foreach($goners as $goner) {
@@ -29,7 +29,7 @@ case "cvs-rcs":
       chmod($modfile,0444);
     }
   }
-  $globals->updateOption("rcs","DiogenesRcs");
+  $globals->updateOption("rcs","Diogenes_VCS_RCS");
   break;
 
 case "rcs-cvs":
@@ -47,9 +47,9 @@ case "rcs-cvs":
     $page->info("-> removing '{$globals->spoolroot}/$site'..");
     System::rm("-r {$globals->spoolroot}/$site");
     $page->info("-> doing a checkout of module '$site'..");
-    $spool = new DiogenesCvs($page,$site,$_SESSION['session']->username,true);
+    $spool = new Diogenes_VCS_CVS($page,$site,$_SESSION['session']->username,true);
   }
-  $globals->updateOption("rcs","DiogenesCvs");
+  $globals->updateOption("rcs","Diogenes_VCS_CVS");
   break;
 }
 
@@ -57,12 +57,12 @@ $page->assign('msg_convert',__("Convert"));
 $page->assign('msg_vcs',__("version control system"));
 
 switch ($globals->rcs) {
-case "DiogenesRcs":
+case "Diogenes_VCS_RCS":
   $page->assign('msg_current_vcs',__("You are currently using RCS as the version control system for your barrels."));
   $page->append('conversions',array("rcs-cvs", __("You can switch to a full CVS repository by clicking here.")));
   break;
 
-case "DiogenesCvs":
+case "Diogenes_VCS_CVS":
   $page->assign('msg_current_vcs',__("You are currently using CVS as the version control system for your barrels."));
   $page->append('conversions',array("cvs-rcs", __("You can switch back to RCS by clicking here.")));
   break;

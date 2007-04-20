@@ -297,7 +297,7 @@ class DiogenesWebDAV extends HTTP_WebDAV_Server
    *
    * @param msg
    *
-   * @see DiogenesRcs
+   * @see Diogenes_VCS_RCS
    */
   function info($msg) {
     // we do nothing
@@ -309,7 +309,7 @@ class DiogenesWebDAV extends HTTP_WebDAV_Server
    *
    * @param msg
    *
-   * @see DiogenesRcs
+   * @see Diogenes_VCS_RCS
    */
   function kill($msg) {
     $this->http_status("400 Error");
@@ -323,7 +323,7 @@ class DiogenesWebDAV extends HTTP_WebDAV_Server
    * @param action
    * @param data
    *
-   * @see DiogenesRcs
+   * @see Diogenes_VCS_RCS
    */
   function log($action,$data) {
     if (isset($_SESSION['log']) && is_object($_SESSION['log']))
