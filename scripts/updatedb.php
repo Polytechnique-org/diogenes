@@ -13,7 +13,7 @@ require_once("diogenes/diogenes.database-creator.inc.php");
 class DiogenesDbInit extends DiogenesDatabaseCreator
 {
   /** database versions history */
-  var $versions = array("0.9.9.3", "0.9.10", "0.9.12", "0.9.15", "0.9.16", "0.9.16+0.9.17pre15", "0.9.16+0.9.17pre19", "0.9.16+0.9.17pre21");
+  var $versions = array("0.9.9.3", "0.9.10", "0.9.12", "0.9.15", "0.9.16", "0.9.16+0.9.17pre15", "0.9.16+0.9.17pre19", "0.9.16+0.9.17pre21", "0.9.21");
 
   /**
    * Upgrades the database from one version to the next
@@ -211,6 +211,11 @@ class DiogenesDbInit extends DiogenesDatabaseCreator
       $this->dbh->query("INSERT INTO diogenes_logactions VALUES (14, 'barrel_plugins', 'the barrel plugins were modified');");
       $this->dbh->query("INSERT INTO diogenes_logactions VALUES (15, 'page_props', 'the page properties were updated');");
       $this->dbh->query("INSERT INTO diogenes_logactions VALUES (16, 'page_plugins', 'the page plugins were modified');");
+      break;
+    
+    case "0.9.21":      
+      $this->dbh->query("UPDATE diogenes_option SET value='Diogenes_VCS_RCS' WHERE barrel='' AND name='rcs' AND value='DiogenesRcs';");
+      $this->dbh->query("UPDATE diogenes_option SET value='Diogenes_VCS_CVS' WHERE barrel='' AND name='rcs' AND value='DiogenesVcs';");
       break;
 
     default:
