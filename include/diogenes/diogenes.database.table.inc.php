@@ -19,8 +19,8 @@
  */
 
 
-/** Class for handling operations on MySQL database tables. Upon construction, the class
- *  probes the table to read its structure.
+/** Class for handling operations on MySQL database tables. Upon construction,
+ *  the class probes the table to read its structure.
  *
  * @see DiogenesDatabase, DiogenesTableEditor
  */
@@ -55,8 +55,8 @@ class DiogenesDatabaseTable {
         break;
       case "timestamp":
       case "datetime":
-	$type = "timestamp";
-	break;
+        $type = "timestamp";
+        break;
       default:
         $type="text";
       }
@@ -64,6 +64,7 @@ class DiogenesDatabaseTable {
         "type" => $type, "value" => $value, "desc" => $name, "sum" => false,
         "key" => $key, "extra" => $extra, "edit" => true, "show" => true);
     }
+    mysql_free_result($res);
   }
 
 }
