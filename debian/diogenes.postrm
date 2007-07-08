@@ -31,6 +31,7 @@ remove_from_webconfig () {
     fi
 }
 
+# FIXME: do we need to source debconf before the hook?
 # source dbconfig-common shell library, and call the hook function
 if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
     . /usr/share/dbconfig-common/dpkg/postrm.mysql 

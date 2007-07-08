@@ -42,7 +42,7 @@ pkg-dist: pkg-build
 	cp -a $(PKG_FILES) $(PKG_DIST)
 	for dir in `find $(PKG_DIRS) $(VCS_FILTER) -o -type d -print`; \
 	do \
-          mkdir -p $(PKG_DIST)/$$dir; \
+	  mkdir -p $(PKG_DIST)/$$dir; \
 	  find $$dir -maxdepth 1 -type f -exec cp {} $(PKG_DIST)/$$dir \; ; \
 	done
 	tar czf $(PKG_DIST).tar.gz $(PKG_DIST)
