@@ -1,9 +1,24 @@
-diogenes (0.9.20-2) unstable; urgency=low
+diogenes (0.9.20-3) UNRELEASED; urgency=low
 
   * Switch to dbconfig-common for database setup.
   * Fix webserver user/group detection for apache2.
 
- -- Jeremy Lainé <jeremy.laine@m4x.org>  Sun,  5 Nov 2006 12:03:28 +0100
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Sun, 08 Jul 2007 21:45:56 +0200
+
+diogenes (0.9.20-2) unstable; urgency=low
+
+  * Acknowledge NMU (Closes: #416740, #388603, #415489).
+  * Check whether ucf is available in postrm (Closes: #431520).
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Sun, 08 Jul 2007 21:30:55 +0200
+
+diogenes (0.9.20-1.1) unstable; urgency=high
+
+  * Non-maintainer upload during BSP.
+  * Fix unconditional use of debconf in postrm (Closes: #416740, #388603).
+  * Add Portuguese debconf translation (Closes: #415489).
+
+ -- Luk Claes <luk@debian.org>  Fri, 18 May 2007 12:07:53 +0200
 
 diogenes (0.9.20-1) unstable; urgency=low
 
