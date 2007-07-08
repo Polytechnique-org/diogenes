@@ -31,8 +31,6 @@ remove_from_webconfig () {
     fi
 }
 
-. /usr/share/debconf/confmodule
-db_version 2.0
 # source dbconfig-common shell library, and call the hook function
 if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
     . /usr/share/dbconfig-common/dpkg/postrm.mysql 
@@ -42,34 +40,46 @@ fi
 ACTION=$1
 case "$ACTION" in
 remove)
+    #
+    # Remove Diogenes from the webserver configuration
+    #
+    if [ -f /usr/share/debconf/confmodule ]; then
+        . /usr/share/debconf/confmodule
+        db_version 2.0
 
-    #
-    # Only try to remove Diogenes from the webserver configs if the db key
-    # diogenes/webservers exists. If not, Diogenes had not been installed
-    # correctly so we just skip the webserver part
-    #
-    if db_get "diogenes/webservers"; then
-        remove_from_webconfig
+        #
+        # Only try to remove Diogenes from the webserver configs if the db key
+        # diogenes/webservers exists. If not, Diogenes had not been installed
+        # correctly so we just skip the webserver part
+        #
+        if db_get "diogenes/webservers"; then
+            remove_from_webconfig
+        fi
     fi
     ;;
 
 purge)
-	
     #
     # Remove ucf-managed files
     #
-    for myfile in /etc/diogenes/apache.conf /etc/diogenes/diogenes.debian.inc.php; do
-        ucf --purge $myfile
-        rm -f $myfile $myfile.dpkg-dist $myfile.dpkg-new $myfile.dpkg-old 
-    done
+    if [ -x $(which ucf) ] ; then
+        for myfile in /etc/diogenes/apache.conf /etc/diogenes/diogenes.debian.inc.php; do
+            ucf --purge $myfile
+            rm -f $myfile $myfile.dpkg-dist $myfile.dpkg-new $myfile.dpkg-old 
+        done
+    fi
 
     #
     # If we were asked to, purge Diogenes data
     #
-    db_get "diogenes/purge_removes_data"
-    if [ "$RET" = "true" ]; then
-        # remove files
-        rm -rf /var/spool/diogenes /var/lib/diogenes
+    if [ -f /usr/share/debconf/confmodule ]; then
+        . /usr/share/debconf/confmodule
+        db_version 2.0
+        db_get "diogenes/purge_removes_data"
+        if [ "$RET" = "true" ]; then
+            # remove files
+            rm -rf /var/spool/diogenes /var/lib/diogenes
+        fi
     fi
     ;;
 
