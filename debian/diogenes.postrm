@@ -63,7 +63,7 @@ purge)
     #
     # Remove ucf-managed files
     #
-    if [ -x $(which ucf) ] ; then
+    if [ -n "$(which ucf)" ] ; then
         for myfile in /etc/diogenes/apache.conf /etc/diogenes/diogenes.debian.inc.php; do
             ucf --purge $myfile
             rm -f $myfile $myfile.dpkg-dist $myfile.dpkg-new $myfile.dpkg-old 
