@@ -1,4 +1,10 @@
-diogenes (0.9.20-3) UNRELEASED; urgency=low
+diogenes (0.9.21) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Raphaël Barrois <raphael.barrois@m4x.org>  Sun, 17 Nov 2013 23:54:00 +0100
+
+diogenes (0.9.20-3) unstable; urgency=low
 
   * Switch to dbconfig-common for database setup.
   * Fix webserver user/group detection for apache2.

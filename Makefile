@@ -1,6 +1,6 @@
 # definitions
 
-VERSION = 0.9.20
+VERSION = 0.9.21
 PKG_DIST = diogenes-$(VERSION)
 LIB_DIST = libdiogenes-$(VERSION)
 

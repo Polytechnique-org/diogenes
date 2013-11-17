@@ -1,3 +1,6 @@
+Diogenes 0.9.21
+ * fixed - force ISO-8859-1 encoding
+
 Diogenes 0.9.20
  * added - add RSS feeds describing changes to barrels
  * added - offer preset style sheets for barrels
