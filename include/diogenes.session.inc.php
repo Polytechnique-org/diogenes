@@ -142,7 +142,7 @@ class DiogenesSession extends DiogenesCoreSession {
 
     if (isset($_COOKIE['DiogenesLogin']))
       $page->assign('username', $_COOKIE['DiogenesLogin']);
-    $page->assign('post',htmlentities($page->script_uri()));
+    $page->assign('post',htmlentities($page->script_uri(), ENT_COMPAT | ENT_HTML401, "ISO-8859-1"));
     $page->assign('challenge',$this->challenge);
     $page->assign('md5',$page->url("md5.js"));
     $page->display('login.tpl');

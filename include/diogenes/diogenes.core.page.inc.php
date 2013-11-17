@@ -186,7 +186,7 @@ function diogenes_func_diff($params)
     if ($line) {
       if (!isset($old) || ($old != $class))
         $out .= "<div class=\"$class\">";
-      $out .= htmlentities($line);
+      $out .= htmlentities($line, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
     }
     $old = $class;
   }
@@ -227,7 +227,7 @@ function diogenes_func_extval($params) {
   foreach($diogenes_db_cache[$cache_id] as $id=>$val)
     $html_out .= "  <option value=\"$id\"".
                     ($selected==$id ? " selected=\"selected\"":"")
-                    .">".htmlentities($val)."</option>\n";
+                    .">".htmlentities($val, ENT_COMPAT | ENT_HTML401, "ISO-8859-1")."</option>\n";
   $html_out .= "</select>\n";
 
   return $html_out;

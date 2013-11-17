@@ -62,9 +62,9 @@ function html_accent($string)  {
   $lca = preg_split('//', $lc_accent, -1, PREG_SPLIT_NO_EMPTY);
   $uca = preg_split('//', $uc_accent, -1, PREG_SPLIT_NO_EMPTY);
   foreach($lca as $key=>$val)
-    $lch[$key] = htmlentities($val);
+    $lch[$key] = htmlentities($val, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
   foreach($uca as $key=>$val)
-    $uch[$key] = htmlentities($val);
+    $uch[$key] = htmlentities($val, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
   $newstring = str_replace($lca,$lch,$string);
   $newstring = str_replace($uca,$uch,$newstring);
   return $newstring;

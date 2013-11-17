@@ -141,7 +141,7 @@ class Diogenes_Barrel_Menu
     {
       $mentry = $mcache[$mid];
 //      echo "pid : $pid, location : $location<br/>";
-      $entry = htmlentities(stripslashes($mentry['title']), ENT_QUOTES);
+      $entry = htmlentities(stripslashes($mentry['title']), ENT_QUOTES, "ISO-8859-1");
       if ($mentry['pid'])
       {
         $link = call_user_func($pid_to_url, $mentry['pid']);

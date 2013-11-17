@@ -171,7 +171,7 @@ class Diogenes_Barrel_Page
     $props = $this->props;
     
     $topbar = array ();
-    $from = htmlentities($caller->script_uri());
+    $from = htmlentities($caller->script_uri(), ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
     
     if ($props['PID']) {    
       $hp = $this->barrel->getPID('');
