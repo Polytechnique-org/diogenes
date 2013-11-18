@@ -1,0 +1,13 @@
+*.tar.gz
+*.cdbs-config_list
+*.log
+Doxyfile
+debian/diogenes.postrm.debhelper
+debian/diogenes.substvars
+debian/diogenes/
+debian/files
+debian/libphp-diogenes.substvars
+debian/libphp-diogenes/
+debian/stamp-makefile-build
+include/diogenes.globals.inc.php
+locale/
