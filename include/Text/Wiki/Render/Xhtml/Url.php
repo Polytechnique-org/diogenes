@@ -37,7 +37,7 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
         // extension.
         $pos = strrpos($href, '.');
         $ext = strtolower(substr($href, $pos + 1));
-        $href = htmlspecialchars($href);
+        $href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
         
         // does the filename extension indicate an image file?
         if ($this->getConf('images') &&
@@ -46,7 +46,7 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
             // create alt text for the image
             if (! isset($text) || $text == '') {
                 $text = basename($href);
-                $text = htmlspecialchars($text);
+                $text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             }
             
             // generate an image tag
@@ -67,14 +67,14 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
             }
             
             // generate a regular link (not an image)
-            $text = htmlspecialchars($text);
+            $text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $css = $this->formatConf(' class="%s"', "css_$type");
             $output = "<a$css href=\"$href\"";
             
             if ($target) {
                 // use a "popup" window.  this is XHTML compliant, suggested by
                 // Aaron Kalin.  uses the $target as the new window name.
-                $target = htmlspecialchars($target);
+                $target = htmlspecialchars($target, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
                 $output .= " onclick=\"window.open(this.href, '$target');";
                 $output .= " return false;\"";
             }

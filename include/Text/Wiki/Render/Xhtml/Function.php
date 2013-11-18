@@ -40,9 +40,9 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
         
         // build the baseline output
         $output = $this->conf['format_main'];
-        $output = str_replace('%access', htmlspecialchars($access), $output);
-        $output = str_replace('%return', htmlspecialchars($return), $output);
-        $output = str_replace('%name', htmlspecialchars($name), $output);
+        $output = str_replace('%access', htmlspecialchars($access, ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $output);
+        $output = str_replace('%return', htmlspecialchars($return, ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $output);
+        $output = str_replace('%name', htmlspecialchars($name, ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $output);
         
         // build the set of params
         $list = array();
@@ -56,9 +56,9 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
             }
             
             // add the param elements
-            $tmp = str_replace('%type', htmlspecialchars($val['type']), $tmp);
-            $tmp = str_replace('%descr', htmlspecialchars($val['descr']), $tmp);
-            $tmp = str_replace('%default', htmlspecialchars($val['default']), $tmp);
+            $tmp = str_replace('%type', htmlspecialchars($val['type'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $tmp);
+            $tmp = str_replace('%descr', htmlspecialchars($val['descr'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $tmp);
+            $tmp = str_replace('%default', htmlspecialchars($val['default'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $tmp);
             $list[] = $tmp;
         }
         
@@ -70,8 +70,8 @@ class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
         $list = array();
         foreach ($throws as $key => $val) {
                $tmp = $this->conf['format_throws'];
-            $tmp = str_replace('%type', htmlspecialchars($val['type']), $tmp);
-            $tmp = str_replace('%descr', htmlspecialchars($val['descr']), $tmp);
+            $tmp = str_replace('%type', htmlspecialchars($val['type'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $tmp);
+            $tmp = str_replace('%descr', htmlspecialchars($val['descr'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"), $tmp);
             $list[] = $tmp;
         }
         

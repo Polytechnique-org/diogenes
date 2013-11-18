@@ -53,7 +53,7 @@ class Text_Wiki_Render_Xhtml_Interwiki extends Text_Wiki_Render {
         $target = $this->getConf('target');
         
         // build base link
-        $text = htmlspecialchars($text);
+        $text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
         $output = "<a$css href=\"$href\"";
         
         // are we targeting a specific window?
@@ -61,7 +61,7 @@ class Text_Wiki_Render_Xhtml_Interwiki extends Text_Wiki_Render {
             // this is XHTML compliant, suggested by Aaron Kalin.
             // code tip is actually from youngpup.net, and it
             // uses the $target as the new window name.
-            $target = htmlspecialchars($target);
+            $target = htmlspecialchars($target, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $output .= " onClick=\"window.open(this.href, '$target');";
             $output .= " return false;\"";
         }

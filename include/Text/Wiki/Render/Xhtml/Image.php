@@ -108,7 +108,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
         }
         
         // start the HTML output
-        $output = '<img src="' . htmlspecialchars($src) . '"';
+        $output = '<img src="' . htmlspecialchars($src, ENT_COMPAT | ENT_HTML401, "ISO-8859-1") . '"';
         
         // get the CSS class but don't add it yet
         $css = $this->formatConf(' class="%s"', 'css');
@@ -128,14 +128,14 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
                 $css = null;
             }
             
-            $key = htmlspecialchars($key);
-            $val = htmlspecialchars($val);
+            $key = htmlspecialchars($key, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
+            $val = htmlspecialchars($val, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $output .= " $key=\"$val\"";
         }
         
         // always add an "alt" attribute per Stephane Solliec
         if (! $alt) {
-            $alt = htmlspecialchars(basename($options['src']));
+            $alt = htmlspecialchars(basename($options['src']), ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $output .= " alt=\"$alt\"";
         }
         
@@ -145,7 +145,7 @@ class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {
         // was the image clickable?
         if ($href) {
             // yes, add the href and return
-            $href = htmlspecialchars($href);
+            $href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $css = $this->formatConf(' class="%s"', 'css_link');
             $output = "<a$css href=\"$href\">$output</a>";
         }

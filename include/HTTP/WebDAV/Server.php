@@ -653,7 +653,7 @@ class HTTP_WebDAV_Server
                             break;
                         default:                                    
                             echo "     <D:$prop[name]>"
-                                . $this->_prop_encode(htmlspecialchars($prop['val']))
+                                . $this->_prop_encode(htmlspecialchars($prop['val'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"))
                                 .     "</D:$prop[name]>\n";                               
                             break;
                         }
@@ -661,11 +661,11 @@ class HTTP_WebDAV_Server
                         // properties from namespaces != "DAV:" or without any namespace 
                         if ($prop["ns"]) {
                             echo "     <" . $ns_hash[$prop["ns"]] . ":$prop[name]>"
-                                . $this->_prop_encode(htmlspecialchars($prop['val']))
+                                . $this->_prop_encode(htmlspecialchars($prop['val'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"))
                                 . "</" . $ns_hash[$prop["ns"]] . ":$prop[name]>\n";
                         } else {
                             echo "     <$prop[name] xmlns=\"\">"
-                                . $this->_prop_encode(htmlspecialchars($prop['val']))
+                                . $this->_prop_encode(htmlspecialchars($prop['val'], ENT_COMPAT | ENT_HTML401, "ISO-8859-1"))
                                 . "</$prop[name]>\n";
                         }                               
                     }
@@ -748,7 +748,7 @@ class HTTP_WebDAV_Server
 
             if ($responsedescr) {
                 echo "  <D:responsedescription>".
-                    $this->_prop_encode(htmlspecialchars($responsedescr)).
+                    $this->_prop_encode(htmlspecialchars($responsedescr, ENT_COMPAT | ENT_HTML401, "ISO-8859-1")).
                     "</D:responsedescription>\n";
             }
 

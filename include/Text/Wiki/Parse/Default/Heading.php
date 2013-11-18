@@ -81,7 +81,7 @@ class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {
             $id = 0;
         }
         
-        $prefix = htmlspecialchars($this->getConf('id_prefix'));
+        $prefix = htmlspecialchars($this->getConf('id_prefix'), ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
         
         $start = $this->wiki->addToken(
             $this->rule, 

@@ -54,7 +54,7 @@ $page->assign('dir',$dir);
 $page->assign('file',$file);
 $page->assign('source',__("File source"));
 $page->assign('msg_log',__("log message"));
-$page->assign('file_content',htmlspecialchars(file_get_contents($myfile), ENT_NOQUOTES));
+$page->assign('file_content',htmlspecialchars(file_get_contents($myfile), ENT_COMPAT | ENT_HTML401, "ISO-8859-1"));
 $page->assign('submit',__("Submit"));
 
 // menu for stylesheet replacement

@@ -36,7 +36,7 @@ class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
         if ($target) {
             // use a "popup" window.  this is XHTML compliant, suggested by
             // Aaron Kalin.  uses the $target as the new window name.
-            $target = htmlspecialchars($target);
+            $target = htmlspecialchars($target, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
             $output .= " onclick=\"window.open(this.href, '$target');";
             $output .= " return false;\"";
         }
@@ -48,8 +48,8 @@ class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
             $q = $text;
         }
         
-        $q = htmlspecialchars($q);
-        $text = htmlspecialchars($text);
+        $q = htmlspecialchars($q, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
+        $text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, "ISO-8859-1");
         
         // finish and return
         $output .= " href=\"http://php.net/$q\">$text</a>";

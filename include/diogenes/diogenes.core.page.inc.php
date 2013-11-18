@@ -280,7 +280,7 @@ function diogenes_func_flags($params)
     $subset = str_replace('\'\'', '\'', str_replace('\\\\', '\\', $subset));
     $html_out .= "<option value=\"$subset\""
                . ((isset($vset[$subset]) && $vset[$subset]) ? " selected=\"selected\"" : "")
-               . ">".(isset($trans) ? $trans[$subset] : htmlspecialchars($subset))."</option>\n";
+               . ">".(isset($trans) ? $trans[$subset] : htmlspecialchars($subset, ENT_COMPAT | ENT_HTML401, "ISO-8859-1"))."</option>\n";
   }
 
   // if we have a name, display closing select tag
